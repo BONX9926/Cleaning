@@ -9,20 +9,20 @@
 	// print $uid.$fname.$lname.$phone;
 	if(isset($uid) && isset($fname) && isset($lname) && isset($phone)) {
 		$sql = "UPDATE `user_detail` SET `fname`='{$fname}',`lname`='{$lname}',`phone`='{$phone}' WHERE `uid`='{$uid}'";
-		echo $sql;exit;
+		// echo $sql;exit;
 		
-		// if(mysqli_query($conn,$sql)) {
+		if(mysqli_query($conn,$sql)) {
 
-		// 	$sql = "SELECT * FROM `user_detail` WHERE `uid`='{$uid}'";
-		// 	if ($res = mysqli_query($conn,$sql)) {
-		// 		if ($res->num_rows > 0) {
-		// 			$row = mysqli_fetch_assoc($res);
-		// 			$_SESSION['fname'] = $row['fname'];
-		// 			$_SESSION['lname'] = $row['lname'];
-		// 			$_SESSION['phone'] = $row['phone'];
-		// 		}
-		// 	}
-		// }
+			$sql = "SELECT * FROM `user_detail` WHERE `uid`='{$uid}'";
+			if ($res = mysqli_query($conn,$sql)) {
+				if ($res->num_rows > 0) {
+					$row = mysqli_fetch_assoc($res);
+					$_SESSION['fname'] = $row['fname'];
+					$_SESSION['lname'] = $row['lname'];
+					$_SESSION['phone'] = $row['phone'];
+				}
+			}
+		}
 			$return['status'] = true;
 			$return['message'] = "Update data";
 	} else {

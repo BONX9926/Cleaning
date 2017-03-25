@@ -33,9 +33,10 @@ Cras justo odio
 <a href="#" class="list-group-item">Vestibulum at eros</a>
 </div> -->
 <ul class="nav nav-pills nav-stacked">
-<li id="profile"><a href="profile.php"> <i class="fa fa-user"></i> Profile</a></li>
+<li id="profile"><a href="profile.php"> <i class="fa fa-user"></i> ข้อมูลส่วนตัว</a></li>
 <!-- <li><a href="profile-activity.html"> <i class="fa fa-calendar"></i> Recent Activity <span class="label label-danger pull-right r-activity">9</span></a></li> -->
-<li><a href="profile-edit.php"> <i class="fa fa-edit"></i> Edit profile</a></li>
+<li><a href="profile-edit.php"> <i class="fa fa-edit"></i> แก้ไขข้อมูลส่วนตัว</a></li>
+<li id="profile-edit-address"><a href="profile-edit-address.php"> <i class="fa fa-edit"></i> แก้ไขที่พัก</a></li>
 </ul>
 			</div>
 			</div>
