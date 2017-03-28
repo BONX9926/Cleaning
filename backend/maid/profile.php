@@ -6,7 +6,7 @@ session_start();
 	<section class="panel">
 		<div class="user-heading round">
 			<a href="#">
-				<img src="../img/<?=$_SESSION['avatar']?>" alt="">
+				<img src="../img/avatar_profile/<?=$_SESSION['avatar']?>" alt="">
 			</a>
 			<!-- <h1><?=$_SESSION['fname']." ".$_SESSION['lname']?></h1> -->
 			<p><?=$_SESSION['email']?></p>

@@ -28,7 +28,9 @@
 
 	<link href="../css/style.css" rel="stylesheet">
 	<link href="../css/style-responsive.css" rel="stylesheet" />
-
+	<link rel="stylesheet" type="text/css" href="../assets/bootstrap-fileupload/bootstrap-fileupload.css" />
+	<script src="../js/jquery.js"></script>
+    <script src="../js/simply-toast.min.js"></script>
 </head>
 
 <body>
@@ -43,14 +45,14 @@
 		<!-- sidebar menu start-->
 		<ul class="sidebar-menu" id="nav-accordion">
 			<li class="sub-menu" id="sbmu_pro">
-				<a href="javascript:;">
+				<a href="javascript:;" id="profile-domain">
 					<i class="fa fa-user"></i>
 					<span>โปรไฟล์ส่วนตัว</span>
 				</a>
 				<ul class="sub">
-					<li id="profile"><a><i class="fa fa-edit"></i>ข้อมูลโปรไฟล์</a></li>
-					<li id="profile-edit"><a><i class="fa fa-edit"></i>แก้ไขโปรไฟล์</a></li>
-					<li id="avatar-edit"><a><i class="fa fa-edit"></i>แก้ไขรูปโปรไฟล์</a></li>
+					<li id="profile" domain-menu="profile-domain"><a><i class="fa fa-edit"></i>ข้อมูลโปรไฟล์</a></li>
+					<li id="profile-edit" domain-menu="profile-domain"><a><i class="fa fa-edit"></i>แก้ไขโปรไฟล์</a></li>
+					<li id="avatar-edit" domain-menu="profile-domain"><a><i class="fa fa-edit"></i>แก้ไขรูปโปรไฟล์</a></li>
 					<!-- <li id="add-maid"><a>เพิ่มแม่บ้าน</a></li> -->
 				</ul>
 			</li>
@@ -104,7 +106,7 @@
 
 
 <!-- js placed at the end of the document so the pages load faster -->
-<script src="../js/jquery.js"></script>
+
 
 <script src="../js/bootstrap.min.js"></script>
 <script class="include" type="text/javascript" src="../js/jquery.dcjqaccordion.2.7.js"></script>
@@ -140,6 +142,9 @@
 			$("li .active").attr('class','');
 			get_page_profile();
 			$(this).attr('class','active');
+			var domain = $(this).attr('domain-menu');
+			$("#"+domain).addClass('dcjq-parent active');
+			// alert(domain);
 			// $("#sbmu_pro").attr('class','active');
 			//alert("555");
 		});
@@ -150,6 +155,8 @@
 			$("li .active").attr('class','');
 			get_page_profile_edit();
 			$(this).attr('class','active');
+			var domain = $(this).attr('domain-menu');
+			$("#"+domain).addClass('dcjq-parent active');
 			//alert("555");
 		});
 
@@ -157,6 +164,8 @@
 			$("li .active").attr('class','');
 			get_page_avatar_edit();
 			$(this).attr('class','active');
+			var domain = $(this).attr('domain-menu');
+			$("#"+domain).addClass('dcjq-parent active');
 			//alert("555");
 		});
 

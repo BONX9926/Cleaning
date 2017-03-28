@@ -43,7 +43,7 @@ if(isset($_FILES)) {
 
 	} else {
 		$return['status'] = false;
-		$return['message'] = "ชนิดของ File ไม่ถูกต้อง";
+		$return['message'] = "ไม่มีไฟล์ส่งมา หรือ ชนิดของไฟลืไม่ถุกต้อง";
 		// $return['message'] = "ไม่มีไฟล์ส่งมา กรุณาเลือกไฟล์";
 	}
 } else {

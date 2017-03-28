@@ -49,20 +49,14 @@
 	<div id="sidebar"  class="nav-collapse ">
 		<!-- sidebar menu start-->
 		<ul class="sidebar-menu" id="nav-accordion">
-			<li>
-				<a href="index.php" id="profile">
-					<i class="fa fa-user"></i>
-					<span>โปรไฟล์ส่วนตัว</span>
-				</a>
-			</li>
 			<li class="sub-menu">
-				<a href="javascript:;" id="submenu_maid">
+				<a href="javascript:;" id="maid-domain">
 					<i class="fa fa-book"></i>
 					<span>แม่บ้าน</span>
 				</a>
 				<ul class="sub" id="sub_maid">
-					<li id="maid"><a >รายชื่อแม่บ้าน</a></li>
-					<li id="add-maid"><a>เพิ่มแม่บ้าน</a></li>
+					<li id="maid" domain-menu="maid-domain"><a >รายชื่อแม่บ้าน</a></li>
+					<li id="add-maid" domain-menu="maid-domain"><a>เพิ่มแม่บ้าน</a></li>
 				</ul>
 			</li>
 			<li class="sub-menu">
@@ -149,6 +143,9 @@
 			$("li .active").attr('class','');
 			get_page_maid();
 			$(this).attr('class','active');
+			var domain = $(this).attr('domain-menu');
+			// alert(domain);
+			$("#"+domain).addClass('dcjq-parent active');
 			//alert("555");
 		});
 		// event but maid click
@@ -158,6 +155,9 @@
 			$("li .active").attr('class','');
 			get_page_add_maid();
 			$(this).attr('class','active');
+			var domain = $(this).attr('domain-menu');
+			// alert(domain);
+			$("#"+domain).addClass('dcjq-parent active');
 			//alert("555");
 		});
 
