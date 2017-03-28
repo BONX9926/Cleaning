@@ -95,10 +95,13 @@ $("input").attr('required', 'required');
 				// console.log(data);
 				let json_res = jQuery.parseJSON(data);
 				if(json_res.status == true) {
-					if(json_res.access == 'A') {
+					// alert(json_res.access);
+					if(json_res.access === 'A') {
 						window.location.href = "admin/index.php";
+					// console.log(json_res.access);
 					} else {
 						window.location.href = "maid/index.php";
+				// console.log('else');
 					}
 				}else{
 					window.location ='index.php?err=2';

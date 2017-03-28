@@ -3,24 +3,23 @@
 		<!-- sidebar menu start-->
 		<ul class="sidebar-menu" id="nav-accordion">
 			<li>
-				<a href="index.php">
+				<a href="index.php" id="profile">
 					<i class="fa fa-user"></i>
 					<span>โปรไฟล์ส่วนตัว</span>
 				</a>
 			</li>
-
+			<?php if(isset($_SESSION['status']) == 'A') {?>
 			<li class="sub-menu">
-				<a href="javascript:;" >
-				<i class="fa fa-laptop"></i>
-				<span>Layouts</span>
+				<a href="javascript:;" id="submenu_maid">
+					<i class="fa fa-book"></i>
+					<span>แม่บ้าน</span>
 				</a>
-				<ul class="sub">
-					<li><a  href="#">Boxed Page</a></li>
-					<li><a  href="#">Horizontal Menu</a></li>
-					<li><a  href="#">Language Switch Bar</a></li>
-					<li><a  href="#" target="_blank">Email Template</a></li>
+				<ul class="sub" id="sub_maid">
+					<li id="maid"><a href="maid.php">รายชื่อแม่บ้าน</a></li>
+					<li><a href="add_maid.php">เพิ่มแม่บ้าน</a></li>
 				</ul>
 			</li>
+			<?php } ?>
 
 			<li class="sub-menu">
 				<a href="javascript:;" >

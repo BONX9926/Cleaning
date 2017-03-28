@@ -8,7 +8,7 @@
 </head>
 <link rel="stylesheet" href="./css/bootstrap.min.css">
 <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<script src="./js/jquery-3.2.0.js"></script>
+<script src="./js/jquery-3.2.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 <body>
@@ -89,15 +89,15 @@ Cras justo odio
 	 		/*optional stuff to do after success */
 	 	}).done(function(data){
 	 		// alert(data);
-	 			console.log(data);
+	 			// console.log(data);
 
-	 	// 	let json_res = jQuery.parseJSON(data);
-			// if(json_res.status == true){
-			// 	// alert(json_res.message);
-			// 	window.location.href = "profile.php";
-			// }else{
-			// 	alert("error");
-			// }
+	 		let json_res = jQuery.parseJSON(data);
+			if(json_res.status == true){
+				// alert(json_res.message);
+				window.location.href = "profile.php";
+			}else{
+				alert("error");
+			}
 	 	});
 	});
 

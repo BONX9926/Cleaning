@@ -8,7 +8,7 @@
 </head>
 <link rel="stylesheet" href="./css/bootstrap.min.css">
 <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<script src="./js/jquery-3.2.0.js"></script>
+<script src="./js/jquery-3.2.0.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 <body>
 <?php include_once 'navbar.php'; ?>
@@ -22,7 +22,7 @@
 	<!-- <h1 align="center">Profile</h1> -->
 			
 			<div class="caption">
-			<h3><img src="<?=$_SESSION['avatar']?>" style='border-radius: 5px;display: inline;' > <?=$_SESSION['name']?></h3>
+			<h3><img src="<?=$_SESSION['avatar']?>" style='border-radius: 5px;display: inline;width: 50px;height:50px;' > <?=$_SESSION['name']?></h3>
 <!-- <div class="list-group">
 <a href="#" class="list-group-item active">
 Cras justo odio

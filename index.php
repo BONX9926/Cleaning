@@ -9,7 +9,7 @@
 
 <link rel="stylesheet" href="./css/bootstrap.min.css">
 <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<script src="./js/jquery-3.2.0.js"></script>
+<script src="./js/jquery-3.2.0.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 
 <body>

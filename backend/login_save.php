@@ -11,10 +11,12 @@
 			if ($res->num_rows > 0) {
 				$row = mysqli_fetch_assoc($res);
 					$_SESSION['login'] = true;
+					$_SESSION['id'] = $row['id'];
 					$_SESSION['fname'] = $row['fname'];
 					$_SESSION['lname'] = $row['lname'];
 					$_SESSION['email'] = $row['email'];
 					$_SESSION['birthday'] = $row['birthday'];
+					$_SESSION['avatar'] = $row['avatar'];
 					$_SESSION['phone'] = $row['phone'];
 					$_SESSION['address'] = $row['address'];
 					$_SESSION['show_detail'] = $row['show_detail'];

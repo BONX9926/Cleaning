@@ -1,6 +1,5 @@
 <?php 
 	session_start();
-	if (isset($_SESSION['login']) && isset($_SESSION['status']) == 'M') {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,13 +29,6 @@
 	<link href="../css/style.css" rel="stylesheet">
 	<link href="../css/style-responsive.css" rel="stylesheet" />
 
-
-
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
-<!--[if lt IE 9]>
-<script src="js/html5shiv.js"></script>
-<script src="js/respond.min.js"></script>
-<![endif]-->
 </head>
 
 <body>
@@ -46,60 +38,63 @@
 <?php include_once '../header.php'; ?>
 <!--header end-->
 <!--sidebar start-->
-<?php include_once '../sidebar.php'; ?>
+<aside>
+	<div id="sidebar"  class="nav-collapse ">
+		<!-- sidebar menu start-->
+		<ul class="sidebar-menu" id="nav-accordion">
+			<li class="sub-menu" id="sbmu_pro">
+				<a href="javascript:;">
+					<i class="fa fa-user"></i>
+					<span>โปรไฟล์ส่วนตัว</span>
+				</a>
+				<ul class="sub">
+					<li id="profile"><a><i class="fa fa-edit"></i>ข้อมูลโปรไฟล์</a></li>
+					<li id="profile-edit"><a><i class="fa fa-edit"></i>แก้ไขโปรไฟล์</a></li>
+					<li id="avatar-edit"><a><i class="fa fa-edit"></i>แก้ไขรูปโปรไฟล์</a></li>
+					<!-- <li id="add-maid"><a>เพิ่มแม่บ้าน</a></li> -->
+				</ul>
+			</li>
+			<li class="sub-menu">
+				<a href="javascript:;" >
+					<i class="fa fa-book"></i>
+					<span>UI Elements</span>
+				</a>
+				<ul class="sub">
+					<li><a  href="#">General</a></li>
+					<li><a  href="#">Buttons</a></li>
+					<li><a  href="#">Widget</a></li>
+					<li><a  href="#">Slider</a></li>
+					<li><a  href="#">Nestable</a></li>
+					<li><a  href="#">Font Awesome</a></li>
+				</ul>
+			</li>
+
+			<li class="sub-menu">
+				<a href="javascript:;" >
+					<i class="fa fa-cogs"></i>
+					<span>Components</span>
+				</a>
+				<ul class="sub">
+					<li><a  href="#">Grids</a></li>
+					<li><a  href="#">Calendar</a></li>
+					<li><a  href="#">Gallery</a></li>
+					<li><a  href="#">Todo List</a></li>
+					<li><a  href="#">Draggable Portlet</a></li>
+					<li><a  href="#">Tree View</a></li>
+				</ul>
+			</li>
+		</ul>
+	<!-- sidebar menu end-->
+	</div>
+</aside>
 <!--sidebar end-->
 	
 <!--main content start-->
 	<section id="main-content">
 		<section class="wrapper">
 			<!-- page start-->
-			<div class="row">
-				<aside class="profile-nav col-lg-3">
-					<section class="panel">
-						<div class="user-heading round">
-							<a href="#">
-								<img src="../img/profile-avatar.jpg" alt="">
-							</a>
-							<h1><?=$_SESSION['fname']." ".$_SESSION['lname']?></h1>
-							<p><?=$_SESSION['email']?></p>
-						</div>
-						<ul class="nav nav-pills nav-stacked">
-							<li class="active"><a href="profile.html"> <i class="fa fa-user"></i> Profile</a></li>
-							<li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span class="label label-danger pull-right r-activity">9</span></a></li>
-							<li><a href="profile_edit.php"> <i class="fa fa-edit"></i> Edit profile</a></li>
-						</ul>
-					</section>
-				</aside>
-				<aside class="profile-info col-lg-9">
-					<section class="panel">
-						<div class="panel-body bio-graph-info">
-							<h1>โปรไฟล์</h1>
-							<div class="row">
-								<div class="bio-row">
-									<p><span>ชื่อ </span>: <?=$_SESSION['fname']?></p>
-								</div>
-								<div class="bio-row">
-									<p><span>นามสกุล </span>: <?=$_SESSION['lname']?></p>
-								</div>
-								<div class="bio-row">
-									<p><span>ที่อยู่ </span>: <?=$_SESSION['address']?></p>
-								</div>
-								<div class="bio-row">
-									<p><span>วันเกิด</span>: <?=$_SESSION['birthday']?></p>
-								</div>
-								<div class="bio-row">
-									<p><span>Email </span>: <?=$_SESSION['email']?></p>
-								</div>
-								<div class="bio-row">
-									<p><span>เบอร์โทรสัพท์ </span>: <?=$_SESSION['phone']?></p>
-								</div>
-								<div class="bio-row">
-									<p><span>แนะนำตัว </span>: <?=$_SESSION['show_detail']?></p>
-								</div>
-							</div>
-						</div>
-					</section>
-				</aside>
+			<div class="row" id="content">
+				
 			</div>
 			<!-- page end-->
 		</section>
@@ -110,6 +105,7 @@
 
 <!-- js placed at the end of the document so the pages load faster -->
 <script src="../js/jquery.js"></script>
+
 <script src="../js/bootstrap.min.js"></script>
 <script class="include" type="text/javascript" src="../js/jquery.dcjqaccordion.2.7.js"></script>
 <script src="../js/jquery.scrollTo.min.js"></script>
@@ -131,32 +127,74 @@
 <script src="../js/easy-pie-chart.js"></script>
 <script src="../js/count.js"></script>
 
+<script src="../js/simply-toast.min.js"></script>
+
 <script>
+	$(document).ready(function() {
+		//set cussor
+		$("a").css('cursor', 'pointer');
+		//set cussor
 
-  //owl carousel
+		// event but maid click
+		$("#profile").click(function(event) {
+			$("li .active").attr('class','');
+			get_page_profile();
+			$(this).attr('class','active');
+			// $("#sbmu_pro").attr('class','active');
+			//alert("555");
+		});
+		// event but maid click
 
-// $(document).ready(function() {
-//   	$("#owl-demo").owlCarousel({
-// 		navigation : true,
-// 		slideSpeed : 300,
-// 		paginationSpeed : 400,
-// 		singleItem : true,
-// 		autoPlay:true
-// 	});
-// });
+		// event but maid click
+		$("#profile-edit").click(function(event) {
+			$("li .active").attr('class','');
+			get_page_profile_edit();
+			$(this).attr('class','active');
+			//alert("555");
+		});
 
-//   //custom select box
+		$("#avatar-edit").click(function(event) {
+			$("li .active").attr('class','');
+			get_page_avatar_edit();
+			$(this).attr('class','active');
+			//alert("555");
+		});
 
-// $(function(){
-// 	$('select.styled').customSelect();
-// });
+		//function get page maid
+		function get_page_profile(){
+			$.get('profile.php', function() {
+				/*optional stuff to do after success */
+			}).done(function(data){
+				$("#content").html(data);
+			});
+		}
+		//function get page maid	
 
+		//function get page maid
+		function get_page_profile_edit(){
+			$.get('profile_edit.php', function() {
+				/*optional stuff to do after success */
+			}).done(function(data){
+				$("#content").html(data);
+			});
+		}
+
+		function get_page_avatar_edit(){
+			$.get('avatar_edit.php', function() {
+				/*optional stuff to do after success */
+			}).done(function(data){
+				$("#content").html(data);
+			});
+		}
+
+		function init(){
+			get_page_maid();
+		}
+		//function get page maid
+
+		//start
+		// init();
+		//start
+
+	});
 </script>
-
-</body>
-</html>
-<?php } else {
-		echo "คุณไม่มีสิทธิใช้งานส่วนนี้";
-	// header("Location: ../maid/index.php");
-	}
-?>
