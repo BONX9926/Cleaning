@@ -1,6 +1,6 @@
 <?php
 	$return = array();
-	
+	sleep(1);
 	if (isset($_POST['date']) && isset($_POST['package'])) {
 		include_once '../connect.php';
 		include_once '../lib/php/public_function.php';
@@ -10,24 +10,29 @@
 
 				$work_date = revert_date($work_date);
 				$timestsmpone_day = 84600;
-
+				$maid_id = array();
 				$sql = "SELECT booking_detail.ref_maid FROM `booking_table` INNER JOIN booking_detail ON (booking_table.booking_id=booking_detail.booking_id) WHERE `start_work` BETWEEN {$work_date} AND ({$work_date}+({$timestsmpone_day}-1))";
 				// echo $sql;
 				if($res = mysqli_query($conn,$sql)) {
-					while ($row = mysqli_fetch_assoc($res))	{
-						$maid_id[] = $row['ref_maid'];
-					}
-						//var_dump($maid_id);
 
-					$sql_showmaid = "SELECT `fname`,`lname`,`avatar`,`phone`,`show_detail` FROM `user_backend` WHERE `status` ='M' AND ";
-
-					foreach ($maid_id as $key => $value) {
-						$patt[] = "`id` != '{$value}'";
+					if(mysqli_num_rows($res) > 0 ){
+						while ($row = mysqli_fetch_assoc($res))	{
+							$maid_id[] = $row['ref_maid'];
+						}
+						$sql_showmaid = "SELECT `id`,`fname`,`lname`,`avatar`,`phone`,`show_detail` FROM `user_backend` WHERE `status` ='M'  AND";
+						foreach ($maid_id as $key => $value) {
+							$patt[] = "`id` != '{$value}'";
+						}
+						$pattFull = implode(' AND ', $patt);
+						$sql_showmaid .= $pattFull;
+					} else {
+						$sql_showmaid = "SELECT `id`,`fname`,`lname`,`avatar`,`phone`,`show_detail` FROM `user_backend` WHERE `status` ='M' ";
 					}
-					$pattFull = implode(' AND ', $patt);
-					$sql_showmaid .= $pattFull;
+					
+
 					if ($res2 = mysqli_query($conn,$sql_showmaid)) {
 						$return['status'] = true;
+						$return['date_th'] = date_thai($work_date);
 						while ($data = mysqli_fetch_assoc($res2)) {
 							$return['data'][] = $data;
 						}

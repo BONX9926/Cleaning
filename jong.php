@@ -21,87 +21,34 @@
     <link rel="stylesheet" type="text/css" href="backend/assets/bootstrap-datetimepicker/css/datetimepicker.css" />
     <link rel="stylesheet" type="text/css" href="backend/assets/jquery-multi-select/css/multi-select.css" />
 	<link href="backend/css/style.css" rel="stylesheet">
+	<link href="css/mycss.css" rel="stylesheet">
 	<link href="backend/css/style-responsive.css" rel="stylesheet" />
+	<style type="text/css">
+		.maid_name {
+			color: #000000;
+		}
+		.my-btn ,.rm-maid {
+			float: right;
+		}
+	</style>
 </head>
 <body>
 <?php include_once 'navbar.php'; ?>
+<div class="loading" id="load_page">Loading&#8230;</div>
 <div class="container" style="padding-top: 60px;">
-<!-- 	<pre>
-	<?php var_dump($_SESSION) ?>
-	</pre> -->
 	<div class="row">
-		<div class="col-lg-12">
-			<section class="panel">
-			<header class="panel-heading">
-			Horizontal Forms
-			</header>
-			<div class="panel-body">
-			<form class="form-horizontal" role="form" action="dateJong.php" method="POST">
-			<div class="form-group">
-			<label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">วันที่ทำความสะอาด</label>
-			<div class="col-lg-9">
-				<div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="<?php echo date('d-m-Y');?>" class="input-append date dpYears">
-				<input type="text" readonly="" name="work-day" value="<?php echo $tomorrow; ?>" size="16" class="form-control">
-				<span class="input-group-btn add-on">
-				<button class="btn btn-danger" type="button"><i class="fa fa-calendar"></i></button>
-				</span>
-				</div>
-			</div>
-			</div>
-			<div class="form-group">
-			<label for="inputPassword1" class="col-lg-2 col-sm-2 control-label">ทำกี่วัน</label>
-			<div class="col-lg-9">
-				<select class="form-control m-bot15" name="package">
-					<option value="day">หนึ่งวัน</option>
-					<option value="week">หนึ่งสัปดาห์</option>
-				</select>
-			</div>
-			</div>
-			<div class="form-group">
-			<div class="col-lg-offset-2 col-lg-10">
-			<button type="submit" class="btn btn-danger">Next</button>
-			</div>
-			</div>
-			</form>
-			</div>
-			</section>
-		</div>	
-	</div>
-	<!-- <label>เวลา</label> -->
-<!-- <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="12-02-2012" class="input-append date dpYears">
-<input type="text" readonly="" value="12-02-2012" size="16" class="form-control">
-<span class="input-group-btn add-on">
-<button class="btn btn-danger" type="button"><i class="fa fa-calendar"></i></button>
-</span>
-</div> -->
-<!-- <div class="row">
-	<div class="col-lg-12">
-		<section class="panel">
-			<header class="panel-heading">
-			<h1>จองบริการ</h1>
-			</header>
-			<div class="panel-body">
-				<div class="stepy-tab">
-					<ul id="default-titles" class="stepy-titles clearfix">
-						<li id="default-title-0" class="current-step">
-							<div>Step 1</div>
-						</li>
-						<li id="default-title-1" class="">
-							<div>Step 2</div>
-						</li>
-						<li id="default-title-2" class="">
-							<div>Step 3</div>
-						</li>
-					</ul>
-				</div>
-			<form class="form-horizontal" id="default">
-				<fieldset title="Step1" class="step" id="default-step-0">
-				<legend> </legend>
+		<div class="col-lg-12" id="content">
+				<section class="panel">
+				<header class="panel-heading">
+				เลือกวันและประเภทในการจอง
+				</header>
+				<div class="panel-body">
+				<form class="form-horizontal">
 				<div class="form-group">
-				<label class="col-lg-2 control-label">วันที่ต้องการจอง</label>
+				<label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">วันที่ทำความสะอาด</label>
 				<div class="col-lg-9">
 					<div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="<?php echo date('d-m-Y');?>" class="input-append date dpYears">
-					<input type="text" readonly="" name="work-day" value="<?php echo date('d-m-Y');?>" size="16" class="form-control">
+					<input type="text" readonly="" id="date" name="work-day" value="<?php echo $tomorrow; ?>" size="16" class="form-control">
 					<span class="input-group-btn add-on">
 					<button class="btn btn-danger" type="button"><i class="fa fa-calendar"></i></button>
 					</span>
@@ -109,92 +56,49 @@
 				</div>
 				</div>
 				<div class="form-group">
-				<label class="col-lg-2 control-label">จองกี่วัน</label>
-				<div class="col-lg-10">
-					<select class="form-control m-bot15">
-						<option value="">รายวัน</option>
-						<option value="">รายสัปดาห์</option>
+				<label for="inputPassword1" class="col-lg-2 col-sm-2 control-label">ประเภทการจอง</label>
+				<div class="col-lg-9">
+					<select class="form-control m-bot15" name="package" id="package">
+						<option value="day">หนึ่งวัน</option>
+						<option value="week">หนึ่งสัปดาห์</option>
 					</select>
 				</div>
 				</div>
+				</form>
 				<div class="form-group">
-				<label class="col-lg-2 control-label">User Name</label>
-				<div class="col-lg-10">
-				<input type="text" class="form-control" placeholder="Username">
+				<div class="col-lg-offset-2 col-lg-10">
+				<button id="submit" class="btn btn-danger">Next</button>
 				</div>
 				</div>
-
-				</fieldset>
-				<fieldset title="Step 2" class="step" id="default-step-1" >
-				<legend> </legend>
-				<div class="form-group">
-				<label class="col-lg-2 control-label">Phone</label>
-				<div class="col-lg-10">
-				<input type="text" class="form-control" placeholder="Phone">
 				</div>
+				</section>
+				<div id="display_maid" style="display: none;">
+					
+						<h3>รายชื่อแม่บ้าน</h3>	
+						<div class="col-lg-12" style="background-color: #ffffff">
+							<div class="col-lg-9" style="max-height: 500px; overflow: scroll;" id="content_maid">
+								
+							
+							</div>
+							<div class="col-lg-3">
+							<h4>แม่บ้านที่คุณเลือก</h4>
+								<table class="table table-bordered" id="list_maid_booking">
+									<tr>
+										<td><i class="fa fa-calendar-check-o fa-sidebar"></i> <span id="date_th">xxx</span></td>
+									</tr>
+									<!-- <tr class="row-maid ">
+										<td><img src="backend/img/avatar_profile/maid5.jpg" style="width: 30px; height: 30px;border-radius: 30px;"> Pattama Pratyamongkol  <button class="btn btn-danger btn-xs">X ลบ</button></td>
+									</tr> -->
+								</table>
+								<button class="btn btn-success">ยืนยัน</button>
+							</div>
+							
+						</div>
+						
+					
 				</div>
-				<div class="form-group">
-				<label class="col-lg-2 control-label">Mobile</label>
-				<div class="col-lg-10">
-				<input type="text" class="form-control" placeholder="Mobile">
-				</div>
-				</div>
-				<div class="form-group">
-				<label class="col-lg-2 control-label">Address</label>
-				<div class="col-lg-10">
-				<textarea class="form-control" cols="60" rows="5"></textarea>
-				</div>
-				</div>
-
-				</fieldset>
-				<fieldset title="Step 3" class="step" id="default-step-2" >
-				<legend> </legend>
-				<div class="form-group">
-				<label class="col-lg-2 control-label">Full Name</label>
-				<div class="col-lg-10">
-				<p class="form-control-static">Tawseef Ahmed</p>
-				</div>
-				</div>
-				<div class="form-group">
-				<label class="col-lg-2 control-label">Email Address</label>
-				<div class="col-lg-10">
-				<p class="form-control-static">tawseef@vectorlab.com</p>
-				</div>
-				</div>
-				<div class="form-group">
-				<label class="col-lg-2 control-label">User Name</label>
-				<div class="col-lg-10">
-				<p class="form-control-static">tawseef</p>
-				</div>
-				</div>
-				<div class="form-group">
-				<label class="col-lg-2 control-label">Phone</label>
-				<div class="col-lg-10">
-				<p class="form-control-static">01234567</p>
-				</div>
-				</div>
-				<div class="form-group">
-				<label class="col-lg-2 control-label">Mobile</label>
-				<div class="col-lg-10">
-				<p class="form-control-static">01234567</p>
-				</div>
-				</div>
-				<div class="form-group">
-				<label class="col-lg-2 control-label">Address</label>
-				<div class="col-lg-10">
-				<p class="form-control-static">
-				Dreamland Ave, Suite 73
-				AU, PC 1361
-				P: (123) 456-7891 </p>
-				</div>
-				</div>
-				</fieldset>
-			<input type="submit" class="finish btn btn-danger" value="Finish"/>
-			</form>
-			</div>
-		</section>
+		</div>	
 	</div>
-</div> -->
 </div>
   <script type="text/javascript" src="backend/assets/fuelux/js/spinner.min.js"></script>
   <script type="text/javascript" src="backend/assets/bootstrap-fileupload/bootstrap-fileupload.js"></script>
@@ -212,19 +116,93 @@
   <script src="backend/js/advanced-form-components.js"></script>
 <!--script for this page-->
 <script src="backend/js/jquery.stepy.js"></script>
-<script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		var list_maid_id = [];
+		$('#load_page').hide();
+		function render(arr_maid) {
+			let patt = "<tr class='row-maid mid-{maid_id}'><td><img src='{img}' style='width: 30px; height: 30px;border-radius: 30px;'> {name}  <button class='btn btn-danger btn-xs rm-maid' mid={{maid_id}}>X ลบ</button></td></tr>";
+			let temp = '';
+			$('.row-maid').remove();
+			$.each(arr_maid, function(index, val) {
+				let maid_name = $('#maid_name-'+val).text();
+				let maid_avatar = $('#img-'+val).attr('src');
 
-//step wizard
+				temp = 
+				patt.replace('{img}',maid_avatar)
+					.replace('{name}', maid_name)
+					.replace('{maid_id}',val)
+					.replace('{{maid_id}}',val);
+				$('#list_maid_booking').append(temp);
+			});
+			$('.rm-maid').click(function(event) {
+				let	conf = confirm("คุณต้องการรบรายการนี้ ใช่หรืแไม่ ?");
+				if (conf)  {
+					let index =  list_maid_id.indexOf($(this).attr('mid'));
+					list_maid_id.splice(index,1);
+					render(list_maid_id);
+					// // alert(list_maid_id);
+					 
+				}
+			});
+		}
 
-$(function() {
-$('#default').stepy({
-backLabel: 'Previous',
-block: true,
-nextLabel: 'Next',
-titleClick: true,
-titleTarget: '.stepy-tab'
-});
-});
+		$('#submit').click(function(event) {
+			$('#load_page').show();
+			$.post('service/show_maid.php', 
+				{date: $('#date').val(), package: $('#package').val()}, 
+				function() {
+					
+				}
+			).done(function(data) {
+				// alert(data);
+				//$('#content').html(data);
+				list_maid_id = [];
+				render(list_maid_id);
+				let patt = '<div class="maid_user" style="height: 180px"><div class="col-lg-3" style="height: inherit;"><img id="img-{maid_id_img}" class="img-responsive img-circle" src="backend/img/avatar_profile/{file_name}" style="padding: 10px; "></div><div class="col-lg-9" style="height:inherit;" ><h4 class="maid_name" id="maid_name-{maid_name}">{name}</h4>{detail}<div class="row"><button maid_id="{maid_id}" class="btn btn-info my-btn">เลือกแม่บ้าน</button></div></div></div><hr>';
+				try{
+					let json_res = jQuery.parseJSON(data);
+					if(json_res.status === true){
+
+						let $temp = "";
+						$("#content_maid").empty();
+						$.each(json_res.data, function(index, val) {
+							$temp = 
+							patt.replace('{file_name}', val.avatar)
+								.replace('{name}', val.fname +" "+val.lname)
+								.replace('{detail}', val.show_detail)
+								.replace('{maid_id}', val.id)
+								.replace('{maid_id_img}', val.id)
+								.replace('{maid_name}', val.id);
+							$("#content_maid").append($temp);
+						});
+						$('#load_page').hide();
+						$("#display_maid").show(800,function() {
+							
+							$('#date_th').html(json_res.date_th);
+						});
+					}
+				}catch(e){
+
+				}
+			}, function() {
+				
+				$(".my-btn").click(function(event) {
+					// alert();i
+					let maid_id = $(this).attr('maid_id');
+					// let maid_name = $('#maid_name-'+$(this).attr('maid_id')).text();
+					// let maid_avatar = $('#img-'+$(this).attr('maid_id')).attr('src');
+					if (list_maid_id.indexOf(maid_id) > -1) {
+
+					} else {
+						list_maid_id.push(maid_id);
+						render(list_maid_id);
+
+					}
+				});	
+			});
+		});
+	});
 </script>
 </body>
 </html>
