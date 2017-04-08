@@ -2,14 +2,14 @@
 	session_start();
 ?>
 
-    <link rel="stylesheet" type="text/css" href="../assets/bootstrap-fileupload/bootstrap-fileupload.css" />
+ <!--    <link rel="stylesheet" type="text/css" href="../assets/bootstrap-fileupload/bootstrap-fileupload.css" />
     <link rel="stylesheet" type="text/css" href="../assets/bootstrap-wysihtml5/bootstrap-wysihtml5.css" />
     <link rel="stylesheet" type="text/css" href="../assets/bootstrap-datepicker/css/datepicker.css" />
     <link rel="stylesheet" type="text/css" href="../assets/bootstrap-timepicker/compiled/timepicker.css" />
     <link rel="stylesheet" type="text/css" href="../assets/bootstrap-colorpicker/css/colorpicker.css" />
     <link rel="stylesheet" type="text/css" href="../assets/bootstrap-daterangepicker/daterangepicker-bs3.css" />
     <link rel="stylesheet" type="text/css" href="../assets/bootstrap-datetimepicker/css/datetimepicker.css" />
-    <link rel="stylesheet" type="text/css" href="../assets/jquery-multi-select/css/multi-select.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/jquery-multi-select/css/multi-select.css" /> -->
 <link rel="stylesheet" href="../css/simply-toast.min.css" type="text/css">
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
 <!--[if lt IE 9]>
@@ -85,7 +85,7 @@
 			</div>
 		</section>
 	</aside>
-<script src="../js/simply-toast.min.js"></script>
+<!-- <script src="../js/simply-toast.min.js"></script>
   <script type="text/javascript" src="../assets/fuelux/js/spinner.min.js"></script>
   <script type="text/javascript" src="../assets/bootstrap-fileupload/bootstrap-fileupload.js"></script>
   <script type="text/javascript" src="../assets/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>
@@ -98,15 +98,15 @@
   <script type="text/javascript" src="../assets/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
   <script type="text/javascript" src="../assets/jquery-multi-select/js/jquery.multi-select.js"></script>
   <script type="text/javascript" src="../assets/jquery-multi-select/js/jquery.quicksearch.js"></script>
-  <script src="../js/jquery.mask.min.js"></script>
+  <script src="../js/jquery.mask.min.js"></script> -->
   <!--this page  script only-->
-<script src="../js/advanced-form-components.js"></script>
+<!-- <script src="../js/advanced-form-components.js"></script> -->
 <script>
     // $("#phone").mask('000-000-0000');
 	$('#submit').click(function(event) {
 		// alert('5555');
 		var data = $('form').serializeArray();
-		// console.log(data);
+		console.log(data);
 		// if (data[0]['value'] != '' && data[1]['value'] != '') {}
 		$.post('profile_edit_save.php', {data: data}, function() {
 

@@ -31,7 +31,7 @@
             </a>
             <ul class="dropdown-menu">
             <li><a href="profile.php">โปรไฟล์</a></li>
-            <li><a href="#">จองบริการ</a></li>
+            <li><a href="jong.php">จองบริการ</a></li>
             <?php if($_SESSION['status'] == 'A') {?>
             <li><a href="#">Admin</a></li>
             <?php 

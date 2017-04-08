@@ -2,8 +2,9 @@
 	session_start();
 ?>
 
-<!-- <link rel="stylesheet" type="text/css" href="../assets/bootstrap-fileupload/bootstrap-fileupload.css" /> -->
+<link rel="stylesheet" type="text/css" href="../assets/bootstrap-fileupload/bootstrap-fileupload.css" />
 <!-- <link rel="stylesheet" href="../css/simply-toast.min.css" type="text/css"> -->
+
 <aside class="profile-info col-lg-12">
 <section class="panel">
 <div class="panel-body bio-graph-info">
@@ -40,6 +41,8 @@
 
 </section>
 </aside>
+<!-- <script src="../js/advanced-form-components.js"></script> -->
+  <script type="text/javascript" src="../assets/bootstrap-fileupload/bootstrap-fileupload.js"></script>
 <script>
 $("#submit").click(function(){
 

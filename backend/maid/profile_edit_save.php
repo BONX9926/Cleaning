@@ -2,7 +2,7 @@
 	include_once '../../connect.php';
 	session_start();
 	$return = array();
-	var_dump($_POST);exit();
+	// var_dump($_POST);exit();
 	$show_detail = $_POST['data'][0]['value'];
 	$fname = $_POST['data'][1]['value'];
 	$lname = $_POST['data'][2]['value'];

@@ -60,17 +60,13 @@
 				</ul>
 			</li>
 			<li class="sub-menu">
-				<a href="javascript:;" >
+				<a href="javascript:;" id="eq-domain">
 					<i class="fa fa-book"></i>
-					<span>UI Elements</span>
+					<span>อุปกรณ์ทำความสะอาด</span>
 				</a>
 				<ul class="sub">
-					<li><a  href="#">General</a></li>
-					<li><a  href="#">Buttons</a></li>
-					<li><a  href="#">Widget</a></li>
-					<li><a  href="#">Slider</a></li>
-					<li><a  href="#">Nestable</a></li>
-					<li><a  href="#">Font Awesome</a></li>
+					<li id="eq" domain-menu="eq-domain"><a>อุปกรณ์ทั้งหมด</a></li>
+					<li id="add-eq" domain-menu="eq-domain"><a>เพิ่มอุปกรณ์</a></li>
 				</ul>
 			</li>
 
@@ -150,6 +146,16 @@
 		});
 		// event but maid click
 
+		//function get page maid
+		function get_page_maid(){
+			$.get('maid.php', function() {
+				/*optional stuff to do after success */
+			}).done(function(data){
+				$("#content").html(data);
+			});
+		}
+		//function get page maid
+
 		// event but maid click
 		$("#add-maid").click(function(event) {
 			$("li .active").attr('class','');
@@ -160,16 +166,7 @@
 			$("#"+domain).addClass('dcjq-parent active');
 			//alert("555");
 		});
-
-		//function get page maid
-		function get_page_maid(){
-			$.get('maid.php', function() {
-				/*optional stuff to do after success */
-			}).done(function(data){
-				$("#content").html(data);
-			});
-		}
-		//function get page maid	
+		// event but maid click
 
 		//function get page maid
 		function get_page_add_maid(){
@@ -180,8 +177,25 @@
 			});
 		}
 
+		$("#eq").click(function(event) {
+			$("li .active").attr('class','');
+			get_page_eq();
+			$(this).attr('class','active');
+			var domain = $(this).attr('domain-menu');
+			// alert(domain);
+			$("#"+domain).addClass('dcjq-parent active');
+		});
+
+		function get_page_eq() {
+			$.get('eq.php', function() {
+				/*optional stuff to do after success */
+			}).done(function(data){
+				$("#content").html(data);
+			});
+		}
+
 		function init(){
-			get_page_maid();
+			
 		}
 		//function get page maid
 

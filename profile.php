@@ -37,32 +37,33 @@ Cras justo odio
 <!-- <li><a href="profile-activity.html"> <i class="fa fa-calendar"></i> Recent Activity <span class="label label-danger pull-right r-activity">9</span></a></li> -->
 <li><a href="profile-edit.php"> <i class="fa fa-edit"></i> แก้ไขข้อมูลส่วนตัว</a></li>
 <li id="profile-edit-address"><a href="profile-edit-address.php"> <i class="fa fa-edit"></i> แก้ไขที่พัก</a></li>
+<li id="profile-edit-address"><a href="jong.php"> <i class="fa fa-edit"></i> จองแม่บ้าน</a></li>
 </ul>
 			</div>
 			</div>
 		</div>
 		<div class="col-lg-8">
 			<div class="thumbnail">
-			<div class="caption">
-			<h3>ข้อมูลส่วนตัว</h3>
-				<div class="row">
-					<div class="col-lg-6">
-					<label>ชื่อ : <?=$_SESSION['fname']?></label>
-					</div>
-					<div class="col-lg-6">
-					<label>นามสกุล : <?=$_SESSION['lname']?></label>
-					</div>
-					<div class="col-lg-6">
-					<label>E-Mail : <?=$_SESSION['email']?></label>
-					</div>
-					<div class="col-lg-6">
-					<label>เบอร์โทรศัพท์ <small>(มือถือ)</small> : <?=$_SESSION['phone']?></label>
-					</div>
-					<div class="col-lg-6">
-					<label>ที่อยู่: <?=$_SESSION['address']?></label>
+				<div class="caption">
+				<h3>ข้อมูลส่วนตัว</h3>
+					<div class="row">
+						<div class="col-lg-6">
+						<label>ชื่อ : <?=$_SESSION['fname']?></label>
+						</div>
+						<div class="col-lg-6">
+						<label>นามสกุล : <?=$_SESSION['lname']?></label>
+						</div>
+						<div class="col-lg-6">
+						<label>E-Mail : <?=$_SESSION['email']?></label>
+						</div>
+						<div class="col-lg-6">
+						<label>เบอร์โทรศัพท์ <small>(มือถือ)</small> : <?=$_SESSION['phone']?></label>
+						</div>
+						<div class="col-lg-12">
+						<label>ที่อยู่: <?=$_SESSION['address']?></label>
+						</div>
 					</div>
 				</div>
-			</div>
 			</div>
 		</div>
 	</div>

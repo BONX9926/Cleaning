@@ -57,17 +57,13 @@
 				</ul>
 			</li>
 			<li class="sub-menu">
-				<a href="javascript:;" >
+				<a href="javascript:;" id="working-domain">
 					<i class="fa fa-book"></i>
-					<span>UI Elements</span>
+					<span>ตารางาน</span>
 				</a>
 				<ul class="sub">
-					<li><a  href="#">General</a></li>
-					<li><a  href="#">Buttons</a></li>
-					<li><a  href="#">Widget</a></li>
-					<li><a  href="#">Slider</a></li>
-					<li><a  href="#">Nestable</a></li>
-					<li><a  href="#">Font Awesome</a></li>
+					<li id="working-now" domain-menu="working-domain"><a >งานวันนี้</a></li>
+					<li id="working-table" domain-menu="working-domain"><a >ตารางงานทั้งหมด</a></li>
 				</ul>
 			</li>
 
@@ -136,7 +132,7 @@
 		//set cussor
 		$("a").css('cursor', 'pointer');
 		//set cussor
-
+	//event menu profile
 		// event but maid click
 		$("#profile").click(function(event) {
 			$("li .active").attr('class','');
@@ -150,25 +146,6 @@
 		});
 		// event but maid click
 
-		// event but maid click
-		$("#profile-edit").click(function(event) {
-			$("li .active").attr('class','');
-			get_page_profile_edit();
-			$(this).attr('class','active');
-			var domain = $(this).attr('domain-menu');
-			$("#"+domain).addClass('dcjq-parent active');
-			//alert("555");
-		});
-
-		$("#avatar-edit").click(function(event) {
-			$("li .active").attr('class','');
-			get_page_avatar_edit();
-			$(this).attr('class','active');
-			var domain = $(this).attr('domain-menu');
-			$("#"+domain).addClass('dcjq-parent active');
-			//alert("555");
-		});
-
 		//function get page maid
 		function get_page_profile(){
 			$.get('profile.php', function() {
@@ -179,7 +156,17 @@
 		}
 		//function get page maid	
 
-		//function get page maid
+		// event but maid click
+		$("#profile-edit").click(function(event) {
+			$("li .active").attr('class','');
+			get_page_profile_edit();
+			$(this).attr('class','active');
+			var domain = $(this).attr('domain-menu');
+			$("#"+domain).addClass('dcjq-parent active');
+			//alert("555");
+		});
+
+		//function get page profile edit
 		function get_page_profile_edit(){
 			$.get('profile_edit.php', function() {
 				/*optional stuff to do after success */
@@ -187,6 +174,16 @@
 				$("#content").html(data);
 			});
 		}
+		//function get page profile edit
+
+		$("#avatar-edit").click(function(event) {
+			$("li .active").attr('class','');
+			get_page_avatar_edit();
+			$(this).attr('class','active');
+			var domain = $(this).attr('domain-menu');
+			$("#"+domain).addClass('dcjq-parent active');
+			//alert("555");
+		});
 
 		function get_page_avatar_edit(){
 			$.get('avatar_edit.php', function() {
@@ -196,9 +193,53 @@
 			});
 		}
 
-		function init(){
-			get_page_maid();
+	//event menu profile
+
+	//event menu working_tabel
+		//event but working
+		$("#working-now").click(function(event) {
+			$("li .active").attr('class','');
+			get_page_working_now();
+			$(this).attr('class','active');
+			var domain = $(this).attr('domain-menu');
+			$("#"+domain).addClass('dcjq-parent active');
+			//alert("555");
+		});
+		//event but working
+
+		//function get page working_now
+		function get_page_working_now(){
+			$.get('working_now.php', function() {
+				/*optional stuff to do after success */
+			}).done(function(data){
+				$("#content").html(data);
+			});
 		}
+		//function get page working_now
+
+
+		$("#working-table").click(function(event) {
+			$("li .active").attr('class','');
+			get_page_working_table();
+			$(this).attr('class','active');
+			var domain = $(this).attr('domain-menu');
+			$("#"+domain).addClass('dcjq-parent active');
+			//alert("555");
+		});
+
+		function get_page_working_table(){
+			$.get('working_table.php', function() {
+				/*optional stuff to do after success */
+			}).done(function(data){
+				$("#content").html(data);
+			});
+		}
+
+
+	//event menu working_tabel
+		// function init(){
+		// 	get_page_maid();
+		// }
 		//function get page maid
 
 		//start
