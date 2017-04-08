@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	
 	$date = date('d-m-Y');
 	// $date = "2015-11-17";
     $tomorrow = date('d-m-Y', strtotime($date. ' + 1 days'));
@@ -22,6 +23,7 @@
     <link rel="stylesheet" type="text/css" href="backend/assets/jquery-multi-select/css/multi-select.css" />
 	<link href="backend/css/style.css" rel="stylesheet">
 	<link href="css/mycss.css" rel="stylesheet">
+	<link href="css/sweetalert.css" rel="stylesheet">
 	<link href="backend/css/style-responsive.css" rel="stylesheet" />
 	<style type="text/css">
 		.maid_name {
@@ -73,29 +75,28 @@
 				</div>
 				</section>
 				<div id="display_maid" style="display: none;">
-					
-						<h3>รายชื่อแม่บ้าน</h3>	
-						<div class="col-lg-12" style="background-color: #ffffff">
-							<div class="col-lg-9" style="max-height: 500px; overflow: scroll;" id="content_maid">
-								
-							
-							</div>
-							<div class="col-lg-3">
-							<h4>แม่บ้านที่คุณเลือก</h4>
-								<table class="table table-bordered" id="list_maid_booking">
-									<tr>
-										<td><i class="fa fa-calendar-check-o fa-sidebar"></i> <span id="date_th">xxx</span></td>
-									</tr>
-									<!-- <tr class="row-maid ">
-										<td><img src="backend/img/avatar_profile/maid5.jpg" style="width: 30px; height: 30px;border-radius: 30px;"> Pattama Pratyamongkol  <button class="btn btn-danger btn-xs">X ลบ</button></td>
-									</tr> -->
-								</table>
-								<button class="btn btn-success">ยืนยัน</button>
-							</div>
-							
+					<h3>รายชื่อแม่บ้าน</h3>	
+					<div class="col-lg-12" style="background-color: #ffffff">
+						<div class="col-lg-9" style="max-height: 500px; overflow: scroll;" id="content_maid">
 						</div>
-						
-					
+						<div class="col-lg-3">
+						<h4>แม่บ้านที่คุณเลือก</h4>
+							<table class="table table-bordered" id="list_maid_booking">
+								<tr>
+									<td><i class="fa fa-calendar-check-o fa-sidebar"></i> <span id="date_th">xxx</span></td>
+								</tr>
+							</table>
+							<button class="btn btn-success" id="confirm">ยืนยัน</button>
+						</div>
+					</div>
+					<h3>อุปกณ์ทำความสะอาดเพิ่มเติม</h3>
+					<div class="col-lg-12" style="background-color: #ffffff">
+						ปปปป
+					</div>
+					<h3>จุดที่ต้องการเน้นเป็นพิเศษ</h3>
+					<div class="col-lg-12" style="background-color: #ffffff">
+						ปปปป
+					</div>
 				</div>
 		</div>	
 	</div>
@@ -115,9 +116,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
   <script src="backend/js/advanced-form-components.js"></script>
 <!--script for this page-->
-<script src="backend/js/jquery.stepy.js"></script>
+<!-- <script src="backend/js/jquery.stepy.js"></script> -->
+<script type="text/javascript" src="js/sweetalert.min.js"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
+		var uid = "<?php echo $_SESSION['uid'] ?>";
 		var list_maid_id = [];
 		$('#load_page').hide();
 		function render(arr_maid) {
@@ -202,6 +205,64 @@
 				});	
 			});
 		});
+
+		$('#confirm').click(function(event) {
+			if (list_maid_id.length > 0) {
+				// alert(true);
+				$.post('service/add_booking.php', 
+					{
+						arr_maid: list_maid_id,
+						user_id: uid,
+						date: $('#date').val()
+					}, 
+					function() {
+					
+					}
+				).done(function(data) {
+					// alert(data);
+					try {
+						let json_res = jQuery.parseJSON(data);
+						if(json_res.status === true) {
+							swal({
+								title: "จองแม่บ้านเรียบร้อยแล้ว",
+								text: json_res.message +" "+"ต้องการเช้าอุปกรณ์ทำความสะอาดเพิ่มหรือไม่",
+								type: "success",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "ต้องการ!",
+								cancelButtonText: "ไม่ต้องการ!",
+								closeOnConfirm: false,
+								closeOnCancel: false
+							},
+							function(isConfirm){
+								if (isConfirm) {
+									window.location.href = "item.php";
+									// get_item_page();
+									// swal("OK!", "Your imaginary file has been deleted.", "success");
+								} else {
+									swal("Cancelled", "Your imaginary file is safe :)", "error");
+								}
+							});
+						} else {
+							swal("Fail!!", json_res.message, "error")
+						}
+					} catch(e) {
+
+					}
+				});
+			} else {
+				alert('ไม่มีแม่บ้านที่คุณเลือก กรุณาเลือกแม่บ้าน');
+			}
+		});
+
+		function get_item_page() {
+			$.get('item.php', function() {
+				/*optional stuff to do after success */
+			}).done(function(data) {
+				// alert()
+				$('#content').html(data);
+			});
+		}
 	});
 </script>
 </body>

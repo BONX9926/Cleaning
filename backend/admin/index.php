@@ -65,8 +65,8 @@
 					<span>อุปกรณ์ทำความสะอาด</span>
 				</a>
 				<ul class="sub">
-					<li id="eq" domain-menu="eq-domain"><a>อุปกรณ์ทั้งหมด</a></li>
-					<li id="add-eq" domain-menu="eq-domain"><a>เพิ่มอุปกรณ์</a></li>
+					<li id="item_list" domain-menu="item-domain"><a>อุปกรณ์ทั้งหมด</a></li>
+					<li id="add-item" domain-menu="item-domain"><a>เพิ่มอุปกรณ์</a></li>
 				</ul>
 			</li>
 
@@ -177,17 +177,34 @@
 			});
 		}
 
-		$("#eq").click(function(event) {
+		$("#item_list").click(function(event) {
 			$("li .active").attr('class','');
-			get_page_eq();
+			get_page_item();
 			$(this).attr('class','active');
 			var domain = $(this).attr('domain-menu');
 			// alert(domain);
 			$("#"+domain).addClass('dcjq-parent active');
 		});
 
-		function get_page_eq() {
-			$.get('eq.php', function() {
+		function get_page_item() {
+			$.get('item.php', function() {
+				/*optional stuff to do after success */
+			}).done(function(data){
+				$("#content").html(data);
+			});
+		}
+
+		$("#add-item").click(function(event) {
+			$("li .active").attr('class','');
+			get_page_add_item();
+			$(this).attr('class','active');
+			var domain = $(this).attr('domain-menu');
+			// alert(domain);
+			$("#"+domain).addClass('dcjq-parent active');
+		});
+
+		function get_page_add_item() {
+			$.get('add_item.php', function() {
 				/*optional stuff to do after success */
 			}).done(function(data){
 				$("#content").html(data);
