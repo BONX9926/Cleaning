@@ -103,8 +103,8 @@
 										$return['message'] = 'อัฟโหลดรูป Fail!!';
 									}
 								}
-
-								if(isset($POST['items'])) {
+								// var_dump($POST['items']);
+								if(isset($_POST['items'])) {
 									foreach ($_POST['items'] as $key => $value) {
 										$arr_item[] = "('{$booking_id}','{$value}')";
 									}
@@ -117,7 +117,7 @@
 									}
 								}
 							} else {
-
+								$return['booking_rooms'] = "ไม่สามารถเพิ่มข้อมูลใน booking_rooms ได้";
 							}
 
 							
@@ -125,7 +125,7 @@
 							$return['status'] = false;
 							$return['message'] = "ไม่สารถเพิ่ม แม่บ้านในบิลได้";
 						}
-						
+
 					} else {
 						$sql_del ="DELETE FROM `booking_table` WHERE `booking_table`.`booking_id` = '{$booking_id}'";
 						if(mysqli_query($conn,$sql_del)) {
