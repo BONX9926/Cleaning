@@ -3,7 +3,7 @@
 		<div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
 	</div>
 	<!--logo start-->
-	<a href="index.html" class="logo">Clean<span>service</span></a>
+	<a href="index.html" class="logo">ระบบบริหารจัดการร้านรับ<span>ทำความสะอาด</span></a>
 	<!--logo end-->
 	<div class="top-nav ">
 		<!--search & user info start-->
@@ -11,7 +11,7 @@
 			<!-- user login dropdown start-->
 			<li class="dropdown">
 				<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-					<img alt="" src="../img/avatar1_small.jpg">
+					<img alt="" style="width: 28.99px;height: 28.99px;" src="../img/avatar_profile/<?=$_SESSION['avatar']?>">
 					<span class="username"><?=$_SESSION['fname']." ".$_SESSION['lname']?></span>
 					<b class="caret"></b>
 				</a>

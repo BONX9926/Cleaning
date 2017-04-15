@@ -16,65 +16,42 @@
 	เพิ่มอุปกรณ์ทำความสะอาด
 	</header>
 	<div class="panel-body">
-		<form class="form-horizontal" role="form">
+		<form class="form-horizontal" role="form" id="files" method="POST" enctype="multipart/formdata">
 			<div class="form-group">
-				<label class="col-lg-2 col-sm-2 control-label">username</label>
+				<label class="col-lg-2 col-sm-2 control-label">รูปอุปกรณ์</label>
 				<div class="col-lg-10">
-					<input type="text" class="form-control" name="user" id="user">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-2 col-sm-2 control-label">password</label>
-				<div class="col-lg-10">
-					<input type="password" class="form-control" name="pass" id="pass">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-2 col-sm-2 control-label">ชื่อ</label>
-				<div class="col-lg-10">
-					<input type="text" class="form-control" name="fname" id="fname">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-2 col-sm-2 control-label">นามสกุล</label>
-				<div class="col-lg-10">
-					<input type="text" class="form-control" name="lname" id="lname">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-2 col-sm-2 control-label">ที่อยู่</label>
-				<div class="col-lg-10">
-					<input type="text" class="form-control" name="address" id="address">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-2 col-sm-2 control-label">Email</label>
-				<div class="col-lg-10">
-					<input type="email" class="form-control" name="email" id="email">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-2 col-sm-2 control-label">เบอร์โทรศัพท์</label>
-				<div class="col-lg-10">
-					<input type="text" name="phone" placeholder="" data-mask="999-999-9999" class="form-control">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-lg-2 col-sm-2 control-label">วันเกิด</label>
-				<div class="col-lg-7">
-					<div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="22-06-1994" class="input-append date dpYears">
-						<input type="text" readonly="" name="birthday" size="16" class="form-control" >
-						<span class="input-group-btn add-on">
-							<button class="btn btn-danger" type="button"><i class="fa fa-calendar"></i></button>
-						</span>
+					<div class="fileupload fileupload-new" data-provides="fileupload">
+					<div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+					<img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" id="show-img" />
+					</div>
+					<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+					<div>
+					<span class="btn btn-white btn-file">
+					<span class="fileupload-new"><i class="fa fa-paper-clip"></i> เลือกรูป</span>
+					<span class="fileupload-exists"><i class="fa fa-undo"></i> เปลี่ยน</span>
+					<input type="file" name="img" id="img" accept="image/.jpg, .png" />
+					</span>
+					<!-- <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> Remove</a> -->
+					</div>
 					</div>
 				</div>
 			</div>
-			
 			<div class="form-group">
-				<label class="col-lg-2 col-sm-2 control-label">แนะนำตัว</label>
+				<label class="col-lg-2 col-sm-2 control-label">ชื่ออุปกรณ์</label>
 				<div class="col-lg-10">
-					<input type="text" class="form-control" name="show_detail" id="show_detail">
+					<input type="text" class="form-control" name="item_name" id="item_name">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label">จำนวนทั้งหมด / ชิ้น</label>
+				<div class="col-lg-10">
+					<input type="number" class="form-control" name="quantity_all" id="quantity_all">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label">ราคาเช่าต่อชิ้น</label>
+				<div class="col-lg-10">
+					<input type="text" class="form-control" name="item_price" id="item_price" >
 				</div>
 			</div>
 		</form>
@@ -88,18 +65,6 @@
 	</div>
 	</section>
 </div>
-<!-- js placed at the end of the document so the pages load faster -->
-<!-- <script src="../js/jquery.js"></script> -->
-<!--  <script src="../js/bootstrap.min.js"></script>
-<script class="include" type="text/javascript" src="../js/jquery.dcjqaccordion.2.7.js"></script>
-<script src="../js/jquery.scrollTo.min.js"></script>
-<script src="../js/jquery.nicescroll.js" type="text/javascript"></script>
-<script src="../js/jquery.sparkline.js" type="text/javascript"></script>
-<script src="../assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
-<script src="../js/owl.carousel.js" ></script>
-<script src="../js/jquery.customSelect.min.js" ></script>
-<script src="../js/respond.min.js" ></script> -->
-
 
 <script src="../js/simply-toast.min.js"></script>
     <!--this page plugins-->
@@ -122,29 +87,37 @@
 <script>
 	 // $("#phone").mask('000-000-0000');
 	$('#submit').click(function(event) {
-		var data = $('form').serializeArray();
+		// var data = $('form').serializeArray();
+		var formData = new FormData($("form#files")[0]);
 		// alert(data[0]['value']);
 		// console.log(data);
-		// if (data[0]['value'] != '' && data[1]['value'] != '' && data[2]['value'] != ''&& data[3]['value'] != ''&& data[4]['value'] != ''&& data[5]['value'] != ''&& data[6]['value'] != ''&& data[7]['value'] != '') {
-			// $.post('add_maid_save.php', {data: data}, function() {
-				
-			// }).done(function(data) {
-				// alert(data);
-				// console.log(data);
-				// let json_res = jQuery.parseJSON(data);
-				// if(json_res.status == true){
-					// $.simplyToast(json_res.message, 'success');
-					//alert()
-					//window.location = "add_maid.php?success=1";
-				// }else{
-					// alert(json_res.message);
-					// $.simplyToast(json_res.message, 'danger');
-				// }
-			// });
-		// } else {
-			// alert("error");
-			// $.simplyToast('กรุณากรอกข้อมูลให้ครบทุกช่อง', 'danger');
-			// window.location ='add_maid.php?err=1';
-		// }
+		// console.log(formData);
+		$.ajax({
+	        url: 'add_item_save.php',
+	        type: 'POST',
+	        data: formData,
+	        async: false,
+	        success: function (data) {
+            // console.log(data);
+            // alert(data);
+            let json_res = jQuery.parseJSON(data);
+            // // alert(json_res.status);
+            if(json_res.status == true) {
+	            $.simplyToast(json_res.message, 'success');
+	            $('input').val("");
+	            $('#show-img').attr('src', '');
+
+            } else {
+            	$.simplyToast(json_res.message, 'danger');
+            // alert('66666');
+            }
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+
+    return false;
+		
 	});
 </script>

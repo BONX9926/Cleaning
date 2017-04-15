@@ -3,10 +3,10 @@
 	$return = array();
 
 	if (isset($_POST['arr_maid']) && isset($_POST['user_id']) && isset($_POST['date'])) {
-		include_once '../connect.php';
-		include_once '../lib/php/public_function.php';
-		$date = revert_date($_POST['date']);
-		$one_day = ($date*1) + (86400-1);
+			include_once '../connect.php';
+			include_once '../lib/php/public_function.php';
+			$date = revert_date($_POST['date']);
+			$one_day = ($date*1) + (86400-1);
 
 		$sql ="SELECT * FROM `booking_table` WHERE `ref_booking_uid` = '{$_POST['user_id']}' AND `status_id` ='false' ";
 		if ($res = mysqli_query($conn,$sql)) {

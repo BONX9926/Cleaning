@@ -33,6 +33,7 @@
 					if ($res2 = mysqli_query($conn,$sql_showmaid)) {
 						$return['status'] = true;
 						$return['date_th'] = date_thai($work_date);
+						$return['date_time'] = $work_date;
 						while ($data = mysqli_fetch_assoc($res2)) {
 							$return['data'][] = $data;
 						}

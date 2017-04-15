@@ -89,7 +89,7 @@
   };
   firebase.initializeApp(config);
 
-	var providerFacebook = new firebase.auth.FacebookAuthProvider();
+	// var providerFacebook = new firebase.auth.FacebookAuthProvider();
 	var providerGoogle = new firebase.auth.GoogleAuthProvider();
 
 	function login(name,email,uid,photoURL,type){

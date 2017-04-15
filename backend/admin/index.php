@@ -29,6 +29,7 @@
 
 	<link href="../css/style.css" rel="stylesheet">
 	<link href="../css/style-responsive.css" rel="stylesheet" />
+	<link rel="stylesheet" href="../css/simply-toast.min.css" type="text/css">
 
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
@@ -51,7 +52,7 @@
 		<ul class="sidebar-menu" id="nav-accordion">
 			<li class="sub-menu">
 				<a href="javascript:;" id="maid-domain">
-					<i class="fa fa-book"></i>
+					<i class="fa fa-group"></i>
 					<span>แม่บ้าน</span>
 				</a>
 				<ul class="sub" id="sub_maid">
@@ -60,8 +61,8 @@
 				</ul>
 			</li>
 			<li class="sub-menu">
-				<a href="javascript:;" id="eq-domain">
-					<i class="fa fa-book"></i>
+				<a href="javascript:;" id="item-domain">
+					<i class="fa fa-gavel"></i>
 					<span>อุปกรณ์ทำความสะอาด</span>
 				</a>
 				<ul class="sub">
@@ -76,13 +77,16 @@
 					<span>Components</span>
 				</a>
 				<ul class="sub">
-					<li><a  href="#">Grids</a></li>
-					<li><a  href="#">Calendar</a></li>
-					<li><a  href="#">Gallery</a></li>
-					<li><a  href="#">Todo List</a></li>
-					<li><a  href="#">Draggable Portlet</a></li>
-					<li><a  href="#">Tree View</a></li>
+					<li><a href="#">Grids</a></li>
+					<li><a href="#">Calendar</a></li>
+					<li><a href="#">Gallery</a></li>
+					<li><a href="#">Todo List</a></li>
+					<li><a href="#">Draggable Portlet</a></li>
+					<li><a href="#">Tree View</a></li>
 				</ul>
+			</li>
+			<li id="work_table">
+				<a><i class="fa fa-calendar"></i><span>ตารางานของแม่บ้าน</span></a>
 			</li>
 		</ul>
 	<!-- sidebar menu end-->
@@ -102,8 +106,10 @@
 	</section>
 <!--main content end-->
 </section>
+
 <!-- js placed at the end of the document so the pages load faster -->
 <script src="../js/jquery.js"></script>
+<script src="../js/simply-toast.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script class="include" type="text/javascript" src="../js/jquery.dcjqaccordion.2.7.js"></script>
 <script src="../js/jquery.scrollTo.min.js"></script>
@@ -191,6 +197,68 @@
 				/*optional stuff to do after success */
 			}).done(function(data){
 				$("#content").html(data);
+			}, function() {
+				$('.edit-btn').click(function() {
+					let item_id = $(this).attr('item_id');
+					$.post('get_item_by_id.php', {item_id: item_id}, function() {
+						/*optional stuff to do after success */
+					}).done(function(data) {
+						let json_res = jQuery.parseJSON(data);
+						if (json_res.status == true) {
+							$('#item_id').val(json_res.data.item_id);
+							$('#item_name').val(json_res.data.item_name);
+							$('#quantity_all').val(json_res.data.quantity_all);
+							$('#item_price').val(json_res.data.item_price);
+							$('#myModal').modal('toggle');
+						}
+					});
+					// alert($(this).attr('item_id'));
+				});
+
+				$('#confirm_edit').click(function() {
+						var formData = new FormData($("form#files")[0]);
+
+						$.ajax({
+					        url: 'edit_item_save.php',
+					        type: 'POST',
+					        data: formData,
+					        async: false,
+					        success: function (data) {
+					        	// console.log(data);
+					        	// alert(data);
+				            let json_res = jQuery.parseJSON(data);
+
+				            if(json_res.status == true) {
+					            $.simplyToast(json_res.message, 'success');
+					            
+					            $('.modal-backdrop').fadeOut('400');
+					            get_page_item();
+
+				            } else {
+				            	$.simplyToast(json_res.message, 'danger');
+				            	// alert(json_res.message);
+				            	$('#myModal').modal('toggle');
+				            }
+				        },
+					        cache: false,
+					        contentType: false,
+					        processData: false
+				    	});
+
+			    	return false;
+				});
+
+				$('.rm-btn').click(function() {
+					// alert("rm");
+					let item_id = $(this).attr("item_id");
+					// alert(item_id);
+					$.post('del_item_save.php', {item_id: item_id}, function() {
+						
+					}).done(function(data) {
+						alert(data);
+					});
+				});
+
 			});
 		}
 

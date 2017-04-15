@@ -62,7 +62,6 @@
 					<span>ตารางาน</span>
 				</a>
 				<ul class="sub">
-					<li id="working-now" domain-menu="working-domain"><a >งานวันนี้</a></li>
 					<li id="working-table" domain-menu="working-domain"><a >ตารางงานทั้งหมด</a></li>
 				</ul>
 			</li>
@@ -196,26 +195,7 @@
 	//event menu profile
 
 	//event menu working_tabel
-		//event but working
-		$("#working-now").click(function(event) {
-			$("li .active").attr('class','');
-			get_page_working_now();
-			$(this).attr('class','active');
-			var domain = $(this).attr('domain-menu');
-			$("#"+domain).addClass('dcjq-parent active');
-			//alert("555");
-		});
-		//event but working
 
-		//function get page working_now
-		function get_page_working_now(){
-			$.get('working_now.php', function() {
-				/*optional stuff to do after success */
-			}).done(function(data){
-				$("#content").html(data);
-			});
-		}
-		//function get page working_now
 
 
 		$("#working-table").click(function(event) {
