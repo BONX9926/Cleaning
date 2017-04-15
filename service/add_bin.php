@@ -88,7 +88,7 @@
 							$sql = "";
 							$sql = "INSERT INTO `booking_rooms`(`booking_id`, `room_name`) VALUES ".implode(' , ',$arr_room);
 							if(mysqli_query($conn,$sql)) {
-
+								
 								if ($_FILES['file']['size'] > 0) {
 									$temp = "../image/img_comment/";
 									if(move_uploaded_file($_FILES["file"]["tmp_name"],$temp.$_FILES["file"]["name"])) {
@@ -96,6 +96,8 @@
 										$sql = "INSERT INTO `booking_comment`(`booking_id`, `img_file_cm`, `comment`) VALUES ('{$booking_id}','{$_FILES['file']['name']}', '{$_POST['comment']}')";
 										if(mysqli_query($conn,$sql)) {
 											$return['booking_comment'] = "เพิ่มข้อมูลใน booking_comment เรียบร้อยแล้ว";
+											
+											// true
 										} else {
 											$return['booking_comment'] = "เพิ่มข้อมูลใน booking_comment ไม่สำเร็จ";
 										}
@@ -103,6 +105,7 @@
 										$return['message'] = 'อัฟโหลดรูป Fail!!';
 									}
 								}
+
 								// var_dump($POST['items']);
 								if(isset($_POST['items'])) {
 									foreach ($_POST['items'] as $key => $value) {
@@ -112,10 +115,12 @@
 									$sql = "INSERT INTO `booking_items`(`booking_id`, `item_name`) VALUES ".implode(' , ',$arr_item);
 									if(mysqli_query($conn,$sql)) {
 										$return['booking_items'] = "เพิ่มข้อมูลใน booking_items เรียบร้อยแล้ว";
+										// true
 									} else {
 										$return['booking_items'] = "ไม่สามารถเพิ่มข้อมูลใน booking_items ได้";
 									}
 								}
+								$return['status'] = true;
 							} else {
 								$return['booking_rooms'] = "ไม่สามารถเพิ่มข้อมูลใน booking_rooms ได้";
 							}
