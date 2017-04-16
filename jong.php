@@ -316,9 +316,9 @@
 				        async: false,
 				        success: function (data) {
 			            // console.log(data);
-			            alert(data);
-			            // let json_res = jQuery.parseJSON(data);
-			            // // alert(json_res.status);
+			            // alert(data);
+			            let json_res = jQuery.parseJSON(data);
+			            alert(json_res.status);
 			            // if(json_res.status == true) {
 				           //  $.simplyToast(json_res.message, 'success');
 				           //  $('input').val("");

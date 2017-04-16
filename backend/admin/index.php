@@ -86,7 +86,7 @@
 				</ul>
 			</li>
 			<li id="work_table">
-				<a><i class="fa fa-calendar"></i><span>ตารางานของแม่บ้าน</span></a>
+				<a id="work_maid"><i class="fa fa-calendar"></i><span>ตารางานของแม่บ้าน</span></a>
 			</li>
 		</ul>
 	<!-- sidebar menu end-->
@@ -277,17 +277,24 @@
 			}).done(function(data){
 				$("#content").html(data);
 			});
+		}		
+
+		$("#work_maid").click(function(event) {
+			$("li .active").attr('class','');
+			work_maid();
+			$(this).attr('class','active');
+			var domain = $(this).attr('domain-menu');
+			// alert(domain);
+			$("#"+domain).addClass('dcjq-parent active');
+		});
+
+		function work_maid() {
+			$.get('work_maid.php', function() {
+				/*optional stuff to do after success */
+			}).done(function(data){
+				$("#content").html(data);
+			});
 		}
-
-		function init(){
-			
-		}
-		//function get page maid
-
-		//start
-		init();
-		//start
-
 	});
 
 </script>

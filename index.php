@@ -53,9 +53,12 @@
                 <hr>
                 <h2 class="tagline">บริการทำความสะอาดออนไลน์</h2>
                 <hr>
+                <br><br>
                 <p><h4>ให้ที่พักของคุณสะอาดน่าอยู่ในเวลาที่ต้องการ ด้วยแม่บ้านที่คุณวางใจ</h4></p>
                 <p><h4>เรื่องความสะอาดไว้ใจเรา เลือกใช้บริการกับเรา ด้วยคุณภาพแล้วมาตราฐาน และพนักงานงานมืออาชีพ</h4></p>
-                <p style="padding-top: 20px;padding-bottom: 20px;"><a class="btn btn-success btn-lg" href="service.php">จองบริการ »</a></p>
+                <p><h4>บริการทุกระดับประทับใจ</h4></p>
+                <!-- <p style="padding-top: 20px;padding-bottom: 20px;"><a class="btn btn-success btn-lg" href="jong.php">จองบริการ »</a></p> -->
+                <br><br><br><br>
             </div>
         </div>
     </div>

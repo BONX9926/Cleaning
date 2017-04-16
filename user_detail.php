@@ -22,6 +22,7 @@
 <div class="container" style="padding-top: 60px;">
 	<div class="row">
 		<div class="col-lg-12">
+		<h4>กรุณากรอกข้อมูล <small style="color:red">เพื่อความสะดวกใช้บริการ</small></h4>
 		<form>
 		<input type="hidden" name="uid" value="<?=$_SESSION['uid']?>" id="uid">
 		<input type="hidden" name="lat" id="latitude">
@@ -29,33 +30,37 @@
 			<div class="col-lg-6">
         	<div class="form-group">
 			<label>ชื่อ :</label>
-				<input type="text" name="fname" class="form-control" id="fname">
+				<input type="text" name="fname" class="form-control" id="fname" placeholder="กรุณากรอกชื่อ">
 			</div>
 			</div>
 			<div class="col-lg-6">
 			<div class="form-group">
 			<label>นามสกุล :</label>
-				<input type="text" name="lname" class="form-control" id="lname">
+				<input type="text" name="lname" class="form-control" id="lname" placeholder="กรุณากรอกนามสกุล">
 			</div>
 			</div>
 			<div class="col-lg-6">
 			<div class="form-group">
 			<label>เบอร์โทรศัพท์ <span>(มือถือ)</span> :</label>
-				<input type="text" name="phone" class="form-control" id="phone">
+				<input type="text" name="phone" class="form-control" id="phone" placeholder="xxx-xxx-xxxx">
 			</div>
 			</div>
 		</form>
 			<div class="col-lg-6">
 			<label>ที่อยู่ :</label>
 			<div class="form-group">
-				<input type="text" name="address" class="form-control" id="address">
+				<input type="text" name="address" class="form-control" id="address" placeholder="">
+				<span style="color:red">(หมายเหตุ: พิมพ์ข้อความเพื่อค้นหาตำแหน่งและเลื่อนหมุดไปยังตำแหน่งที่พักของคุณ)</span>
 			</div>
 			</div>
 			<div class="col-lg-10 col-lg-offset-1">
-			<div id="myMap"></div>
+			<div id="myMap"></div><br>
 			</div>
 			<div class="col-lg-12">
-			<button id="submit" class="btn btn-info">ตกลง</button>
+				<div class="col-lg-4 col-lg-offset-4">
+					<button id="submit" class="btn btn-danger btn-block">ตกลง</button>
+				<br><br>
+				</div>
 			</div>
 
 		</div>
