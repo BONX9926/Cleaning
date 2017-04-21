@@ -318,16 +318,17 @@
 			            // console.log(data);
 			            // alert(data);
 			            let json_res = jQuery.parseJSON(data);
-			            alert(json_res.status);
-			            // if(json_res.status == true) {
+			            // alert(json_res.status);
+			            if(json_res.status === true) {
+			            	window.location.href = "invoice.php";
 				           //  $.simplyToast(json_res.message, 'success');
 				           //  $('input').val("");
 				           //  $('#show-img').attr('src', '');
 
-			            // } else {
-			            // 	$.simplyToast(json_res.message, 'danger');
-			            // // alert('66666');
-			            // }
+			            } else {
+			            	// $.simplyToast(json_res.message, 'danger');
+			            	alert(json_res.message);
+			            }
 			        },
 			        cache: false,
 			        contentType: false,
@@ -390,17 +391,6 @@
 			});	
 			});
 		});
-
-		
-
-		function get_item_page() {
-			$.get('item.php', function() {
-				/*optional stuff to do after success */
-			}).done(function(data) {
-				// alert()
-				$('#content').html(data);
-			});
-		}
 	});
 </script>
 </body>
