@@ -30,11 +30,10 @@ $temp_files = "../img/items/";
 	if(count($_POST) == 4) {
 		$status = false;
 		include_once '../../connect.php';
-		$sql = "SELECT  `quantity_remain` FROM `item` WHERE `item_id`='{$_POST['item_id']}' ";
+		$sql = "SELECT  `quantity_remain` FROM `items` WHERE `item_id`='{$_POST['item_id']}' ";
 
 		if ($res = mysqli_query($conn,$sql)) {
 			$quantity_remain = mysqli_fetch_assoc($res)['quantity_remain'];
-
 		}	
 
 		if ($_FILES['img']['size'] > 0) {
@@ -56,7 +55,7 @@ $temp_files = "../img/items/";
 				}
 			}
 		} else {
-			$sql = "UPDATE `item` SET `item_name`='{$_POST['item_name']}',`quantity_all`='{$_POST['quantity_all']}',`item_price`='{$_POST['item_price']}' WHERE `item_id`='{$_POST['item_id']}' ";
+			$sql = "UPDATE `items` SET `item_name`='{$_POST['item_name']}',`quantity_all`='{$_POST['quantity_all']}',`item_price`='{$_POST['item_price']}' WHERE `item_id`='{$_POST['item_id']}' ";
 			if(check_remain($_POST['quantity_all'],$quantity_remain)) {
 				if (mysqli_query($conn,$sql)) {
 

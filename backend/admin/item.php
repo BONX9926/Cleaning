@@ -52,7 +52,7 @@
 <h4 class="modal-title" id="myModalLabel">แก้ไขข้อมูล</h4>
 </div>
 <div class="modal-body">
-<!-- <form class="form-horizontal" role="form" id="files" method="POST" enctype="multipart/formdata"> -->
+<form class="form-horizontal" role="form" id="files" method="POST" enctype="multipart/formdata">
 <div class="form-group">
 <label class="col-lg-3 col-sm-3 control-label">รูปอุปกรณ์</label>
 <div class="col-lg-9">
@@ -78,7 +78,7 @@
 <input type="text" class="form-control" name="item_price" id="item_price">
 </div>
 </div>
-<!-- </form> -->
+</form>
 </div>
 <div class="modal-footer">
 <button  class="btn btn-primary" id="confirm_edit">ยืนยันการแก้ไข</button>
@@ -88,6 +88,3 @@
 </div>
 </div>
 </div>
-<script type="text/javascript">
-
-</script>

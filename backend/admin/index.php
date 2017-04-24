@@ -71,6 +71,10 @@
 				</ul>
 			</li>
 
+			<li>
+				<a id="payment"><i class="fa fa-credit-card"></i><span>แจ้งชำระเงิน</span></a>
+			</li>
+
 			<li class="sub-menu">
 				<a href="javascript:;" >
 					<i class="fa fa-cogs"></i>
@@ -283,13 +287,30 @@
 			$("li .active").attr('class','');
 			work_maid();
 			$(this).attr('class','active');
-			var domain = $(this).attr('domain-menu');
+			// var domain = $(this).attr('domain-menu');
 			// alert(domain);
-			$("#"+domain).addClass('dcjq-parent active');
+			// $("#"+domain).addClass('dcjq-parent active');
 		});
 
 		function work_maid() {
 			$.get('work_maid.php', function() {
+				/*optional stuff to do after success */
+			}).done(function(data){
+				$("#content").html(data);
+			});
+		}
+
+		$("#payment").click(function(event) {
+			$("li .active").attr('class','');
+			payment();
+			$(this).attr('class','active');
+			// var domain = $(this).attr('domain-menu');
+			// alert(domain);
+			// $("#"+domain).addClass('dcjq-parent active');
+		});
+
+		function payment() {
+			$.get('payment.php', function() {
 				/*optional stuff to do after success */
 			}).done(function(data){
 				$("#content").html(data);
