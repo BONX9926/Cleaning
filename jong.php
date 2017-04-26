@@ -318,9 +318,9 @@
 			            // console.log(data);
 			            // alert(data);
 			            let json_res = jQuery.parseJSON(data);
-			            // alert(json_res.status);
-			            if(json_res.status === true) {
-			            	window.location.href = "invoice.php";
+			            alert(json_res.status);
+			            if(json_res.status == true) {
+			            	window.location.href = "jong_detail.php";
 				           //  $.simplyToast(json_res.message, 'success');
 				           //  $('input').val("");
 				           //  $('#show-img').attr('src', '');

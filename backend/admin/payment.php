@@ -33,7 +33,7 @@
 							<td class="numeric"><?=$show['email']?></td>
 							<td class="numeric"><?=number_format($show['money'])?></td>
 							<td class="numeric"><?=$show['created_at']?></td>
-							<td class="numeric"><?=$show['file']?></td>
+							<td class="numeric"><a href="#myModal" data-toggle="modal"><?=$show['file']?></a></td>
 							<td class="numeric">
 							<?php 
 								$sql1 = "SELECT `status_id` FROM `booking_table` WHERE `booking_id`='{$show['num_bin']}' ";
@@ -56,11 +56,27 @@
 								</div>
 							</td>
 						</tr>
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+		<div class="modal-content">
+		<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">หลักฐานการชำระเงิน</h4>
+		</div>
+		<div class="modal-body">
+
+		<img src="../../image/payment/<?=$show['file']?>" style="width:500;height: 500px;">
+
+		</div>
+		</div>
+		</div>
+		</div>
 						<?php } ?>
 					</tbody>
 				</table>
 			</section>
 		</div>
+
 	</section>
 </div>
 <script type="text/javascript">
