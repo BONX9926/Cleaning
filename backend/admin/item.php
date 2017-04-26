@@ -81,7 +81,7 @@
 </form>
 </div>
 <div class="modal-footer">
-<button  class="btn btn-primary" id="confirm_edit">ยืนยันการแก้ไข</button>
+<button class="btn btn-primary" id="confirm_edit">ยืนยันการแก้ไข</button>
 <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
 </div>
 </div>

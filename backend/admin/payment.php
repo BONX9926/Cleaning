@@ -24,7 +24,6 @@
 							include_once '../../connect.php';
 							$sql = "SELECT * FROM `payment`";
 							$data = mysqli_query($conn,$sql);
-							$count = 0;
 							while($show = mysqli_fetch_assoc($data)){
 						?>
 						<tr>
@@ -35,7 +34,27 @@
 							<td class="numeric"><?=number_format($show['money'])?></td>
 							<td class="numeric"><?=$show['created_at']?></td>
 							<td class="numeric"><?=$show['file']?></td>
-							<td class="numeric"><button>xxx</button></td>
+							<td class="numeric">
+							<?php 
+								$sql1 = "SELECT `status_id` FROM `booking_table` WHERE `booking_id`='{$show['num_bin']}' ";
+								// echo $sql1; 
+								$data1 = mysqli_query($conn,$sql1);
+								while($show1 = mysqli_fetch_assoc($data1)){
+									// var_dump($show1["status_id"]);
+									?>
+
+							<input type="hidden" id="status_id" value="<?php echo $show1["status_id"]?>">
+							<?php
+								}
+							?>
+								<div class="switch has-switch" id_bin="<?=$show['num_bin']?>" id="bin">
+									<div class="switch-off">
+									<input type="checkbox" name="status_id" checked="" data-toggle="switch">
+									<span class="switch-left">ON</span>
+									<label>&nbsp;</label><span class="switch-right">OFF</span>
+									</div>
+								</div>
+							</td>
 						</tr>
 						<?php } ?>
 					</tbody>
@@ -44,3 +63,14 @@
 		</div>
 	</section>
 </div>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		var status_id = $("#status_id").val();
+		// console.log(status_id);
+		if(status_id == "true") {
+			$('.switch-off').attr('class', 'switch-on');
+		} else if (status_id == "false") {
+			$('.switch-on').attr('class', 'switch-off');
+		}
+	});
+</script>

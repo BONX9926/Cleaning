@@ -115,6 +115,7 @@
 <script src="../js/jquery.js"></script>
 <script src="../js/simply-toast.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<!-- <script src="../js/jquery-ui-1.9.2.custom.min.js"></script> -->
 <script class="include" type="text/javascript" src="../js/jquery.dcjqaccordion.2.7.js"></script>
 <script src="../js/jquery.scrollTo.min.js"></script>
 <script src="../js/jquery.nicescroll.js" type="text/javascript"></script>
@@ -123,6 +124,9 @@
 <script src="../js/owl.carousel.js" ></script>
 <script src="../js/jquery.customSelect.min.js" ></script>
 <script src="../js/respond.min.js" ></script>
+
+<!-- //test -->
+
 
 <!--right slidebar-->
 <script src="../js/slidebars.min.js"></script>
@@ -314,6 +318,43 @@
 				/*optional stuff to do after success */
 			}).done(function(data){
 				$("#content").html(data);
+				// Switch()
+			}, function Switch() {
+				$(".switch-right").click(function() {
+					$('.switch-off').attr('class', 'switch-on switch-animate');
+					$("#bin").attr('id_bin');
+					// console.log($("#bin").attr('id_bin'));
+					$.post('update_bin.php', {status_id: "true", id:$("#bin").attr('id_bin')}, function() {
+						/*optional stuff to do after success */
+					}).done(function(data){
+						// console.log(data);
+						var json_res = jQuery.parseJSON(data);
+							if(json_res.status == true) {
+								$.simplyToast(json_res.message, 'success');
+							} else {
+								$.simplyToast(json_res.message, 'danger');
+							}
+					});
+
+				});
+
+				$(".switch-left").click(function() {
+					$('.switch-on').attr('class', 'switch-off switch-animate');
+					$("#bin").attr('id_bin');
+					// console.log("false");
+					$.post('update_bin.php', {status_id: "false", id:$("#bin").attr('id_bin')}, function() {
+						/*optional stuff to do after success */
+					}).done(function(data){
+						// console.log(data);
+						var json_res = jQuery.parseJSON(data);
+							if(json_res.status == true) {
+								$.simplyToast(json_res.message, 'success');
+							} else {
+								$.simplyToast(json_res.message, 'danger');
+							}
+					});
+				});
+
 			});
 		}
 	});
