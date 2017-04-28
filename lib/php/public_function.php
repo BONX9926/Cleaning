@@ -13,7 +13,6 @@
 	function revert_date($fulldate)
 	{
 		return strtotime($fulldate);
-
 	}
 	// แปลง Date เป็น Timestamp
 

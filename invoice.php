@@ -159,6 +159,7 @@
 						<td><?=$arr_size['size_pirce']*1; ?></td>
 					</tr>
 				<?php } ?>
+				<?php if(isset($arr_item)) { ?>
 					<tr>
 						<td>อุปกรณ์</td>
 						<td class="hidden-phone">
@@ -186,37 +187,34 @@
 						<td class=""><?php echo count($arr_price); ?></td>
 						<td><?php echo $item_pice = array_sum($arr_price); ?></td>
 					</tr>
+					<?php } ?>
 					<tr>
 						<td colspan="4" align="center"><b>รวมทั้งหมด</b></td>
 						<td></td>
 					</tr>
-<!-- 					<tr>
-						<td>Personal Computer</td>
-						<td class="hidden-phone">iMac 21 inch slim body. 1.7 GHz, 8 GB Ram</td>
-						<td class="">$1200</td>
-						<td class="">2</td>
-						<td>$2400</td>
-					</tr>
-					<tr>
-						<td>Printer</td>
-						<td class="hidden-phone">Epson Color Jet printer </td>
-						<td class="">$200</td>
-						<td class="">2</td>
-						<td>$400</td>
-					</tr> -->
 				</tbody>
 			</table>
 			<div class="row">
 				<div class="col-lg-4 invoice-block pull-right">
 					<ul class="unstyled amounts">
-						<li><strong>ราคารวมสุทธิ :</strong> <?php $total = $maid_price+$arr_size['size_pirce']+$item_pice; echo number_format($total); ?> บาท</li>
+						<li><strong>ราคารวมสุทธิ :</strong>
+							<!-- <?php $total = $maid_price+$arr_size['size_pirce']+$item_pice; echo number_format($total); ?> บาท -->
+							<?php if(isset($item_pice)) {
+									$total = $maid_price+$arr_size['size_pirce']+$item_pice;
+									echo number_format($total);
+								} else {
+									$total = $maid_price+$arr_size['size_pirce'];
+									echo number_format($total);
+								}
+							?> บาท
+						</li>
 						<li><strong>Discount :</strong> 10%</li>
 						<li><strong>ภาษี :</strong> -----</li>
 						<li><strong>Grand Total :</strong> $6138</li>
 					</ul>
 				</div>
 			</div>
-			<br><br><br><br><br>
+			<br><br><br><br><br><br><br><br>
 				<div class="text-center invoice-btn">
 					<a href="jong_detail.php" class="btn btn-danger btn-lg"><i class="fa fa-check"></i> กลับ </a>
 					<a class="btn btn-info btn-lg" onclick="javascript:window.print();"><i class="fa fa-print"></i> พิมพ์ </a>

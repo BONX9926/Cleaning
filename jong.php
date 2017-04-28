@@ -89,7 +89,7 @@
 							</select>
 						</div>
 						<div class="col-lg-6">
-							<h3>ประเภทการทำความสะอาด</h3>
+							<h3>ประเภทการทำความสะอาด <small style="color:red">จำเป็นต้องเลือก</small></h3>
 							<div id="app_room">
 									<!-- {{ items }} -->
 								<div id="room_category">

@@ -74,7 +74,9 @@
 			<li>
 				<a id="payment"><i class="fa fa-credit-card"></i><span>แจ้งชำระเงิน</span></a>
 			</li>
-
+			<li id="work_table">
+				<a id="work_items"><i class="fa fa-calendar"></i><span>คืนอุปกรณ์</span></a>
+			</li>
 			<li class="sub-menu">
 				<a href="javascript:;" >
 					<i class="fa fa-cogs"></i>
@@ -88,9 +90,6 @@
 					<li><a href="#">Draggable Portlet</a></li>
 					<li><a href="#">Tree View</a></li>
 				</ul>
-			</li>
-			<li id="work_table">
-				<a id="work_maid"><i class="fa fa-calendar"></i><span>ตารางานของแม่บ้าน</span></a>
 			</li>
 		</ul>
 	<!-- sidebar menu end-->
@@ -287,17 +286,17 @@
 			});
 		}		
 
-		$("#work_maid").click(function(event) {
+		$("#work_items").click(function(event) {
 			$("li .active").attr('class','');
-			work_maid();
+			work_items();
 			$(this).attr('class','active');
 			// var domain = $(this).attr('domain-menu');
 			// alert(domain);
 			// $("#"+domain).addClass('dcjq-parent active');
 		});
 
-		function work_maid() {
-			$.get('work_maid.php', function() {
+		function work_items() {
+			$.get('work_items.php', function() {
 				/*optional stuff to do after success */
 			}).done(function(data){
 				$("#content").html(data);
