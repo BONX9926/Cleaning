@@ -59,14 +59,11 @@
 			<li class="sub-menu">
 				<a href="javascript:;" id="working-domain">
 					<i class="fa fa-book"></i>
-					<span>ตารางาน</span>
+					<span>ตารางงาน</span>
 				</a>
 				<ul class="sub">
 					<li id="working-table" domain-menu="working-domain"><a >ตารางงานทั้งหมด</a></li>
 				</ul>
-			</li>
-			<li>
-				<a id="items"><i class="fa fa-rocket"></i><span>ยืมอุปกรณ์</span></a>
 			</li>
 
 			<li class="sub-menu">
@@ -128,7 +125,9 @@
 <script src="../js/count.js"></script>
 
 <script src="../js/simply-toast.min.js"></script>
-
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiN2gSbA1GuW8BeHF4CMVucHzGvl0_drs">
+</script>
 <script>
 	$(document).ready(function() {
 		//set cussor
@@ -202,9 +201,9 @@
 		$("#working-table").click(function(event) {
 			$("li .active").attr('class','');
 			get_page_working_table();
-			$(this).attr('class','active');
-			var domain = $(this).attr('domain-menu');
-			$("#"+domain).addClass('dcjq-parent active');
+			// $(this).attr('class','active');
+			// var domain = $(this).attr('domain-menu');
+			// $("#"+domain).addClass('dcjq-parent active');
 			//alert("555");
 		});
 
@@ -213,24 +212,11 @@
 				/*optional stuff to do after success */
 			}).done(function(data){
 				$("#content").html(data);
+				//alert(data);
 			});
 		}
 
 	//event menu working_tabel
-
-		$("#items").click(function(event) {
-			$("li .active").attr('class','');
-			get_page_items();
-			//alert("555");
-		});
-
-		function get_page_items(){
-			$.get('items.php', function() {
-				/*optional stuff to do after success */
-			}).done(function(data){
-				$("#content").html(data);
-			});
-		}
 
 
 	});
