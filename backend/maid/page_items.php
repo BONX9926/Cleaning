@@ -60,9 +60,9 @@
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 			<h4 class="modal-title" id="md-title">รายชื่ออุปกรณ์ที่ต้องการยืม</h4>
 		</div>
-		<div class="modal-body" id="md-content">
+		<div class="modal-body" >
 			<!-- <h1 align="center">ไม่มีรายการ</h1> -->
-			<div class="row">
+			<div class="row" id="md-content1">
 				<div class="col-md-3"><img src="" width="100" height="100" id="md-img"></div>
 				<div class="col-md-9">
 				<form id="form">
@@ -73,6 +73,8 @@
 					<button type="button" class="btn btn-success btn-confirm">ยืนยัน</button>
 				</form>
 				</div>
+			</div>
+			<div class="row" id="md-content2">
 			</div>
 		</div>
 		<div class="modal-footer">
@@ -85,9 +87,13 @@
 <script type="text/javascript">
 jQuery(document).ready(function($) {
 	$("#cart").click(function() {
-		$("#modal").modal("toggle");
+		icon_cart();
+		// $("#modal").modal("toggle");
 	});
 	$(".my-btn").click(function() {
+		$("#md-content1").show();
+		$("#md-content2").hide();
+		
 		var item_id = $(this).attr('item_id');
 		$("#hid-item-id").val(item_id);
 		var img = $("#img-"+item_id).attr("src");
@@ -120,8 +126,15 @@ jQuery(document).ready(function($) {
 	});
 
 
-	function get_item_by_id(id) {
-
+	function icon_cart() {
+		$.get('list-items-cart.php', function(data) {
+			/*optional stuff to do after success */
+		}).done(function(data){
+			$("#md-content1").hide();
+			$("#md-content2").html(data);
+			$("#md-content2").show();
+			$("#modal").modal("toggle");
+		});
 	}
 });
 </script>

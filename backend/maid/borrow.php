@@ -7,13 +7,12 @@
 		$sql = "SELECT * FROM `items` WHERE `item_id`='{$_POST['data'][0]['value']}' ";
 		if ($res = mysqli_query($conn,$sql)) {
 			$row = mysqli_fetch_assoc($res);
-
-			$_SESSION[''] =
+			echo "555";
+			// $_SESSION[''] =
 		} else {
 			// SQL ERROR
+			echo "SQL ERROR";
 		}
-		$return['status'] = $_POST['data'][0]['value'];
-		$return['message'] = "success";
 	} else {
 		$return['status'] = false;
 		$return['message'] = "ข้อมูลไม่ถูกต้อง";
