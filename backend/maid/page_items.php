@@ -93,6 +93,7 @@
 jQuery(document).ready(function($) {
 	get_count_items();
 	$("#cart").click(function() {
+		// get_count_items();
 		icon_cart();
 		// $("#modal").modal("toggle");
 	});

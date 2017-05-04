@@ -13,15 +13,17 @@
 			$row = mysqli_fetch_assoc($res);
 	?>
 		<tr>
-			<td><img src="../img/items/<?=$row['img']?>" width="100" height="100" id="md-img"></td>
+			<td><img src="../img/items/<?=$row['img']?>" width="50" height="50" id="md-img"></td>
 			<td><?=$row['item_name']?></td>
 			<td><?=$amount?></td>
 		</tr>
 	<?php } ?>
 	</table>
 	<div class="col-md-12" align="center">
-		
+	<?php if(count($_SESSION['items_cart']) <= 0){echo "<h1>ไม่มีรายการ</h1>"; } ?>
+	<?php if(isset($row)) { ?>	
 	<button type="button" class="btn btn-success" id="confirm-borrow">ยืนยัน</button>
+	<?php } ?>
 	</div>
 </div>
 <script type="text/javascript">
@@ -31,9 +33,23 @@
 			$.post('borrow_save.php', {event: 'send'}, function(data, textStatus, xhr) {
 				/*optional stuff to do after success */
 			}).done(function(data){
-				alert(data);
+				// alert(data);
+				// if (data == "true") {
+					get_count_items();
+				// }
+				$("#modal").modal("toggle");
+				alert("แจ้งการยืมเสร็จสิ้น กรุณาสามารถรับของได้วันถัดไป");
 			});
 		});
+
+		function get_count_items() {
+		$.post('borrow.php', {event: 'get_count_item'}, function() {
+			/*optional stuff to do after success */
+		}).done(function(data) {
+			//alert(data);
+			$(".myCount").html(data);
+		});
+	}
 	});
 </script>
 
