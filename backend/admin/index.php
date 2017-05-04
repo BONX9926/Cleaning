@@ -78,17 +78,13 @@
 				<a id="work_items"><i class="fa fa-calendar"></i><span>คืนอุปกรณ์</span></a>
 			</li>
 			<li class="sub-menu">
-				<a href="javascript:;" >
+				<a href="javascript:;" id="borrow-return">
 					<i class="fa fa-cogs"></i>
-					<span>Components</span>
+					<span>ยืม-คืน อุปกรณ์</span>
 				</a>
 				<ul class="sub">
-					<li><a href="#">Grids</a></li>
-					<li><a href="#">Calendar</a></li>
-					<li><a href="#">Gallery</a></li>
-					<li><a href="#">Todo List</a></li>
-					<li><a href="#">Draggable Portlet</a></li>
-					<li><a href="#">Tree View</a></li>
+					<li id="borrow" domain-menu="borrow-return"><a>แจ้งขอยืม</a></li>
+					<li id="return" domain-menu="borrow-return"><a>คืนอุปรกรณ์</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -147,6 +143,43 @@
 		$("a").css('cursor', 'pointer');
 		//set cussor
 
+
+		$("#borrow").click(function(event) {
+			$("li .active").attr('class','');
+			get_page_borrow();
+			$(this).attr('class','active');
+			var domain = $(this).attr('domain-menu');
+			// alert(domain);
+			$("#"+domain).addClass('dcjq-parent active');
+			//alert("555");
+		});
+
+		function get_page_borrow(){
+			$.get('get_page_borrow.php', function() {
+				// optional stuff to do after success 
+			}).done(function(data){
+				$("#content").html(data);
+			});
+		}
+
+		$("#return").click(function(event) {
+			$("li .active").attr('class','');
+			get_page_return();
+			$(this).attr('class','active');
+			var domain = $(this).attr('domain-menu');
+			// alert(domain);
+			$("#"+domain).addClass('dcjq-parent active');
+		});
+
+		function get_page_return(){
+			$.get('get_page_return.php', function() {
+				// optional stuff to do after success 
+			}).done(function(data){
+				$("#content").html(data);
+			});
+			// alert(555);
+		}
+
 		// event but maid click
 		$("#maid").click(function(event) {
 			$("li .active").attr('class','');
@@ -169,7 +202,7 @@
 		}
 		//function get page maid
 
-		// event but maid click
+
 		$("#add-maid").click(function(event) {
 			$("li .active").attr('class','');
 			get_page_add_maid();
@@ -179,9 +212,9 @@
 			$("#"+domain).addClass('dcjq-parent active');
 			//alert("555");
 		});
-		// event but maid click
 
-		//function get page maid
+
+
 		function get_page_add_maid(){
 			$.get('add_maid.php', function() {
 				/*optional stuff to do after success */

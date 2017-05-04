@@ -6,13 +6,18 @@
 	if ($_POST['event'] == "send") {
 		$sql = "INSERT INTO `borrow_table`(`ref_maid_id`) VALUES ('{$_SESSION['id']}') ";
 		if (mysqli_query($conn, $sql)) {
-			foreach ($_SESSION['items_cart'] as $item_id => $amount) {
-				$sql1 ="INSERT INTO `borrow_detail`(`ref_borrow_id`, `item_id`, `item_amount`) VALUES ('{$_SESSION['id']}','{$item_id}','{$amount}') ";
-				if (mysqli_query($conn, $sql1)) {
-					$_SESSION['items_cart'] = array();
-					echo "true";
+			$sql1 ="SELECT `borrow_id` FROM `borrow_table` WHERE `ref_maid_id`='{$_SESSION['id']}' AND `status`='{0}' ";
+			if ($res = mysqli_query($conn, $sql1)) {
+				$row = mysqli_fetch_assoc($res);
+				foreach ($_SESSION['items_cart'] as $item_id => $amount) {
+					$sql1 ="INSERT INTO `borrow_detail`(`ref_borrow_id`, `item_id`, `item_amount`) VALUES ('{$row['borrow_id']}','{$item_id}','{$amount}') ";
+					if (mysqli_query($conn, $sql1)) {
+						$_SESSION['items_cart'] = array();
+						echo "true";
+					}
 				}
 			}
+
 		}
 	} else {
 		echo "ERROR SEND";
