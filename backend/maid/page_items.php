@@ -19,7 +19,12 @@
 		<div class="panel-body">
 			<section id="unseen">
 				<div class="row" align="right" style="padding-right: 50px;">
-				<div id="cart"><i class="fa fa-shopping-cart fa-2x"></i><span class="badge right btn-danger" >0</span></div>
+				<div id="cart">
+					<i class="fa fa-shopping-cart fa-2x"></i>
+					<span class="badge right btn-danger myCount" >
+							0
+					</span>
+				</div>
 				<br>
 				</div>
 				<div class="row">
@@ -86,6 +91,7 @@
 </div>
 <script type="text/javascript">
 jQuery(document).ready(function($) {
+	get_count_items();
 	$("#cart").click(function() {
 		icon_cart();
 		// $("#modal").modal("toggle");
@@ -111,11 +117,15 @@ jQuery(document).ready(function($) {
 		var data = $("#form").serializeArray();
 		// console.log(data[1].value);
 		if(data[1].value != "") {
-			$.post('borrow.php', {data: data}, function(data, textStatus, xhr) {
+			$.post('borrow.php', {data: data,event:'set'}, function(data, textStatus, xhr) {
 				
 			}).done(function(data){
-				alert(data);
-				console.log(data);
+				 // alert(data);
+				if (data == "true") {
+					get_count_items();
+				}
+				// console.log(data);
+				$("#modal").modal("toggle");
 			});
 		} else {
 			alert("กรุณาระบุจำนวน");
@@ -134,6 +144,15 @@ jQuery(document).ready(function($) {
 			$("#md-content2").html(data);
 			$("#md-content2").show();
 			$("#modal").modal("toggle");
+		});
+	}
+
+	function get_count_items() {
+		$.post('borrow.php', {event: 'get_count_item'}, function() {
+			/*optional stuff to do after success */
+		}).done(function(data) {
+			//alert(data);
+			$(".myCount").html(data);
 		});
 	}
 });

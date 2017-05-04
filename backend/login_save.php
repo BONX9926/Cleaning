@@ -21,6 +21,7 @@
 					$_SESSION['address'] = $row['address'];
 					$_SESSION['show_detail'] = $row['show_detail'];
 					$_SESSION['status'] = $row['status'];
+					$_SESSION['items_cart'] = array();
 				$return['status'] = true;
 				$return['message'] = "login";
 				$return['access'] = $row['status'];
