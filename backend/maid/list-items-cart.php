@@ -30,10 +30,10 @@
 	$(document).ready(function() {
 		$("#confirm-borrow").click(function(event) {
 			// alert();
-			$.post('borrow_save.php', {event: 'send'}, function(data, textStatus, xhr) {
+			$.post('borrow_save.php', {event: 'send'}, function() {
 				/*optional stuff to do after success */
 			}).done(function(data){
-				// alert(data);
+				alert(data);
 				// if (data == "true") {
 					get_count_items();
 				// }

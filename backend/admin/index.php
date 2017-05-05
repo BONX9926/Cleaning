@@ -74,9 +74,7 @@
 			<li>
 				<a id="payment"><i class="fa fa-credit-card"></i><span>แจ้งชำระเงิน</span></a>
 			</li>
-			<li id="work_table">
-				<a id="work_items"><i class="fa fa-calendar"></i><span>คืนอุปกรณ์</span></a>
-			</li>
+
 			<li class="sub-menu">
 				<a href="javascript:;" id="borrow-return">
 					<i class="fa fa-cogs"></i>
@@ -84,7 +82,7 @@
 				</a>
 				<ul class="sub">
 					<li id="borrow" domain-menu="borrow-return"><a>แจ้งขอยืม</a></li>
-					<li id="return" domain-menu="borrow-return"><a>คืนอุปรกรณ์</a></li>
+					<li id="return" domain-menu="borrow-return"><a>คืนอุปกรณ์</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -319,23 +317,6 @@
 			});
 		}		
 
-		$("#work_items").click(function(event) {
-			$("li .active").attr('class','');
-			work_items();
-			$(this).attr('class','active');
-			// var domain = $(this).attr('domain-menu');
-			// alert(domain);
-			// $("#"+domain).addClass('dcjq-parent active');
-		});
-
-		function work_items() {
-			$.get('work_items.php', function() {
-				/*optional stuff to do after success */
-			}).done(function(data){
-				$("#content").html(data);
-			});
-		}
-
 		$("#payment").click(function(event) {
 			$("li .active").attr('class','');
 			payment();
@@ -351,42 +332,6 @@
 			}).done(function(data){
 				$("#content").html(data);
 				// Switch()
-			}, function Switch() {
-				$(".switch-right").click(function() {
-					$('.switch-off').attr('class', 'switch-on switch-animate');
-					$("#bin").attr('id_bin');
-					// console.log($("#bin").attr('id_bin'));
-					$.post('update_bin.php', {status_id: "true", id:$("#bin").attr('id_bin')}, function() {
-						/*optional stuff to do after success */
-					}).done(function(data){
-						// console.log(data);
-						var json_res = jQuery.parseJSON(data);
-							if(json_res.status == true) {
-								$.simplyToast(json_res.message, 'success');
-							} else {
-								$.simplyToast(json_res.message, 'danger');
-							}
-					});
-
-				});
-
-				$(".switch-left").click(function() {
-					$('.switch-on').attr('class', 'switch-off switch-animate');
-					$("#bin").attr('id_bin');
-					// console.log("false");
-					$.post('update_bin.php', {status_id: "false", id:$("#bin").attr('id_bin')}, function() {
-						/*optional stuff to do after success */
-					}).done(function(data){
-						// console.log(data);
-						var json_res = jQuery.parseJSON(data);
-							if(json_res.status == true) {
-								$.simplyToast(json_res.message, 'success');
-							} else {
-								$.simplyToast(json_res.message, 'danger');
-							}
-					});
-				});
-
 			});
 		}
 	});

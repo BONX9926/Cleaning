@@ -1,5 +1,18 @@
 <?php
 	session_start();
+	include_once '../../connect.php';
+	$status_id = array(
+		"true" => "ชำระเงินเรียบร้อยแล้ว",
+		"false" => "รอการชำระเงิน"
+
+	);
+	// $sql1 ="SELECT `booking_id`,`status_id` FROM `booking_table`";
+	// if ($res = mysqli_query($conn,$sql1)) {
+	// 	while ($row = mysqli_fetch_assoc($res)) {
+	// 		$status_array[] = $row;
+	// 	}
+	// }
+	// 		var_dump($status_array);
 ?>
 <div class="col-lg-12">
 	<section class="panel">
@@ -20,8 +33,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<?php 
-							include_once '../../connect.php';
+						<?php
 							$sql = "SELECT * FROM `payment`";
 							$data = mysqli_query($conn,$sql);
 							while($show = mysqli_fetch_assoc($data)){
@@ -42,18 +54,26 @@
 								while($show1 = mysqli_fetch_assoc($data1)){
 									// var_dump($show1["status_id"]);
 									?>
+								<select class="form-control m-bot15 myStatus" >
+									<?php 
+										foreach ($status_id as $status => $value) {
+											# code...
+											if($status == $show1["status_id"]){
+												$selected = "selected";
+											}else{
+												$selected = "";
+											}
+										
+									?>
+									<option value="status_id:<?=$status ?>,borrow_id:<?=$show['num_bin']?>" <?=$selected ?>  > <?=$value?></option>
 
-							<input type="hidden" id="status_id" value="<?php echo $show1["status_id"]?>">
+									<?php 
+										}
+									 ?>
+	                            </select>
 							<?php
 								}
 							?>
-								<div class="switch has-switch" id_bin="<?=$show['num_bin']?>" id="bin">
-									<div class="switch-off">
-									<input type="checkbox" name="status_id" checked="" data-toggle="switch">
-									<span class="switch-left">ON</span>
-									<label>&nbsp;</label><span class="switch-right">OFF</span>
-									</div>
-								</div>
 							</td>
 						</tr>
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -81,12 +101,16 @@
 </div>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
-		var status_id = $("#status_id").val();
-		// console.log(status_id);
-		if(status_id == "true") {
-			$('.switch-off').attr('class', 'switch-on');
-		} else if (status_id == "false") {
-			$('.switch-on').attr('class', 'switch-off');
-		}
+		$(".myStatus").change(function(event) {
+			var info = $(this).val();
+			
+			
+
+			$.post('service_update_status_payment.php', {info:info , event:"update_stauts_payment", }, function() {
+				/*optional stuff to do after success */
+			}).done(function(data){
+				alert(data);
+			});
+		});
 	});
 </script>
