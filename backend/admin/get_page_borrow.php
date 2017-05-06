@@ -37,12 +37,12 @@
 								// var_dump($row);
 								?>
 						<tr>
-							<td><?=$row['borrow_id']?></td>
+							<td class="borrow_id"><?=$row['borrow_id']?></td>
 							<td><?=date_thai(revert_date($row['borrow_date']))?></td>
 							<td><?=$row['fname']?> <?=$row['lname']?></td>
 							<td class="numeric"><?php echo get_items_borrow($row['borrow_id'],$conn); ?></td>
 							<td class="numeric">
-								<select class="form-control m-bot15 myStatus" >
+								<select class="form-control m-bot15 myStatus" borrow_id="<?=$row['borrow_id']?>">
 								<?php 
 									$selected = "";
 									foreach ($status_array as $key => $value) {
@@ -62,7 +62,6 @@
 						</tr>
 								<?php
 							}
-
 						}
 					?>
 					</tbody>
@@ -75,9 +74,16 @@
 	
 		$(".myStatus").change(function(event) {
 			var info = $(this).val();
-			
-			
-
+			var borrow_id = $(this).attr('borrow_id');
+			// console.log(aaa);
+			//update amout items
+			$.post('service_update_items.php', {borrow_id: borrow_id}, function() {
+				// optional stuff to do after success 
+			}).done(function(data){
+				alert(data);
+				// console.log(data);
+			});
+			//update Status
 			$.post('service_update_status.php', {info:info , event:"update_stauts" }, function() {
 				/*optional stuff to do after success */
 			}).done(function(data){

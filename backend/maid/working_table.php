@@ -30,7 +30,7 @@
 					// echo $sql;
 					// var_dump($list_info_maid);
 				}else{
-					var_dump($_SESSION);
+					// var_dump($_SESSION);
 				}
 				// echo "<pre>";
 				// var_dump($_SESSION);
@@ -51,7 +51,7 @@
 					<td><?=$lists['start_date_full'] ?></td>
 					<td><?=$lists['fname'] ?> <?=$lists['lname'] ?></td>
 					<td><?=$lists['items'] ?></td>
-					<td><a  class="map" href="#"><?=$lists['lat'] ?>,<?=$lists['lng'] ?></a></td>
+					<td><a  class="map" href="map.php?lat=<?=$lists['lat'] ?>&lng=<?=$lists['lng'] ?>" ><?=$lists['lat'] ?>,<?=$lists['lng'] ?></a></td>
 					<td><a class="view-spc" href="#"  book-id="<?=$lists['booking_id'] ?>" >view</a></td>
 				</tr>
 				<?php 
@@ -104,40 +104,10 @@
 		$(".view-spc").click(function(event) {
 			var book_id = $(this).attr('book-id');
 			// alert(book_id);
-		});
-
-	});
-
-	$(function(){
-		$(".map").click(function(event) {
-			var location = $(this).text();
-			$(".modal-title").html("Map");
-			var loca = location.split(",");
-			initMap(loca[0],loca[1]);
 			$("#modal").modal("toggle");
-			console.log(loca);
-
-			// alert(location);
 		});
+
 	});
+
 </script>
-<script>
-
-	
-	function initMap(lat,lng) {
-	        var uluru = {lat: lat*1, lng: lng*1};
-	        var map = new google.maps.Map(document.getElementById('map'), {
-	          zoom: 5,
-	          center: uluru
-	        });
-	        var marker = new google.maps.Marker({
-	          position: uluru,
-	          map: map
-	        });
-	}
-      
-	
-
-     
-    </script>
    
