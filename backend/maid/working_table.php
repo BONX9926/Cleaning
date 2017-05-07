@@ -51,7 +51,7 @@
 					<td><?=$lists['start_date_full'] ?></td>
 					<td><?=$lists['fname'] ?> <?=$lists['lname'] ?></td>
 					<td><?=$lists['items'] ?></td>
-					<td><a  class="map" href="map.php?lat=<?=$lists['lat'] ?>&lng=<?=$lists['lng'] ?>" ><?=$lists['lat'] ?>,<?=$lists['lng'] ?></a></td>
+					<td><a  class="map" target="_blank" href="map.php?lat=<?=$lists['lat'] ?>&lng=<?=$lists['lng'] ?>" ><?=$lists['lat'] ?>,<?=$lists['lng'] ?></a></td>
 					<td><a class="view-spc" href="#"  book-id="<?=$lists['booking_id'] ?>" >view</a></td>
 				</tr>
 				<?php 
@@ -60,7 +60,8 @@
 				?>
 			</table>
 		</div>
-
+		
+		</table>
 	</section>
 </aside>
 
@@ -72,12 +73,11 @@
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 			<h4 class="modal-title">Modal Tittle</h4>
 		</div>
-		<div class="modal-body" id="map">
+		<div class="modal-body" id="md-body" align="center">
 			
 		</div>
 		<div class="modal-footer">
-			<button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-			<button class="btn btn-success" type="button">Save changes</button>
+			<button data-dismiss="modal" class="btn btn-danger" type="button">Close</button>
 		</div>
 	</div>
 	</div>
@@ -104,7 +104,25 @@
 		$(".view-spc").click(function(event) {
 			var book_id = $(this).attr('book-id');
 			// alert(book_id);
-			$("#modal").modal("toggle");
+			$.post('focus_area.php', {book_id: book_id}, function() {
+				/*optional stuff to do after success */
+			}).done(function(data){
+
+				if (data != "null") {
+					// console.log("data");
+					var json_res = jQuery.parseJSON(data);
+					var _img = json_res.data.img_file_cm;
+					var _detail = json_res.data.comment;
+					console.log(json_res.data.img_file_cm);
+					$("#md-body").html("<table class='table-bordered'><tr><td><img src='../../image/img_comment/"+_img+"'></td></tr><tr><td><h3>รายละเอียด :</h3><span>"+_detail+"</span></td></tr>");
+					$("#modal").modal("toggle");
+				} else {
+					// console.log("data null");
+					$("#md-body").html("<h1>ไม่มีรายการ</h1>");
+					$("#modal").modal("toggle");
+				}
+
+			});
 		});
 
 	});
