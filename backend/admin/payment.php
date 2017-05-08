@@ -103,14 +103,40 @@
 	jQuery(document).ready(function($) {
 		$(".myStatus").change(function(event) {
 			var info = $(this).val();
-			
-			
-
-			$.post('service_update_status_payment.php', {info:info , event:"update_stauts_payment", }, function() {
-				/*optional stuff to do after success */
-			}).done(function(data){
-				alert(data);
+			var status = info.substring(10, 11);
+			if (status == "t") {
+				var status_up ="ชำระเงินเรียบร้อยแล้ว";
+			}else if(status == "f") {
+				var status_up ="รอการชำระเงิน";
+			} else {
+				var status_up ="error";
+			}
+			swal({
+				title: "คุณต้องการเปลี่ยนแปลงสถานะเป็น\n"+status_up,
+				text: "กรุณากรอก password เพื่อทำการยืนยัน",
+				type: "input",
+				inputType: "password",
+				showCancelButton: true,
+				closeOnConfirm: false,
+			}, function (inputValue) {
+				if (inputValue === false) return false;
+				if (inputValue === "") {
+					swal.showInputError("กรุณากรอก password ");
+					return false
+				}
+				$.post('service_update_status_payment.php', {password:inputValue, info:info , event:"update_stauts_payment", }, function() {
+					/*optional stuff to do after success */
+				}).done(function(data){
+					swal(data);
+					// if (data == "true") {}
+				});
 			});
+
+			// $.post('service_update_status_payment.php', {info:info , event:"update_stauts_payment", }, function() {
+			// 	/*optional stuff to do after success */
+			// }).done(function(data){
+			// 	alert(data);
+			// });
 		});
 	});
 </script>

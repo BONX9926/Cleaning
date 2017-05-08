@@ -44,6 +44,11 @@ if(check_pass($_POST['password'])) {
 				if (mysqli_query($conn,$sql)) {
 					echo "เปลี่ยนสถานะเรียบร้อยแล้ว";
 				}
+		} else if($status == "4"){
+			$sql = "UPDATE `borrow_table` SET `status`='{$status}' WHERE `borrow_id`='{$borrow_id}' ";
+				if (mysqli_query($conn,$sql)) {
+					echo "เปลี่ยนสถานะเรียบร้อยแล้ว";
+				}
 		}
 		
 	} else {

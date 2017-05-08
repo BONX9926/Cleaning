@@ -1,12 +1,6 @@
 <?php
 	session_start();
 ?>
-<style>
-   #map {
-    height: 400px;
-    width: 100%;
-   }
-</style>
 <aside class="profile-info col-lg-12">
 	<section class="panel">
 		<div class="panel-body bio-graph-info">

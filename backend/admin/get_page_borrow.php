@@ -79,8 +79,10 @@
 				var status_up ="กำลังตรวจสอบ";
 			}else if(status == "2") {
 				var status_up ="รอรับของ";
-			} else {
-				var status_up ="error";
+			}else if(status == "3") {
+				var status_up ="ยังไม่คืน";
+			}else if(status == "4") {
+				var status_up ="คืนเรียบร้อย";
 			}
 			// var borrow_id = $(this).attr('borrow_id');
 			// var status_id = $(this).attr('borrow_id');
@@ -93,11 +95,15 @@
 			// 	// console.log(data);
 			// });
 			//update Status
-
 swal({
-	title: "คุณต้องการเปลี่ยนแปลงสถานะเป็น\n"+status_up,
-	text: "กรุณากรอก password เพื่อทำการยืนยัน",
-	type: "input",
+  	title: "คุณต้องการเปลี่ยนแปลงสถานะเป็น\n<u style='color:red'>"+status_up+"</u>",
+
+  	html:
+    'You can use <b>bold text</b>, ' +
+    '<a href="//github.com">links</a> ' +
+    'and other HTML tags',
+	text: 'กรุณากรอก password เพื่อทำการยืนยัน',
+	type: 'input',
 	inputType: "password",
 	showCancelButton: true,
 	closeOnConfirm: false,
@@ -114,6 +120,30 @@ swal({
 		// if (data == "true") {}
 	});
 });
+
+
+
+
+// swal({
+// 	title: 'คุณต้องการเปลี่ยนแปลงสถานะเป็น\n'+status_up,
+// 	text: 'กรุณากรอก password เพื่อทำการยืนยัน',
+// 	type: 'input',
+// 	inputType: "password",
+// 	showCancelButton: true,
+// 	closeOnConfirm: false,
+// }, function (inputValue) {
+// 	if (inputValue === false) return false;
+// 	if (inputValue === "") {
+// 		swal.showInputError("กรุณากรอก password ");
+// 		return false
+// 	}
+// 	$.post('service_update_status.php', {password:inputValue, info:info, event:"update_stauts" }, function() {
+// 		/*optional stuff to do after success */
+// 	}).done(function(data){
+// 		swal(data);
+// 		// if (data == "true") {}
+// 	});
+// });
 
 
 
