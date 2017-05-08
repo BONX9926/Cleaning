@@ -20,7 +20,6 @@
 			<h3><img src="<?=$_SESSION['avatar']?>" style='border-radius: 5px;display: inline;width: 50px;height:50px;' > <?=$_SESSION['name']?></h3>
 				<ul class="nav nav-pills nav-stacked">
 				<li id="profile"><a href="profile.php"> <i class="fa fa-user"></i> ข้อมูลส่วนตัว</a></li>
-				<!-- <li><a href="profile-activity.html"> <i class="fa fa-calendar"></i> Recent Activity <span class="label label-danger pull-right r-activity">9</span></a></li> -->
 				<li><a href="profile-edit.php"> <i class="fa fa-edit"></i> แก้ไขข้อมูลส่วนตัว</a></li>
 				<li id="profile-edit-address"><a href="profile-edit-address.php"> <i class="fa fa-edit"></i> แก้ไขที่พัก</a></li>
 				<li id="jong_detail"><a href="jong_detail.php"> <i class="fa fa-edit"></i> ข้อมูลการจองของคุณ</a></li>

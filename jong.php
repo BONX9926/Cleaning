@@ -318,7 +318,7 @@
 			            // console.log(data);
 			            // alert(data);
 			            let json_res = jQuery.parseJSON(data);
-			            alert(json_res.status);
+			            alert("กรุณาชำระเงิน ภายในวันเวลาที่บิลระบุ");
 			            if(json_res.status == true) {
 			            	window.location.href = "jong_detail.php";
 				           //  $.simplyToast(json_res.message, 'success');
@@ -336,54 +336,7 @@
 			    });
 
 			    return false;
-					// $('#comment').val();
-					// alert(vm_i.items);
-					// $.post('service/add_booking.php', 
 
-					// $.post('service/add_bin.php', 
-					// 	{
-					// 		arr_maid: list_maid_id,
-					// 		user_id: uid,
-					// 		date: $('#date').val(),
-					// 		area_size: $('#area_size').val(),
-					// 		comment: $('#comment').val(),
-					// 		rooms: vm_c.items,
-					// 		items: vm_i.items
-					// 	}, 
-					// 	function() {
-						
-					// 	}).done(function(data) {
-					// 		alert(data);
-					// 		try {
-					// 			let json_res = jQuery.parseJSON(data);
-					// 			if(json_res.status === true) {
-					// 				swal({
-					// 					title: "จองแม่บ้านเรียบร้อยแล้ว",
-					// 					text: json_res.message +" "+"ต้องการเช้าอุปกรณ์ทำความสะอาดเพิ่มหรือไม่",
-					// 					type: "success",
-					// 					showCancelButton: true,
-					// 					confirmButtonColor: "#DD6B55",
-					// 					confirmButtonText: "ต้องการ!",
-					// 					cancelButtonText: "ไม่ต้องการ!",
-					// 					closeOnConfirm: false,
-					// 					closeOnCancel: false
-					// 				},
-					// 				function(isConfirm){
-					// 					if (isConfirm) {
-					// 						window.location.href = "item.php";
-					// 						// get_item_page();
-					// 						// swal("OK!", "Your imaginary file has been deleted.", "success");
-					// 					} else {
-					// 						swal("Cancelled", "Your imaginary file is safe :)", "error");
-					// 					}
-					// 				});
-					// 			} else {
-					// 				swal("Fail!!", json_res.message, "error")
-					// 			}
-					// 		} catch(e) {
-
-					// 		}
-					// 	});
 				} else {
 					alert('ไม่มีแม่บ้านที่คุณเลือก กรุณาเลือกแม่บ้าน');
 					return false;

@@ -14,6 +14,7 @@
 					$_SESSION['id'] = $row['id'];
 					$_SESSION['fname'] = $row['fname'];
 					$_SESSION['lname'] = $row['lname'];
+					$_SESSION['pass'] = $row['pass'];
 					$_SESSION['email'] = $row['email'];
 					$_SESSION['birthday'] = $row['birthday'];
 					$_SESSION['avatar'] = $row['avatar'];

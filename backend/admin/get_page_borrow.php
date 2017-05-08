@@ -74,21 +74,56 @@
 	
 		$(".myStatus").change(function(event) {
 			var info = $(this).val();
-			var borrow_id = $(this).attr('borrow_id');
-			// console.log(aaa);
+			var status = info.substring(10, 11);
+			if (status == "1") {
+				var status_up ="กำลังตรวจสอบ";
+			}else if(status == "2") {
+				var status_up ="รอรับของ";
+			} else {
+				var status_up ="error";
+			}
+			// var borrow_id = $(this).attr('borrow_id');
+			// var status_id = $(this).attr('borrow_id');
+			// alert(info);
 			//update amout items
-			$.post('service_update_items.php', {borrow_id: borrow_id}, function() {
-				// optional stuff to do after success 
-			}).done(function(data){
-				alert(data);
-				// console.log(data);
-			});
+			// $.post('service_update_items.php', {borrow_id: borrow_id}, function() {
+			// 	// optional stuff to do after success 
+			// }).done(function(data){
+			// 	alert(data);
+			// 	// console.log(data);
+			// });
 			//update Status
-			$.post('service_update_status.php', {info:info , event:"update_stauts" }, function() {
-				/*optional stuff to do after success */
-			}).done(function(data){
-				alert(data);
-			});
+
+swal({
+	title: "คุณต้องการเปลี่ยนแปลงสถานะเป็น\n"+status_up,
+	text: "กรุณากรอก password เพื่อทำการยืนยัน",
+	type: "input",
+	inputType: "password",
+	showCancelButton: true,
+	closeOnConfirm: false,
+}, function (inputValue) {
+	if (inputValue === false) return false;
+	if (inputValue === "") {
+		swal.showInputError("กรุณากรอก password ");
+		return false
+	}
+	$.post('service_update_status.php', {password:inputValue, info:info, event:"update_stauts" }, function() {
+		/*optional stuff to do after success */
+	}).done(function(data){
+		swal(data);
+		// if (data == "true") {}
+	});
+});
+
+
+
+
+
+			// $.post('service_update_status.php', {info:info , event:"update_stauts" }, function() {
+			// 	/*optional stuff to do after success */
+			// }).done(function(data){
+			// 	alert(data);
+			// });
 		});
 	
 </script>

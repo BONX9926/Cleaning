@@ -20,6 +20,7 @@
 	<link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
 	<link href="../assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
 	<link rel="stylesheet" href="../css/owl.carousel.css" type="text/css">
+	<link rel="stylesheet" type="text/css" href="../../css/sweetalert.css">
 <!-- 	<link rel="stylesheet" href="../css/simply-toast.min.css" type="text/css"> -->
 
 	<!--right slidebar-->
@@ -132,6 +133,7 @@
 <script src="../js/sparkline-chart.js"></script>
 <script src="../js/easy-pie-chart.js"></script>
 <script src="../js/count.js"></script>
+<script src="../../js/sweetalert.min.js"></script>
 
     <!--this page plugins-->
 

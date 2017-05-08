@@ -83,9 +83,9 @@
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 		<h4 class="modal-title">หลักฐานการชำระเงิน</h4>
 		</div>
-		<div class="modal-body">
+		<div class="modal-body" align="center">
 
-		<img src="../../image/payment/<?=$show['file']?>" style="width:500;height: 500px;">
+		<img src="../../image/payment/<?=$show['file']?>" style="width:500px;height: 500px;">
 
 		</div>
 		</div>
