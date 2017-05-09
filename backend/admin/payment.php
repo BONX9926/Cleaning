@@ -6,13 +6,6 @@
 		"false" => "รอการชำระเงิน"
 
 	);
-	// $sql1 ="SELECT `booking_id`,`status_id` FROM `booking_table`";
-	// if ($res = mysqli_query($conn,$sql1)) {
-	// 	while ($row = mysqli_fetch_assoc($res)) {
-	// 		$status_array[] = $row;
-	// 	}
-	// }
-	// 		var_dump($status_array);
 ?>
 <div class="col-lg-12">
 	<section class="panel">
@@ -43,9 +36,9 @@
 							<td><?=$show['name']?></td>
 							<td class="numeric"><?=$show['phone']?></td>
 							<td class="numeric"><?=$show['email']?></td>
-							<td class="numeric"><?=number_format($show['money'])?></td>
+							<td class="numeric"><?=$show['money']?></td>
 							<td class="numeric"><?=$show['created_at']?></td>
-							<td class="numeric"><a href="#myModal" data-toggle="modal"><?=$show['file']?></a></td>
+							<td class="numeric"><a style="cursor: pointer;" class="img-credit" img-cr="<?=$show['num_bin']?>"><?=$show['file']?></a></td>
 							<td class="numeric">
 							<?php 
 								$sql1 = "SELECT `status_id` FROM `booking_table` WHERE `booking_id`='{$show['num_bin']}' ";
@@ -83,9 +76,9 @@
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 		<h4 class="modal-title">หลักฐานการชำระเงิน</h4>
 		</div>
-		<div class="modal-body" align="center">
+		<div class="modal-body" align="center" id="md-body">
 
-		<img src="../../image/payment/<?=$show['file']?>" style="width:500px;height: 500px;">
+		
 
 		</div>
 		</div>
@@ -131,12 +124,18 @@
 					// if (data == "true") {}
 				});
 			});
-
-			// $.post('service_update_status_payment.php', {info:info , event:"update_stauts_payment", }, function() {
-			// 	/*optional stuff to do after success */
-			// }).done(function(data){
-			// 	alert(data);
-			// });
 		});
+		$(".img-credit").click(function(event) {
+			var numbin = $(this).attr('img-cr');
+			// alert(numbin);
+			$.post('get_img_credit.php', {numbin: numbin}, function() {
+				/*optional stuff to do after success */
+			}).done(function(data){
+				// alert(data);
+				$("#md-body").html("<img src='../../image/payment/"+data+"' style='width:500px;height: 500px;'>");
+				$("#myModal").modal("toggle");
+			})
+		});
+
 	});
 </script>

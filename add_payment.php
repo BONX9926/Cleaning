@@ -12,8 +12,8 @@
 				if(move_uploaded_file($_FILES['file']['tmp_name'], $tmp_path.$_FILES["file"]["name"])) {
 				$sql = "INSERT INTO `payment`(`num_bin`, `name`, `email`, `phone`, `money`, `file`) VALUES ('{$_POST['num_bin']}', '{$_POST['name']}', '{$_POST['email']}', '{$_POST['phone']}', '{$_POST['money']}', '{$_FILES['file']['name']}')";
 					if (mysqli_query($conn,$sql)) {
-						# code...
-						header("Location:payment.php?succ=1");
+						$numbin= $_POST['num_bin'];
+						header("Location:payment.php?succ=1&numbin=$numbin");
 					} else {
 						echo "$sql error";
 					}
@@ -22,13 +22,17 @@
 				}
 				// echo "string";
 			} else {
-				header("Location:payment.php?succ=2");
+				$numbin= $_POST['num_bin'];
+				header("Location:payment.php?succ=2&numbin=$numbin");
+
 			}
 		} else {
-			header("Location:payment.php?succ=2");
+			$numbin= $_POST['num_bin'];
+			header("Location:payment.php?succ=2&numbin=$numbin");
 		}
 
 	} else {
-		header("Location:payment.php?succ=2");
+		$numbin= $_POST['num_bin'];
+		header("Location:payment.php?succ=2&numbin=$numbin");
 	}
 ?>

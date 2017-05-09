@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="./css/bootstrap.min.css">
 <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <script src="./js/jquery-3.2.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 </head>
 <body>
@@ -40,7 +41,7 @@
 	<fieldset>
 
 	<!-- Form Name -->
-	<legend><i class="fa fa-credit-card"></i> แจ้งชำระเงิน</legend>
+	<legend><i class="fa fa-credit-card"></i> แจ้งชำระเงิน <small style="color:red">กรุณาตรวจสอบข้อมูลให้เรียบร้อยก่อนแจ้งชำระ</small></legend>
 
 
 	<div class="form-group">
@@ -48,7 +49,7 @@
 	<div class="col-md-4 inputGroupContainer">
 	<div class="input-group">
 	<span class="input-group-addon"><i class="fa fa-file-o"></i></span>
-	<input name="num_bin" class="form-control" type="text" placeholder="กรอกเลขที่บิล" required>
+	<input name="num_bin" class="form-control" type="text" value="<?=$_GET['numbin']?>" required>
 	</div>
 	</div>
 	</div>
@@ -89,11 +90,11 @@
 	</div>
 
 	<div class="form-group">
-	<label class="col-md-4 control-label">หลักฐานการโอนเงิน</label>  
+	<label class="col-md-4 control-label">หลักฐานการโอนเงิน <small style="color:red">(ต้องมี)</small></label>  
 	<div class="col-md-4 inputGroupContainer">
 	<div class="input-group">
 	<span class="input-group-addon"><i class="fa fa-file"></i></span>
-	<input name="file" class="form-control" type="file" accept="image/.jpg, .png">
+	<input name="file" class="form-control" type="file" accept="image/.png,.jpg">
 	</div>
 	<span style="color:red">**นามสกุลไฟล์ .jpg .png เท่านั้น</span>
 	</div>
@@ -104,7 +105,7 @@
 	<div class="col-md-4 inputGroupContainer">
 	<div class="input-group">
 	<span class="input-group-addon"><i class="fa fa-btc"></i></span>
-	<input name="money" class="form-control" type="text" placeholder="กรอกจำนวนเงิน" required>
+	<input name="money" class="form-control" type="text" placeholder="กรอกจำนวนเงิน" id="money" required>
 	</div>
 	</div>
 	</div>
@@ -121,5 +122,10 @@
 	</form>
 	</div><!-- /.container -->
 </div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#money").mask('0,000,000');
+	});
+</script>
 </body>
 </html>
