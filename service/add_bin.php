@@ -112,7 +112,7 @@
 										$arr_item[] = "('{$booking_id}','{$value}')";
 									}
 									$sql = "";
-									$sql = "INSERT INTO `booking_items`(`booking_id`, `item_name`) VALUES ".implode(' , ',$arr_item);
+									$sql = "INSERT INTO `booking_items`(`booking_id`, `item_name`, `item_price`) VALUES ".implode(' , ',$arr_item);
 									if(mysqli_query($conn,$sql)) {
 										$return['booking_items'] = "เพิ่มข้อมูลใน booking_items เรียบร้อยแล้ว";
 										// true

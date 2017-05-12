@@ -1,7 +1,7 @@
 <?php
 	$return = array();
 	include_once '../connect.php';
-	$sql = "SELECT `item_id`, `item_name` FROM `items`";
+	$sql = "SELECT `item_id`, `item_name`, `item_price` FROM `items`";
 
 	if ($res = mysqli_query($conn,$sql)) {
 		$return['status'] = true;

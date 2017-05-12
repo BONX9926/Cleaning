@@ -74,7 +74,7 @@
 				<a id="br-items"><i class="fa fa-calendar"></i><span>รายการที่ยืม</span></a>
 			</li>
 
-			<li class="sub-menu">
+			<!-- <li class="sub-menu">
 				<a href="javascript:;" >
 					<i class="fa fa-cogs"></i>
 					<span>Components</span>
@@ -87,7 +87,7 @@
 					<li><a  href="#">Draggable Portlet</a></li>
 					<li><a  href="#">Tree View</a></li>
 				</ul>
-			</li>
+			</li> -->
 		</ul>
 	<!-- sidebar menu end-->
 	</div>

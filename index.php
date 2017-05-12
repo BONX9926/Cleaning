@@ -51,7 +51,7 @@
         <div class="row" id="bg">
             <div  class="col-lg-12 text-center">
                 <hr>
-                <h2 class="tagline">บริการทำความสะอาดออนไลน์</h2>
+                <h2 class="tagline">ร้านรับบริการทำความสะอาด</h2>
                 <hr>
                 <br><br>
                 <p><h4>ให้ที่พักของคุณสะอาดน่าอยู่ในเวลาที่ต้องการ ด้วยแม่บ้านที่คุณวางใจ</h4></p>
@@ -118,9 +118,9 @@
 
 <hr>
 
-<footer>
+<!-- <footer>
 <p>© 2016 Company, Inc.</p>
-</footer>
+</footer> -->
 <script type="text/javascript">
 	$("#index").attr({
         "class" : "active"

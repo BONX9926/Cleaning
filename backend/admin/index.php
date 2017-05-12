@@ -76,6 +76,14 @@
 				<a id="payment"><i class="fa fa-credit-card"></i><span>แจ้งชำระเงิน</span></a>
 			</li>
 
+			<li>
+				<a id="maid-table"><i class="fa fa-credit-card"></i><span>การจองบริการ</span></a>
+			</li>
+
+			<li>
+				<a id="select"><i class="fa fa-credit-card"></i><span>ค้นหาบิลจากแม่บ้าน</span></a>
+			</li>
+
 			<li class="sub-menu">
 				<a href="javascript:;" id="borrow-return">
 					<i class="fa fa-cogs"></i>
@@ -330,6 +338,42 @@
 
 		function payment() {
 			$.get('payment.php', function() {
+				/*optional stuff to do after success */
+			}).done(function(data){
+				$("#content").html(data);
+				// Switch()
+			});
+		}		
+
+		$("#maid-table").click(function(event) {
+			$("li .active").attr('class','');
+			maid_table();
+			$(this).attr('class','active');
+			// var domain = $(this).attr('domain-menu');
+			// alert(domain);
+			// $("#"+domain).addClass('dcjq-parent active');
+		});
+
+		function maid_table() {
+			$.get('maid-table.php', function() {
+				/*optional stuff to do after success */
+			}).done(function(data){
+				$("#content").html(data);
+				// Switch()
+			});
+		}
+
+		$("#select").click(function(event) {
+			$("li .active").attr('class','');
+			select();
+			$(this).attr('class','active');
+			// var domain = $(this).attr('domain-menu');
+			// alert(domain);
+			// $("#"+domain).addClass('dcjq-parent active');
+		});
+
+		function select() {
+			$.get('select.php', function() {
 				/*optional stuff to do after success */
 			}).done(function(data){
 				$("#content").html(data);
