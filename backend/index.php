@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	if (!isset($_SESSION['login'])) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -42,15 +43,15 @@
 <div class="form-signin">
 <h2 class="form-signin-heading">เข้าสู่ระบบ</h2>
 <div class="login-wrap">
-<form>
+<form action="login.php" method="post">
 <input type="text" name="user" class="form-control" placeholder="User ID" autofocus>
 <input type="password" name="pass" class="form-control" placeholder="Password">
-</form>
 <span class="pull-right">
 <a data-toggle="modal" href="#myModal"> ลืมรหัสผ่าน?</a>
 </span>
-<button class="btn btn-lg btn-login btn-block" id="submit">เข้าสู่ระบบเลย</button>
+<button class="btn btn-lg btn-login btn-block" id="submit" type="submit">เข้าสู่ระบบเลย</button>
 </div>
+</form>
 </div>
 
 
@@ -78,7 +79,7 @@
 
 
 </div>
-<script>
+<!-- <script>
 $("input").attr('required', 'required');
 	$('#submit').click(function(event) {
 		// alert('Login');
@@ -117,6 +118,17 @@ $("input").attr('required', 'required');
 		// 	alert(data);
 		// });
 	});
-</script>
+</script> -->
 </body>
 </html>
+<?php
+	} else {
+		if ($_SESSION['status'] == "A") {
+			header("Location:admin/index.php");
+			// echo "ADmin";
+		} else if($_SESSION['status'] == "M") {
+			// echo "Maid";
+			header("Location:maid/index.php");
+		}
+	}
+?>

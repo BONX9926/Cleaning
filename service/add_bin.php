@@ -81,12 +81,29 @@
 						$sql = "INSERT INTO `booking_detail`(`booking_id`, `ref_maid`) VALUES ".implode(' , ',$arr_maid);
 						if(mysqli_query($conn,$sql)) {
 							$return['booking_detail'] = "เพิ่มรายการห้องที่ต้องการทำความสะอาด OK";
+							$arr_room_price = array();
 							foreach ($_POST['rooms'] as $key => $value) {
-								$arr_room[] = "('{$booking_id}','{$value}')";
+								$sql = "";
+								$sql = "SELECT `size_pirce` FROM `size_area` WHERE `size_id`='{$value}' ";
+								if($res = mysqli_query($conn,$sql)) {
+									// echo $sql;
+									while($row = mysqli_fetch_assoc($res)) {
+										// while ($row = mysqli_fetch_assoc($res)) {
+											$arr_room_price[] = $row['size_pirce'];
+										// }
+									}
+										// var_dump($row);
+									// echo "<br/>";
+								} else {
+									echo "SQL ITEMS ERROR";
+								}
+							}
+							foreach ($_POST['rooms'] as $key => $value) {
+								$arr_room[] = "('{$booking_id}','{$value}','{$arr_room_price[$key]}')";
 							}
 
 							$sql = "";
-							$sql = "INSERT INTO `booking_rooms`(`booking_id`, `room_name`) VALUES ".implode(' , ',$arr_room);
+							$sql = "INSERT INTO `booking_rooms`(`booking_id`, `room_name`, `room_price`) VALUES ".implode(' , ',$arr_room);
 							if(mysqli_query($conn,$sql)) {
 								
 								if ($_FILES['file']['size'] > 0) {
@@ -108,8 +125,34 @@
 
 								// var_dump($POST['items']);
 								if(isset($_POST['items'])) {
+									// foreach ($_POST['items'] as $key => $value) {
+									// 	$sql = "";
+									// 	$sql = "SELECT `item_price` FROM `items` WHERE `item_id`='{$value}' ";
+									// 	if(mysqli_query($conn,$sql)) {
+
+									// 	} else {
+									// 		echo "SQL ITEMS ERROR";
+									// 	}
+									// }
+									$arr_item_price = array();
 									foreach ($_POST['items'] as $key => $value) {
-										$arr_item[] = "('{$booking_id}','{$value}')";
+										$sql = "";
+										$sql = "SELECT `item_price` FROM `items` WHERE `item_id`='{$value}' ";
+										if($res = mysqli_query($conn,$sql)) {
+											// echo $sql;
+											while($row = mysqli_fetch_assoc($res)) {
+												// while ($row = mysqli_fetch_assoc($res)) {
+													$arr_item_price[] = $row['item_price'];
+												// }
+											}
+												// var_dump($row);
+											// echo "<br/>";
+										} else {
+											echo "SQL ITEMS ERROR";
+										}
+									}
+									foreach ($_POST['items'] as $key => $value) {
+										$arr_item[] = "('{$booking_id}','{$value}','{$arr_item_price[$key]}')";
 									}
 									$sql = "";
 									$sql = "INSERT INTO `booking_items`(`booking_id`, `item_name`, `item_price`) VALUES ".implode(' , ',$arr_item);

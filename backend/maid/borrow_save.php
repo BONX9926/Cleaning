@@ -17,9 +17,10 @@
 					// echo $sql1."<br>";
 					if (mysqli_query($conn, $sql1)) {
 						$_SESSION['items_cart'] = array();
-						echo "true";
+						// echo "true";
 					}
 				}
+				echo "true";
 			}
 
 		}

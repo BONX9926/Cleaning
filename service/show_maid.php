@@ -1,12 +1,12 @@
 <?php
 	$return = array();
 	sleep(1);
-	if (isset($_POST['date']) && isset($_POST['package'])) {
+	if (isset($_POST['date'])) {
 		include_once '../connect.php';
 		include_once '../lib/php/public_function.php';
-		if($_POST['package'] == 'day'){
+		// if($_POST['package'] == 'day'){
 				$work_date 	= $_POST['date'];
-				$package 	= $_POST['package'];
+				// $package 	= $_POST['package'];
 
 				$work_date = revert_date($work_date);
 				$timestsmpone_day = 84600;
@@ -45,11 +45,11 @@
 				} else {
 					$return['status'] = false;
 				}
-		} elseif($_POST['package'] == 'week') {
-			echo "Week";
-		} else {
-			$return['status'] = false;
-		}
+		// } else if($_POST['package'] == 'week') {
+			// echo "Week";
+		// } else {
+		// 	$return['status'] = false;
+		// }
 
 
 	} else {

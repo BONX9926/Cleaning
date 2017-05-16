@@ -1,9 +1,9 @@
 <?php
 	session_start();
 	
-	$date = date('d-m-Y');
+	// $date = date('d-m-Y');
 	// $date = "2015-11-17";
-    $tomorrow = date('d-m-Y', strtotime($date. ' + 1 days'));
+    // $tomorrow = date('d-m-Y', strtotime($date. ' + 1 days'));
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,30 +43,29 @@
 		<div class="col-lg-12" id="content">
 				<section class="panel">
 				<header class="panel-heading">
-				เลือกวันและประเภทในการจอง
+				เลือกวันที่ต้องการทำความสะอาด
 				</header>
 				<div class="panel-body">
 				<form class="form-horizontal">
 				<div class="form-group">
 				<label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">วันที่ทำความสะอาด</label>
 				<div class="col-lg-9">
-					<div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="<?php echo date('d-m-Y');?>" class="input-append date dpYears">
-					<input type="text" readonly="" id="date" name="work-day" value="<?php echo $tomorrow; ?>" size="16" class="form-control">
-					<span class="input-group-btn add-on">
-					<button class="btn btn-danger" type="button"><i class="fa fa-calendar"></i></button>
-					</span>
-					</div>
+					<!-- <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="<?php echo date('d-m-Y');?>" class="input-append date dpYears"> -->
+					<input type="date" id="date" name="work-day" class="form-control">
+					<!-- <span class="input-group-btn add-on"> -->
+					<!-- <button class="btn btn-danger" type="button"><i class="fa fa-calendar"></i></button> -->
+					<!-- </span> -->
+					<!-- </div> -->
 				</div>
 				</div>
-				<div class="form-group">
+<!-- 				<div class="form-group">
 				<label for="inputPassword1" class="col-lg-2 col-sm-2 control-label">ประเภทการจอง</label>
 				<div class="col-lg-9">
 					<select class="form-control m-bot15" name="package" id="package">
 						<option value="day">หนึ่งวัน</option>
-						<!-- <option value="week">หนึ่งสัปดาห์</option> -->
 					</select>
 				</div>
-				</div>
+				</div> -->
 				</form>
 				<div class="form-group">
 				<div class="col-lg-offset-2 col-lg-10">
@@ -187,6 +186,10 @@
 		}
 
 		$('#submit').click(function(event) {
+			if ($('#date').val() =="") {
+				alert("กรุณาเลือกวันที่");
+				$('#load_page').hide();
+			} else {
 			$('#load_page').show();
 			
 			$.post('service/show_size_area.php', function() {
@@ -239,8 +242,7 @@
 			});
 			$.post('service/show_maid.php', 
 				{
-					date: $('#date').val(), 
-					package: $('#package').val()
+					date: $('#date').val()
 				}, function() {
 					
 				}).done(function(data) {
@@ -318,8 +320,8 @@
 			            // console.log(data);
 			            // alert(data);
 			            let json_res = jQuery.parseJSON(data);
-			            alert("กรุณาชำระเงิน ภายในวันเวลาที่บิลระบุ");
 			            if(json_res.status == true) {
+			            alert("กรุณาชำระเงิน ภายในวันเวลาที่บิลระบุ");
 			            	window.location.href = "jong_detail.php";
 				           //  $.simplyToast(json_res.message, 'success');
 				           //  $('input').val("");
@@ -341,9 +343,10 @@
 					alert('ไม่มีแม่บ้านที่คุณเลือก กรุณาเลือกแม่บ้าน');
 					return false;
 				}
-			});	
-			});
-		});
+			});//end $('#confirm').click(function(event) 
+			});// function() 285
+		}
+		});//end $('#submit').click(function(event)
 	});
 </script>
 </body>

@@ -21,7 +21,7 @@
 			while($row = mysqli_fetch_assoc($res)) {
 	?>	
 		<tr>
-			<td><a href="invoice.php?num=<?=$row['booking_id']?>"><?=$row['booking_id']?></a></td>
+			<td><a href="invoice.php?num=<?=$row['booking_id']?>" target="_blank"><?=$row['booking_id']?></a></td>
 			<td><?=date_thai($row['start_work'])?></td>
 			<td><?=date_thai(revert_date($row['created_at']))?></td>
 			<td>
