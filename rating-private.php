@@ -38,12 +38,13 @@
 						<form action="rating_save.php" method="post">
 						<input type="hidden" name="uid" value="<?=$_SESSION['uid']?>">
 						<input type="hidden" name="maid_id" value="<?=$row['id']?>">
+						<input type="hidden" name="bin" value="<?=$_GET['bin']?>">
 						<p id="star-rating" style="display: inline-block;">
-							<input type="radio" name="point" class="rating" value="1" required="required"/>
-						    <input type="radio" name="point" class="rating" value="2" required="required"/>
-						    <input type="radio" name="point" class="rating" value="3" required="required"/>
-						    <input type="radio" name="point" class="rating" value="4" required="required"/>
-						    <input type="radio" name="point" class="rating" value="5" required="required"/>
+							<input type="radio" name="point" class="rating" value="1" />
+						    <input type="radio" name="point" class="rating" value="2" />
+						    <input type="radio" name="point" class="rating" value="3" />
+						    <input type="radio" name="point" class="rating" value="4" />
+						    <input type="radio" name="point" class="rating" value="5" />
 						</p>
 						<p>
 							<h4>แสดงความคิดเห็น :</h4>
@@ -65,7 +66,8 @@
 				</html>
 				<?php
 			} else {
-				echo "ไม่พบ";
+				// echo "ไม่พบ";
+				header("Location:jong_detail.php");
 			}
 		}
 	} else {

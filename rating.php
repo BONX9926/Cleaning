@@ -36,7 +36,21 @@
 				<div class="caption">
 				<h3 align="center"><?=$row['fname']?> <?=$row['lname']?></h3>
 				<p>
+				<?php 
+					$sql1 = "SELECT * FROM `comment_point` WHERE `maid_id`='{$row['id']}' AND `bin`='{$_GET['bin']}'";
+					if ($res1 = mysqli_query($conn,$sql1)) {
+						if ($res1->num_rows > 0) {
+							echo "<h4 style='color:green' align='center'>ให้คะแนนและแสดงความคิดเห็นแล้ว</h4>";
+						} else {
+							// echo "button true";
+							?>
 					<a href="rating-private.php?maid=<?=$row['id']?>&bin=<?=$_GET['bin']?>" class="btn btn-primary center-block">แสดงความคิดเห็นและให้คะแนน</a>
+						<?php
+						}
+					} else {
+						echo "SQL1 ERROR";
+					}
+				?>
 				</p>
 <!-- 				<p class="star-rating" maid-id="<?=$row['id']?>">
 				    <input type="radio" class="rating" value="1" />

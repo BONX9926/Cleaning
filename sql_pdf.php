@@ -60,6 +60,14 @@ session_start();
 				echo "SQL4 ERROR";
 			}
 
+
+			$sql5 = "SELECT room_category.room_name, booking_rooms.room_price FROM `booking_table`INNER JOIN `booking_rooms` ON booking_table.booking_id = booking_rooms.booking_id INNER JOIN `room_category` ON booking_rooms.room_name = room_category.room_id WHERE booking_table.booking_id ='{$data['booking_id']}' AND `booking_table`.`status_id` ='true' ";
+			// $arr_room_name = array();
+			if($res5 = mysqli_query($conn,$sql5)) {
+				while ($data5 = mysqli_fetch_assoc($res5)) {
+					$arr_room_name[] = $data5;
+				}
+			}
 		} else {
 			header("Location:error.php");
 		}

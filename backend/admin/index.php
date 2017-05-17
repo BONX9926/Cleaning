@@ -90,8 +90,8 @@
 					<span>ยืม-คืน อุปกรณ์</span>
 				</a>
 				<ul class="sub">
-					<li id="borrow" domain-menu="borrow-return"><a>แจ้งขอยืม</a></li>
-					<li id="return" domain-menu="borrow-return"><a>คืนอุปกรณ์</a></li>
+					<li id="borrow" domain-menu="borrow-return"><a>แจ้งขอยืม-คืน</a></li>
+					<!-- <li id="return" domain-menu="borrow-return"><a>คืนอุปกรณ์</a></li> -->
 				</ul>
 			</li>
 		</ul>

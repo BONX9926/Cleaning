@@ -63,8 +63,31 @@ include_once 'sql_pdf.php';
 			<td>พื่นที่</td>
 			<td class="hidden-phone"><?=$arr_size['size_name']; ?></td>
 			<td class=""><?=$arr_size['size_pirce']; ?></td>
-			<td class="">1</td>
-			<td><?=$arr_size['size_pirce']*1; ?></td>
+			<td class=""><?=count($arr_size['size_pirce']);?></td>
+			<td><?php echo $arr_size_price = $arr_size['size_pirce']*1; ?></td>
+		</tr>
+	<?php } ?>	
+	<?php if(isset($arr_room_name)) { ?>
+		<tr>
+			<td>ประเภทห้อง</td>
+			<td class="hidden-phone">
+			<?php 
+				foreach ($arr_room_name as $key => $value) {
+					$arr_room[] = $value['room_name'];
+				}
+				echo implode(",", $arr_room);
+			?>
+			</td>
+			<td class="">
+			<?php 
+				foreach ($arr_room_name as $key => $value) {
+					$arr_room_price[] = $value['room_price'];
+				}
+				echo implode(",", $arr_room_price);
+			?>
+			</td>
+			<td class=""><?=count($arr_room_name);?></td>
+			<td><?php echo $room_price = array_sum($arr_room_price); ?></td>
 		</tr>
 	<?php } ?>
 	<?php if(isset($arr_item)) { ?>
@@ -93,18 +116,22 @@ include_once 'sql_pdf.php';
 		?>
 		</td>
 		<td class=""><?php echo count($arr_price); ?></td>
-		<td><?php echo $item_pice = array_sum($arr_price); ?></td>
+		<td><?php echo $item_price = array_sum($arr_price); ?></td>
 	</tr>
 	<?php } ?>
 	<tr>
 		<td colspan='4' align='center'>รวมทั้งหมด</td>
 		<td>
 		<?php 
-			if(isset($item_pice)) {
-				$total = $maid_price+$arr_size['size_pirce']+$item_pice;
+		// $maid_price
+		// $arr_size_price
+		// $room_price
+		// $item_price
+			if (isset($arr_Nmaid) && isset($arr_size) && isset($arr_room_name) && isset($arr_item) ) {
+				$total = $maid_price+$arr_size_price+$room_price+$item_price;
 				echo number_format($total);
-			} else {
-				$total = $maid_price+$arr_size['size_pirce'];
+			} else if (isset($arr_Nmaid) && isset($arr_size) && isset($arr_room_name)) {
+				$total = $maid_price+$arr_size_price+$room_price;
 				echo number_format($total);
 			}
 		?> บาท

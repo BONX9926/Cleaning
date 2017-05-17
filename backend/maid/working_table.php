@@ -22,9 +22,23 @@
 
 					}
 					// echo $sql;
+					// echo "<pre>";
 					// var_dump($list_info_maid);
 				}else{
 					// var_dump($_SESSION);
+				}
+				function room_name($room_id,$connect) {
+					$sql = "SELECT room_category.room_name FROM `booking_table`INNER JOIN `booking_rooms` ON booking_table.booking_id = booking_rooms.booking_id INNER JOIN `room_category` ON booking_rooms.room_name = room_category.room_id WHERE booking_table.booking_id ='{$room_id}' AND `booking_table`.`status_id` ='true' ";
+					$arr_room_name = array();
+					if($res = mysqli_query($connect,$sql)) {
+						while ($row = mysqli_fetch_assoc($res)) {
+							$arr_room_name[] = $row;
+						}
+						foreach ($arr_room_name as $key => $value) {
+							$arrayName[] = implode(' ', $value);
+						}
+						echo implode(",", $arrayName);
+					}
 				}
 				// echo "<pre>";
 				// var_dump($_SESSION);
@@ -33,6 +47,7 @@
 				<tr>
 					<td>วันที่ทำงาน</td>
 					<td>ชื่อผู้จ้างงาน</td>
+					<td>รายละเอียด</td>
 					<td>สิ่งที่ต้องเตรียมไปด้วย</td>
 					<td>พิกัด</td>
 					<td>จุดที่เน้นทำความสะอาด</td>
@@ -44,6 +59,7 @@
 				<tr>
 					<td><?=$lists['start_date_full'] ?></td>
 					<td><?=$lists['fname'] ?> <?=$lists['lname'] ?></td>
+					<td><?=room_name($lists['booking_id'],$conn) ?></td>
 					<td><?=$lists['items'] ?></td>
 					<td><a  class="map" target="_blank" href="map.php?lat=<?=$lists['lat'] ?>&lng=<?=$lists['lng'] ?>" ><?=$lists['lat'] ?>,<?=$lists['lng'] ?></a></td>
 					<td><a class="view-spc" href="#"  book-id="<?=$lists['booking_id'] ?>" >view</a></td>
