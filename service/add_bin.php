@@ -84,12 +84,12 @@
 							$arr_room_price = array();
 							foreach ($_POST['rooms'] as $key => $value) {
 								$sql = "";
-								$sql = "SELECT `size_pirce` FROM `size_area` WHERE `size_id`='{$value}' ";
+								$sql = "SELECT `room_price` FROM `room_category` WHERE `room_id`='{$value}' ";
 								if($res = mysqli_query($conn,$sql)) {
 									// echo $sql;
 									while($row = mysqli_fetch_assoc($res)) {
 										// while ($row = mysqli_fetch_assoc($res)) {
-											$arr_room_price[] = $row['size_pirce'];
+											$arr_room_price[] = $row['room_price'];
 										// }
 									}
 										// var_dump($row);

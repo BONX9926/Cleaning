@@ -15,7 +15,7 @@
 	// var_dump($_POST);
 		include_once 'connect.php';
 		include_once 'lib/php/public_function.php';
-		$sql = "SELECT `booking_id`, `ref_booking_uid`, `area_size`, `start_work`, `end_work`, `created_at`, `status_id` FROM `booking_table` WHERE `ref_booking_uid` = '{$_POST['uid']}'";
+		$sql = "SELECT `booking_id`, `ref_booking_uid`, `area_size`, `start_work`, `end_work`, `created_at`, `status_id`, `work_status` FROM `booking_table` WHERE `ref_booking_uid` = '{$_POST['uid']}'";
 		// echo $sql;
 		if ($res = mysqli_query($conn,$sql)) {
 			while($row = mysqli_fetch_assoc($res)) {
@@ -45,7 +45,7 @@
 					}
 				?>
 			</td>
-			<td><a href="rating.php?bin=<?=$row['booking_id']?>">ให้คะแนนทำความสะอาด</a></td>
+			<td><a href="rating.php?bin=<?=$row['booking_id']?>">click</a></td>
 		</tr>
 	<?php 
 				}

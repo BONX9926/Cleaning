@@ -52,18 +52,6 @@
 					}
 				?>
 				</p>
-<!-- 				<p class="star-rating" maid-id="<?=$row['id']?>">
-				    <input type="radio" class="rating" value="1" />
-				    <input type="radio" class="rating" value="2" />
-				    <input type="radio" class="rating" value="3" />
-				    <input type="radio" class="rating" value="4" />
-				    <input type="radio" class="rating" value="5" />
-				</p>
-				<p>
-				<span>แสดงความคิดเห็น :</span>
-					<textarea class="form-control" name="comment" rows="5"></textarea>
-				</p>
-				<p> -->
 				</div>
 			</div>
 		</div>

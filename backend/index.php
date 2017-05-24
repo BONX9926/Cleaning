@@ -44,11 +44,11 @@
 <h2 class="form-signin-heading">เข้าสู่ระบบ</h2>
 <div class="login-wrap">
 <form action="login.php" method="post">
-<input type="text" name="user" class="form-control" placeholder="User ID" autofocus>
+<input type="text" name="user" class="form-control" placeholder="User ID" autofocus="autofocus">
 <input type="password" name="pass" class="form-control" placeholder="Password">
-<span class="pull-right">
+<!-- <span class="pull-right">
 <a data-toggle="modal" href="#myModal"> ลืมรหัสผ่าน?</a>
-</span>
+</span> -->
 <button class="btn btn-lg btn-login btn-block" id="submit" type="submit">เข้าสู่ระบบเลย</button>
 </div>
 </form>

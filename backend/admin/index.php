@@ -1,5 +1,6 @@
 <?php 
 	session_start();
+	if (isset($_SESSION['login'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -299,12 +300,36 @@
 				$('.rm-btn').click(function() {
 					// alert("rm");
 					let item_id = $(this).attr("item_id");
-					// alert(item_id);
-					$.post('del_item_save.php', {item_id: item_id}, function() {
-						
-					}).done(function(data) {
-						alert(data);
-					});
+
+					swal({
+						title: "คุณแน่่ใจใช่ไหม?",
+						text: "จะลบรายการที่ "+item_id,
+						type: "warning",
+						showCancelButton: true,
+						confirmButtonClass: "btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plx!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+						},
+						function(isConfirm) {
+						if (isConfirm) {
+							$.post('del_item_save.php', {item_id: item_id}, function() {
+								
+							}).done(function(data) {
+								// alert(data);
+								var json_res = jQuery.parseJSON(data);
+								if (json_res.status == true) {
+									swal("Deleted!", json_res.message, "error");
+									get_page_item();
+								} else {
+									swal("Deleted!", json_res.message, "error");
+								}
+							});
+						} else {
+						swal("Cancelled", "ยกเลิกการทำรายการ", "error");
+						}
+						});
 				});
 
 			});
@@ -360,6 +385,46 @@
 			}).done(function(data){
 				$("#content").html(data);
 				// Switch()
+			}, function() {
+				$(".btn-danger").click(function(event) {
+					var bin_id = $(this).attr('bin-id');
+						swal({
+						title: "คุณแน่ใจใช่ไหม?",
+						text: "จะลบรายการบิลที่ "+bin_id,
+						type: "warning",
+						showCancelButton: true,
+						confirmButtonClass: "btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plx!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+						},
+						function(isConfirm) {
+						if (isConfirm) {
+						$.post('del_bin.php', {num_bin: bin_id}, function(data, textStatus, xhr) {
+							/*optional stuff to do after success */
+						}).done(function(data){
+							// swal(data);
+							var json_res = jQuery.parseJSON(data);
+							if(json_res.status == true) {
+								swal("Deleted!", json_res.message, "success");
+								maid_table();
+							} else {
+								swal("Deleted!", json_res.message, "error");
+							}
+						});
+						} else {
+						swal("Cancelled", "ยกเลิกการทำรายการ", "error");
+						}
+						});
+
+					// alert(bin_id);
+					// alert(5555);
+				});
+				$('')
+				// $(".del-bin").click(function(event) {
+				// 	alert(bin-id);
+				// });
 			});
 		}
 
@@ -386,3 +451,4 @@
 
 </body>
 </html>
+<?php } else { header("Location:../index.php"); } ?>

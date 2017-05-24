@@ -31,6 +31,7 @@
 				<td>ผู้จ้าง</td>
 				<td>วันที่จ้าง</td>
 				<td>พนักงาน</td>
+				<td>ลบ</td>
 			</tr>
 			<?php
 				$sql ="SELECT * FROM `booking_table` INNER JOIN `user_detail` ON booking_table.ref_booking_uid = user_detail.uid";
@@ -43,6 +44,7 @@
 					<td><?=$row['fname']?> <?=$row['lname']?></td>
 					<td><?=date_thai($row['start_work'])?></td>
 					<td><?php name_maid($row['booking_id'],$conn) ?></td>
+					<td><button class="btn btn-danger del-bin" bin-id="<?=$row['booking_id']?>">ลบ</button></td>
 
 				</tr>
 			<?php

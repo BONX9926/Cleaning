@@ -1,5 +1,6 @@
 <?php 
 	session_start();
+	if (isset($_SESSION['login'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -264,3 +265,6 @@
 
 	});
 </script>
+</body>
+</html>
+<?php } else { header("Location:../index.php"); } ?>
