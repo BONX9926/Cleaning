@@ -1,7 +1,6 @@
 <?php
 // session_start();
 include_once 'sql_pdf.php';
-	$a="10";
   require_once("mpdf/mpdf.php");
   $status = ($data['status_id'] == "true") ? "ชำระเงินเรียบร้อย" : "รอการชำระเงิน";
   ob_start();
@@ -62,9 +61,9 @@ include_once 'sql_pdf.php';
 		<tr>
 			<td>พื่นที่</td>
 			<td class="hidden-phone"><?=$arr_size['size_name']; ?></td>
-			<td class=""><?=$arr_size['size_pirce']; ?></td>
-			<td class=""><?=count($arr_size['size_pirce']);?></td>
-			<td><?php echo $arr_size_price = $arr_size['size_pirce']*1; ?></td>
+			<td class=""><?=$data['price_area']; ?></td>
+			<td class=""><?=count($data['price_area']);?></td>
+			<td><?php echo $arr_size_price = $data['price_area']*1; ?></td>
 		</tr>
 	<?php } ?>	
 	<?php if(isset($arr_room_name)) { ?>

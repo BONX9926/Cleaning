@@ -49,7 +49,7 @@
 <!-- <span class="pull-right">
 <a data-toggle="modal" href="#myModal"> ลืมรหัสผ่าน?</a>
 </span> -->
-<button class="btn btn-lg btn-login btn-block" id="submit" type="submit">เข้าสู่ระบบเลย</button>
+<button class="btn btn-lg btn-login btn-block" id="submit" type="submit">เข้าสู่ระบบ</button>
 </div>
 </form>
 </div>

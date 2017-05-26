@@ -17,7 +17,7 @@
 	<header class="panel-heading">แจ้งยืมอุปกรณ์</header>
 		<div class="panel-body">
 			<section id="unseen">
-				<table class="table table-bordered table-striped table-condensed">
+				<table class="table">
 					<thead>
 						<tr>
 							<th>เลขที่บิล</th>
@@ -25,12 +25,13 @@
 							<th>ชื่อ-นามสกุล</th>
 							<th class="numeric">รายละเอียด</th>
 							<th class="numeric">สถานะ</th>
+							<th class="numeric">หมายเหตุ</th>
 						</tr>
 					</thead>
 					<tbody>
 					<?php
 						
-						$sql = "SELECT `borrow_table`.`borrow_id`,`borrow_table`.`status`,`borrow_table`.`borrow_date`,`borrow_table`.`status`,`user_backend`.`fname`,`user_backend`.`lname` FROM `borrow_table`INNER JOIN `user_backend` ON borrow_table.ref_maid_id = user_backend.id";
+						$sql = "SELECT `borrow_table`.`borrow_id`,`borrow_table`.`status`,`borrow_table`.`borrow_date`,`borrow_table`.`status`,`user_backend`.`fname`,`user_backend`.`lname` FROM `borrow_table`INNER JOIN `user_backend` ON borrow_table.ref_maid_id = user_backend.id ORDER BY `borrow_table`.`borrow_id` DESC";
 						// echo $sql;
 						if ($res = mysqli_query($conn,$sql)) {
 							while ($row = mysqli_fetch_assoc($res)) {
@@ -59,6 +60,7 @@
 								?>
                                 </select>
                              </td>
+                             <td><?php echo ($row['status'] == "3") ? "<button type='button' class='btn btn-primary my-Br' br-id='".$row['borrow_id']."'>คืน</button>" : ""; ?></td>
 						</tr>
 								<?php
 							}
@@ -66,94 +68,80 @@
 					?>
 					</tbody>
 				</table>
+				<!-- Modal -->
+<div class="modal fade" id="return-modal-list" role="dialog">
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title">รายการยืมอุปกรณ์</h4>
+    </div>
+    <div class="modal-body">
+      <p>This is a large modal.</p>
+    </div>
+    <div class="modal-footer">
+    	
+      <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Modal -->
 			</section>
 		</div>
 	</section>
 </div>
 <script type="text/javascript">
 	
-		$(".myStatus").change(function(event) {
-			var info = $(this).val();
-			var status = info.substring(10, 11);
-			if (status == "1") {
-				var status_up ="กำลังตรวจสอบ";
-			}else if(status == "2") {
-				var status_up ="รอรับของ";
-			}else if(status == "3") {
-				var status_up ="ยังไม่คืน";
-			}else if(status == "4") {
-				var status_up ="คืนเรียบร้อย";
+	$(".myStatus").change(function(event) {
+		var info = $(this).val();
+		var status = info.substring(10, 11);
+		if (status == "1") {
+			var status_up ="กำลังตรวจสอบ";
+		}else if(status == "2") {
+			var status_up ="รอรับของ";
+		}else if(status == "3") {
+			var status_up ="ยืมของแล้ว";
+		}else if(status == "4") {
+			var status_up ="คืนเรียบร้อย";
+		}
+		swal({
+		  	title: "คุณต้องการเปลี่ยนแปลงสถานะเป็น\n<u style='color:red'>"+status_up+"</u>",
+
+		  	html:
+		    'You can use <b>bold text</b>, ' +
+		    '<a href="//github.com">links</a> ' +
+		    'and other HTML tags',
+			text: 'กรุณากรอก password เพื่อทำการยืนยัน',
+			type: 'input',
+			inputType: "password",
+			showCancelButton: true,
+			closeOnConfirm: false,
+		}, function (inputValue) {
+			if (inputValue === false) return false;
+			if (inputValue === "") {
+				swal.showInputError("กรุณากรอก password ");
+				return false
 			}
-			// var borrow_id = $(this).attr('borrow_id');
-			// var status_id = $(this).attr('borrow_id');
-			// alert(info);
-			//update amout items
-			// $.post('service_update_items.php', {borrow_id: borrow_id}, function() {
-			// 	// optional stuff to do after success 
-			// }).done(function(data){
-			// 	alert(data);
-			// 	// console.log(data);
-			// });
-			//update Status
-swal({
-  	title: "คุณต้องการเปลี่ยนแปลงสถานะเป็น\n<u style='color:red'>"+status_up+"</u>",
-
-  	html:
-    'You can use <b>bold text</b>, ' +
-    '<a href="//github.com">links</a> ' +
-    'and other HTML tags',
-	text: 'กรุณากรอก password เพื่อทำการยืนยัน',
-	type: 'input',
-	inputType: "password",
-	showCancelButton: true,
-	closeOnConfirm: false,
-}, function (inputValue) {
-	if (inputValue === false) return false;
-	if (inputValue === "") {
-		swal.showInputError("กรุณากรอก password ");
-		return false
-	}
-	$.post('service_update_status.php', {password:inputValue, info:info, event:"update_stauts" }, function() {
-		/*optional stuff to do after success */
-	}).done(function(data){
-		swal(data);
-		// if (data == "true") {}
-	});
-});
-
-
-
-
-// swal({
-// 	title: 'คุณต้องการเปลี่ยนแปลงสถานะเป็น\n'+status_up,
-// 	text: 'กรุณากรอก password เพื่อทำการยืนยัน',
-// 	type: 'input',
-// 	inputType: "password",
-// 	showCancelButton: true,
-// 	closeOnConfirm: false,
-// }, function (inputValue) {
-// 	if (inputValue === false) return false;
-// 	if (inputValue === "") {
-// 		swal.showInputError("กรุณากรอก password ");
-// 		return false
-// 	}
-// 	$.post('service_update_status.php', {password:inputValue, info:info, event:"update_stauts" }, function() {
-// 		/*optional stuff to do after success */
-// 	}).done(function(data){
-// 		swal(data);
-// 		// if (data == "true") {}
-// 	});
-// });
-
-
-
-
-
-			// $.post('service_update_status.php', {info:info , event:"update_stauts" }, function() {
-			// 	/*optional stuff to do after success */
-			// }).done(function(data){
-			// 	alert(data);
-			// });
+			$.post('service_update_status.php', {password:inputValue, info:info, event:"update_stauts" }, function() {
+				/*optional stuff to do after success */
+			}).done(function(data){
+				swal(data);
+				// if (data == "true") {}
+			});
 		});
+
+
+	});
+
+	$(".my-Br").click(function(event) {
+		var id = $(this).attr('br-id');
+		$.post('GetItemsListReturn.php', {id: id}, function(data, textStatus, xhr) {
+			/*optional stuff to do after success */
+		}).done(function(data){
+			$(".modal-body").html(data);
+			$("#return-modal-list").modal('show');
+		});
+	});
 	
 </script>

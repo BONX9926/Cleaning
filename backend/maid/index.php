@@ -21,6 +21,7 @@
 	<link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
 	<link href="../assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
 	<link rel="stylesheet" href="../css/owl.carousel.css" type="text/css">
+	<link rel="stylesheet" type="text/css" href="../../css/sweetalert.css">
 
 	<!--right slidebar-->
 	<link href="../css/slidebars.css" rel="stylesheet">
@@ -134,6 +135,7 @@
 <script src="../js/count.js"></script>
 
 <script src="../js/simply-toast.min.js"></script>
+<script src="../../js/sweetalert.min.js"></script>
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiN2gSbA1GuW8BeHF4CMVucHzGvl0_drs">
 </script>

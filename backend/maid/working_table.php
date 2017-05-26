@@ -1,5 +1,10 @@
 <?php
 	session_start();
+		$status_id = array(
+		"true" => "เสร็จเรียบร้อย",
+		"false" => "อยู่ระหว่างดำเนินการ"
+
+	);
 ?>
 <aside class="profile-info col-lg-12">
 	<section class="panel">
@@ -50,8 +55,8 @@
 					<td>รายละเอียด</td>
 					<td>สิ่งที่ต้องเตรียมไปด้วย</td>
 					<td>สถานะการทำงาน</td>
-					<td>พิกัด</td>
-					<td>จุดที่เน้นทำความสะอาด</td>
+					<td>Location</td>
+					<td>Focus Area</td>
 				</tr>
 				<?php
 					foreach ($list_info_maid as $index => $lists) {
@@ -62,8 +67,37 @@
 					<td><?=$lists['fname'] ?> <?=$lists['lname'] ?></td>
 					<td><?=room_name($lists['booking_id'],$conn) ?></td>
 					<td><?=$lists['items'] ?></td>
-					<td><?=$lists['work_status'] ?></td>
-					<td><a  class="map" target="_blank" href="map.php?lat=<?=$lists['lat'] ?>&lng=<?=$lists['lng'] ?>" ><?=$lists['lat'] ?>,<?=$lists['lng'] ?></a></td>
+					<td>
+					<?php 
+						$sql1 = "SELECT `work_status` FROM `booking_table` WHERE `booking_id`='{$lists['booking_id']}' ";
+						// echo $sql1; 
+						$data1 = mysqli_query($conn,$sql1);
+						while($show1 = mysqli_fetch_assoc($data1)){
+							// var_dump($show1["status_id"]);
+							?>
+						<select class="form-control m-bot15 myStatus" >
+							<?php 
+								foreach ($status_id as $status => $value) {
+									# code...
+									if($status == $show1["work_status"]){
+										$selected = "selected";
+									}else{
+										$selected = "";
+									}
+								
+							?>
+							<option value="status_id:<?=$status ?>,borrow_id:<?=$lists['booking_id']?>" <?=$selected ?>  > <?=$value?></option>
+
+							<?php 
+								}
+							 ?>
+                        </select>
+					<?php
+						}
+					?>
+					</td>
+					<!-- <td><?=$lists['work_status'] ?></td> -->
+					<td><a  class="map" target="_blank" href="map.php?lat=<?=$lists['lat'] ?>&lng=<?=$lists['lng'] ?>" >Click</a></td>
 					<td><a class="view-spc" href="#"  book-id="<?=$lists['booking_id'] ?>" >view</a></td>
 				</tr>
 				<?php 
@@ -112,7 +146,7 @@
 
 ?>
 <script type="text/javascript">
-	$(function(){
+	jQuery(document).ready(function($) {
 		$(".view-spc").click(function(event) {
 			var book_id = $(this).attr('book-id');
 			// alert(book_id);
@@ -134,6 +168,40 @@
 					$("#modal").modal("toggle");
 				}
 
+			});
+		});
+
+		$(".myStatus").change(function(event) {
+			var info = $(this).val();
+			// swal(info);
+			// alert(info);
+			var status = info.substring(10, 11);
+			if (status == "t") {
+				var status_up ="เสร็จเรียบร้อย";
+			}else if(status == "f") {
+				var status_up ="อยู่ระหว่างดำเนินการ";
+			} else {
+				var status_up ="error";
+			}
+			swal({
+				title: "คุณต้องการเปลี่ยนแปลงสถานะเป็น\n"+status_up,
+				text: "กรุณากรอก password เพื่อทำการยืนยัน",
+				type: "input",
+				inputType: "password",
+				showCancelButton: true,
+				closeOnConfirm: false,
+			}, function (inputValue) {
+				if (inputValue === false) return false;
+				if (inputValue === "") {
+					swal.showInputError("กรุณากรอก password ");
+					return false
+				}
+				$.post('service_update_status_work.php', {password:inputValue, info:info , event:"update_status_work", }, function() {
+					/*optional stuff to do after success */
+				}).done(function(data){
+					swal(data);
+					// if (data == "true") {}
+				});
 			});
 		});
 

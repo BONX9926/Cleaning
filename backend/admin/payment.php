@@ -27,7 +27,7 @@
 					</thead>
 					<tbody>
 						<?php
-							$sql = "SELECT * FROM `payment`";
+							$sql = "SELECT * FROM `payment` ORDER BY `num_bin` DESC";
 							$data = mysqli_query($conn,$sql);
 							while($show = mysqli_fetch_assoc($data)){
 						?>
@@ -38,7 +38,7 @@
 							<td class="numeric"><?=$show['email']?></td>
 							<td class="numeric"><?=$show['money']?></td>
 							<td class="numeric"><?=$show['created_at']?></td>
-							<td class="numeric"><a style="cursor: pointer;" class="img-credit" img-cr="<?=$show['num_bin']?>"><?=$show['file']?></a></td>
+							<td class="numeric"><a style="cursor: pointer;" class="img-credit" img-cr="<?=$show['num_bin']?>">Click</a></td>
 							<td class="numeric">
 							<?php 
 								$sql1 = "SELECT `status_id` FROM `booking_table` WHERE `booking_id`='{$show['num_bin']}' ";

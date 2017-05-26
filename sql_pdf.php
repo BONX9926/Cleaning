@@ -39,7 +39,7 @@ session_start();
 				echo "SQL1 ERROR";
 			}
 			//SQL3 
-			$sql3 = "SELECT `size_id`, `size_name`, `size_pirce` FROM `size_area` INNER JOIN `booking_table`ON (size_area.size_id = booking_table.area_size) WHERE `size_id`='{$data['area_size']}'";
+			$sql3 = "SELECT `size_name` FROM `size_area` INNER JOIN `booking_table`ON (size_area.size_id = booking_table.area_size) WHERE `size_id`='{$data['area_size']}'";
 			if ($res3 = mysqli_query($conn,$sql3) ) {
 				$arr_size = mysqli_fetch_assoc($res3);
 				// var_dump($data3);

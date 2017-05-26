@@ -63,8 +63,17 @@
 			} else {
 	// 			//pass
 				// echo "PASS";
+				// $sql="";
+				$sql="SELECT `size_pirce` FROM `size_area` WHERE `size_id`='{$_POST['area_size']}' LIMIT 1";
+				if ($res = mysqli_query($conn,$sql)) {
+					$data = mysqli_fetch_assoc($res);
+					$price_area =$data['size_pirce'];
+				} else {
+					echo "SQL ERROR get price_area";
+				}
+
 				$sql = "";
-				$sql ="INSERT INTO `booking_table`(`ref_booking_uid`, `area_size`, `start_work`, `end_work`) VALUES ('{$_POST['uid']}', '{$_POST['area_size']}', '{$date}','{$one_day}')";
+				$sql ="INSERT INTO `booking_table`(`ref_booking_uid`, `area_size`, `price_area`, `start_work`, `end_work`) VALUES ('{$_POST['uid']}', '{$_POST['area_size']}', '{$price_area}', '{$date}','{$one_day}')";
 				if(mysqli_query($conn,$sql)) {
 					$return['booking_table'] = "สร้างบิลเรียบร้อย";
 					$sql = "";

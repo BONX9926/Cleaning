@@ -46,7 +46,7 @@
 							<div class="caption">
 							<h3 id="name-<?=$row['item_id']?>"><?=$row['item_name']?></h3>
 							<p id="detail-<?=$row['item_id']?>">จำนวนที่สามารถยืมได้ : <?=$row['quantity_remain'] ?> ชิ้น</p>
-							<p><a item_id="<?=$row['item_id'] ?>" <?=$dis?> class="btn btn-primary my-btn">ยืมเดี๋ยวนี้</a></p>
+							<p><a item_id="<?=$row['item_id'] ?>" <?=$dis?> class="btn btn-primary my-btn">ยืม</a></p>
 							</div>
 						</div>
 					</div>

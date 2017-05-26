@@ -34,7 +34,7 @@
 				<td>ลบ</td>
 			</tr>
 			<?php
-				$sql ="SELECT * FROM `booking_table` INNER JOIN `user_detail` ON booking_table.ref_booking_uid = user_detail.uid";
+				$sql ="SELECT * FROM `booking_table` INNER JOIN `user_detail` ON booking_table.ref_booking_uid = user_detail.uid ORDER BY booking_table.booking_id DESC";
 				if ($res = mysqli_query($conn,$sql)) {
 					while ($row = mysqli_fetch_assoc($res)) {
 						// var_dump($row);

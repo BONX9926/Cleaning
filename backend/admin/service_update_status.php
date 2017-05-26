@@ -45,23 +45,21 @@ if(check_pass($_POST['password'])) {
 					echo "เปลี่ยนสถานะเรียบร้อยแล้ว";
 				}
 		} else if($status == "4"){
-			$sql = "SELECT items.item_id,borrow_detail.item_amount as item FROM `borrow_detail`INNER JOIN `borrow_table`ON borrow_detail.ref_borrow_id = borrow_table.borrow_id INNER JOIN `items` ON items.item_id = borrow_detail.item_id WHERE borrow_table.borrow_id = '{$borrow_id}' ";
-			if ($res = mysqli_query($conn,$sql)) {
-				while ($row = mysqli_fetch_assoc($res)) {
-						$borrow_items_id[] = $row;
-				}
-				foreach ($borrow_items_id as $key => $value) {
-					$sql1 ="UPDATE `items` SET `quantity_remain`=quantity_remain+'{$value['item']}' WHERE `item_id` ='{$value['item_id']}' ";
-					if(mysqli_query($conn,$sql1)) {
+			$sql = "UPDATE `borrow_table` SET `status`='{$status}' WHERE `borrow_id`='{$borrow_id}' ";
+			if (mysqli_query($conn,$sql)) {
+				$sql1 = "SELECT items.item_id,borrow_detail.item_amount as item FROM `borrow_detail`INNER JOIN `borrow_table`ON borrow_detail.ref_borrow_id = borrow_table.borrow_id INNER JOIN `items` ON items.item_id = borrow_detail.item_id WHERE borrow_table.borrow_id = '{$borrow_id}' ";
+				if ($res = mysqli_query($conn,$sql1)) {
+					while ($row = mysqli_fetch_assoc($res)) {
+							$borrow_items_id[] = $row;
 					}
+					foreach ($borrow_items_id as $key => $value) {
+						$sql1 ="UPDATE `items` SET `quantity_remain`=quantity_remain+'{$value['item']}' WHERE `item_id` ='{$value['item_id']}' ";
+						if(mysqli_query($conn,$sql1)) {
+						}
+					}
+					echo "เปลี่ยนสถานะเรียบร้อยแล้ว";
 				}
-				echo "เปลี่ยนสถานะเรียบร้อยแล้ว";
 			}
-			// var_dump($_POST);
-			// $sql = "UPDATE `borrow_table` SET `status`='{$status}' WHERE `borrow_id`='{$borrow_id}' ";
-			// 	if (mysqli_query($conn,$sql)) {
-			// 		echo "เปลี่ยนสถานะเรียบร้อยแล้ว";
-			// 	}
 		}
 		
 	} else {
