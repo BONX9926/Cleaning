@@ -18,7 +18,7 @@
 //       string(0) ""
 //     }
 //   }
-//   ["item_wornout"]=>
+//   ["item_wongout"]=>
 //   array(2) {
 //     [0]=>
 //     array(2) {
@@ -42,6 +42,7 @@ include_once '../../connect.php';
 $isset_item = array();
 $limit_item = array();
 $return = array();
+$date = date("d-m-Y H:i:s");
 	foreach ($_POST['item_return'] as $key => $value) {
 		if($value['value'] != null || $value['value']!= ""){
 			$isset_item[] = array(
@@ -51,12 +52,12 @@ $return = array();
 		}
 	}
 	//
-	foreach ($_POST['item_wornout'] as $key => $value) {
+	foreach ($_POST['item_wongout'] as $key => $value) {
 		$item = str_replace("return-wornout-", "", $value['name']);
 		$amount = $value['value'];
-		$sql_item_wornout = "UPDATE `items` SET `quantity_all`=`quantity_all` - '{$amount}' WHERE `item_id`='{$item}'";
+		$sql_item_wongout = "UPDATE `items` SET `quantity_remain`=`quantity_remain` - '{$amount}',`item_wongout`= `item_wongout` + '{$value['value']}' WHERE `item_id`='{$item}'";
 
-		// mysqli_query($conn,$sql_item_wornout);
+		mysqli_query($conn,$sql_item_wongout);
 	}
 $limit_item = true;
 	foreach ($isset_item as $key => $value) {
@@ -77,40 +78,41 @@ $limit_item = true;
 	if($limit_item && count($isset_item) != 0){
 	// update item return
 	foreach ($isset_item as $key => $array_item) {
-		$sql_update = "UPDATE `borrow_detail` SET `item_amount`= `item_amount`+'{$array_item['amount']}'  WHERE `ref_borrow_id` = '{$_POST['br_id']}' and `item_id` = '{$array_item['item_id']}'";
+		$sql_update = "UPDATE `borrow_detail` SET `item_return`= `item_return`+'{$array_item['amount']}'  WHERE `ref_borrow_id` = '{$_POST['br_id']}' and `item_id` = '{$array_item['item_id']}'";
 
-		$sql_return_stock = "UPDATE `sport_inventory` SET `item_total`= `item_total`+ {$array_item['amount']}  WHERE `item_id` = '{$array_item['item_id']}'";
-		// if(mysqli_query($conn, $sql_update)){
-		// 	mysqli_query($conn, $sql_return_stock);
-		// }
+		$sql_return_stock = "UPDATE `items` SET `quantity_remain`= `quantity_remain`+ {$array_item['amount']}  WHERE `item_id` = '{$array_item['item_id']}'";
+		if(mysqli_query($conn, $sql_update)){
+			mysqli_query($conn, $sql_return_stock);
+		}
 	}
 
 
-	$sql_check_item = "SELECT * FROM `borrow_detail` WHERE `item_amount` != `item_return_amount` and `ref_borrow_id` = '{$_POST['br_id']}'";
-	// if($res = mysqli_query($conn, $sql_check_item)){
+	$sql_check_item = "SELECT * FROM `borrow_detail` WHERE `item_amount` != `item_return` and `ref_borrow_id` = '{$_POST['br_id']}'";
+	if($res = mysqli_query($conn, $sql_check_item)){
 		if(mysqli_num_rows($res) != 0){
-			// $update_status_br = "UPDATE `borrow_table` SET `br_status`='4' WHERE `borrow_id` = '{$_POST['br_id']}'"; 
-			// mysqli_query($conn,$update_status_br);
+			$update_status_br = "UPDATE `borrow_table` SET `status`='5' WHERE `borrow_id` = '{$_POST['br_id']}'"; 
+			mysqli_query($conn,$update_status_br);
 			$return['status'] = true;
 			$return['message'] = "เสร็จสิ้น";
 			
 		}else{
-			$update_status_br = "UPDATE `borrow_table` SET `return_date`= '{$date}',`br_status`='5' WHERE `borrow_id` = '{$_POST['br_id']}'"; 
-			// mysqli_query($conn,$update_status_br);
+			$update_status_br = "UPDATE `borrow_table` SET `return_date`= '{$date}',`status`='4' WHERE `borrow_id` = '{$_POST['br_id']}'"; 
+			mysqli_query($conn,$update_status_br);
 			$return['status'] = true;
 			$return['message'] = "เสร็จสิ้น";
 			
 		}
+	}
 
 	// update item return
 	
-}elseif( count($isset_item)==0){
+}else if( count($isset_item)==0){
 	$return['status'] = false;
 	$return['message'] = "ไม่ได้ป้อนข้อมูล";
 	
 }else{
 	$return['status'] = false;
-	$return['message'] = "ป้อนจำนวนเกิน การยืมกรุณาลองให่ม";
+	$return['message'] = "ป้อนจำนวนเกิน";
 	
 }
 

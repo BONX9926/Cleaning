@@ -31,7 +31,7 @@
 					<tbody>
 					<?php
 						
-						$sql = "SELECT `borrow_table`.`borrow_id`,`borrow_table`.`status`,`borrow_table`.`borrow_date`,`borrow_table`.`status`,`user_backend`.`fname`,`user_backend`.`lname` FROM `borrow_table`INNER JOIN `user_backend` ON borrow_table.ref_maid_id = user_backend.id ORDER BY `borrow_table`.`borrow_id` DESC";
+						$sql = "SELECT `borrow_table`.`borrow_id`,`borrow_table`.`status`,`borrow_table`.`borrow_date`,`borrow_table`.`status`,`user_backend`.`fname`,`user_backend`.`lname` FROM `borrow_table`INNER JOIN `user_backend` ON borrow_table.ref_maid_id = user_backend.id WHERE `borrow_table`.`status` !='4' ORDER BY `borrow_table`.`borrow_id` DESC";
 						// echo $sql;
 						if ($res = mysqli_query($conn,$sql)) {
 							while ($row = mysqli_fetch_assoc($res)) {
@@ -52,15 +52,16 @@
 										}else{
 											$selected = "";
 										}
-								?>		
+										if ($value['id'] >= $row['status']) {
+								?>	
 									<option  value="status_id:<?=$value['id'] ?>,borrow_id:<?=$row['borrow_id']?>" <?=$selected ?> ><?=$value['name'] ?></option>
 								<?php 
-
+										}
 									}
 								?>
                                 </select>
                              </td>
-                             <td><?php echo ($row['status'] == "3") ? "<button type='button' class='btn btn-primary my-Br' br-id='".$row['borrow_id']."'>คืน</button>" : ""; ?></td>
+                             <td><?php echo ($row['status'] == "3" || $row['status'] == "5") ? "<button type='button' class='btn btn-primary my-Br' br-id='".$row['borrow_id']."'>คืน</button>" : ""; ?></td>
 						</tr>
 								<?php
 							}
@@ -92,7 +93,14 @@
 	</section>
 </div>
 <script type="text/javascript">
-	
+
+	function get_page_borrow(){
+		$.get('get_page_borrow.php', function() {
+			// optional stuff to do after success 
+		}).done(function(data){
+			$("#content").html(data);
+		});
+	}
 	$(".myStatus").change(function(event) {
 		var info = $(this).val();
 		var status = info.substring(10, 11);
@@ -116,6 +124,7 @@
 			type: 'input',
 			inputType: "password",
 			showCancelButton: true,
+			cancelButtonClass: 'btn btn-info canC',
 			closeOnConfirm: false,
 		}, function (inputValue) {
 			if (inputValue === false) return false;
@@ -123,15 +132,17 @@
 				swal.showInputError("กรุณากรอก password ");
 				return false
 			}
+
+
 			$.post('service_update_status.php', {password:inputValue, info:info, event:"update_stauts" }, function() {
 				/*optional stuff to do after success */
 			}).done(function(data){
 				swal(data);
+				get_page_borrow();
+
 				// if (data == "true") {}
 			});
 		});
-
-
 	});
 
 	$(".my-Br").click(function(event) {

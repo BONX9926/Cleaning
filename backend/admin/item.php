@@ -14,6 +14,7 @@
 							<th class="numeric">ชื่อ</th>
 							<th class="numeric">ทั้งหมด</th>
 							<th class="numeric">คงเหลือ</th>
+							<th class="numeric">ชำรุด</th>
 							<th class="numeric">ราคาเช่าต่อชิ้น</th>
 							<th class="numeric"></th>
 						</tr>
@@ -31,6 +32,7 @@
 							<td class="numeric"><?=$show['item_name']?></td>
 							<td class="numeric"><?=$show['quantity_all']?></td>
 							<td class="numeric"><?=$show['quantity_remain']?></td>
+							<td class="numeric"><?=$show['item_wongout']?></td>
 							<td class="numeric"><?=$show['item_price']?></td>
 							<td class="numeric">
 								<button class="btn btn-primary btn-xs edit-btn" item_id="<?=$show['item_id']?>" ><i class="fa fa-pencil"></i></button>

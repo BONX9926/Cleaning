@@ -79,46 +79,6 @@
 
 
 </div>
-<!-- <script>
-$("input").attr('required', 'required');
-	$('#submit').click(function(event) {
-		// alert('Login');
-		var data = $('form').serializeArray();
-		// alert(data);
-		// console.log(data[0]['value']);
-		if (data[0]['value'] != '' && data[1]['value'] !='') {
-			// console.log(data[0]['value']);
-			// console.log(data[1]['value']);
-			$.post('login_save.php', {data: data}, function() {
-				// optional stuff to do after success 
-			}).done(function(data) {
-				// alert(data);
-				// console.log(data);
-				let json_res = jQuery.parseJSON(data);
-				if(json_res.status == true) {
-					// alert(json_res.access);
-					if(json_res.access === 'A') {
-						window.location.href = "admin/index.php";
-					// console.log(json_res.access);
-					} else {
-						window.location.href = "maid/index.php";
-				// console.log('else');
-					}
-				}else{
-					window.location ='index.php?err=2';
-				}
-			});
-		} else {
-			// console.log('ERROR');
-			window.location ='index.php?err=1';
-		}
-		// $.post('login.php', {data: data}, function() {
-		// 	// optional stuff to do after success 
-		// }).done(function(data) {
-		// 	alert(data);
-		// });
-	});
-</script> -->
 </body>
 </html>
 <?php
