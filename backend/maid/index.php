@@ -74,6 +74,9 @@
 
 			<li>
 				<a id="br-items"><i class="fa fa-calendar"></i><span>รายการที่ยืม</span></a>
+			</li>			
+			<li>
+				<a id="comments"><i class="fa fa-comment"></i><span>ความคิดเห็น</span></a>
 			</li>
 
 			<!-- <li class="sub-menu">
@@ -257,6 +260,24 @@
 
 		function get_page_br_items(){
 			$.get('page_br_items.php', function() {
+				/*optional stuff to do after success */
+			}).done(function(data){
+				$("#content").html(data);
+				//alert(data);
+			});
+		}
+
+		$("#comments").click(function(event) {
+			$("li .active").attr('class','');
+			get_page_comments();
+			$(this).attr('class','active');
+			// var domain = $(this).attr('domain-menu');
+			// $("#"+domain).addClass('dcjq-parent active');
+			// alert("555");
+		});
+
+		function get_page_comments(){
+			$.get('get_page_comments.php', function() {
 				/*optional stuff to do after success */
 			}).done(function(data){
 				$("#content").html(data);
