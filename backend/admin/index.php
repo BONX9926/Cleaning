@@ -33,6 +33,7 @@
 	<link href="../css/style-responsive.css" rel="stylesheet" />
 	<link rel="stylesheet" href="../css/simply-toast.min.css" type="text/css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" type="text/css">
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	
 
 
@@ -54,7 +55,7 @@
 <!--header start-->
 <?php 
 	include_once '../header.php'; 
-	include_once '../../connect.php';
+	// include_once '../../connect.php';
 ?>
 <!--header end-->
 <!--sidebar start-->
@@ -63,41 +64,26 @@
 		<!-- sidebar menu start-->
 		<ul class="sidebar-menu" id="nav-accordion">
 			<li>
-				<a id="payment"><i class="fa fa-credit-card"></i><span>แจ้งชำระเงิน</span> <span class="badge btn btn-danger btn-xs">10</span></a>
+				<a id="payment"><i class="fa fa-credit-card"></i><span>แจ้งชำระเงิน</span> <b id="alert_pay"></b></a>
 			</li>
 			<li class="sub-menu">
 				<a href="javascript:;" id="borrow-return">
-					<i class="fa fa-cogs"></i>
-					<span>ยืม-คืน อุปกรณ์ 
-					<?php
-						$sql_isset = "SELECT `borrow_table`.`borrow_id`,`borrow_table`.`status`,`borrow_table`.`borrow_date`,`borrow_table`.`status`,`user_backend`.`fname`,`user_backend`.`lname` FROM `borrow_table`INNER JOIN `user_backend` ON borrow_table.ref_maid_id = user_backend.id WHERE `borrow_table`.`status` ='1' ";
-						if ($res = mysqli_query($conn,$sql_isset)) {
-					?>
-						<span class="badge btn btn-primary btn-xs">New</span>
-					<?php
-						} else {
-							
-						}
-					?>
-					</span>
+					<i class="fa fa-gavel"></i>
+					<span>ยืม-คืน อุปกรณ์ </span>
 				</a>
 				<ul class="sub">
-					<li id="borrow" domain-menu="borrow-return"><a>แจ้งขอยืม-คืน 
-					<?php 
-						$sql = "SELECT `borrow_table`.`borrow_id`,`borrow_table`.`status`,`borrow_table`.`borrow_date`,`borrow_table`.`status`,`user_backend`.`fname`,`user_backend`.`lname` FROM `borrow_table`INNER JOIN `user_backend` ON borrow_table.ref_maid_id = user_backend.id WHERE `borrow_table`.`status` ='1' ";
-						if ($res = mysqli_query($conn,$sql)) {
-							// var_dump($res);
-							if ($res->num_rows > 0) {
-					?>
-					<span class="badge btn btn-warning btn-xs"><?=$res->num_rows?></span></a></li>
-					
-					<?php
-							} else {
-
-							}
-						}
-					?>
-					<!-- <li id="return" domain-menu="borrow-return"><a>คืนอุปกรณ์</a></li> -->
+					<li id="borrow" domain-menu="borrow-return"><a>แจ้งขอยืม-คืน</a></li>
+					<li id="list_borrow" domain-menu="borrow-return"><a>รายการยืม-คืนอุปกรณ์</a></li>
+				</ul>
+			</li>
+			<li class="sub-menu">
+				<a href="javascript:;" id="salary-domain">
+					<i class="fa fa-gavel"></i>
+					<span>ระบบเงินเดือน</span>
+				</a>
+				<ul class="sub">
+					<li id="calcurator" domain-menu="salary-domain"><a>คำนวณเงินเดือน</a></li>
+					<li id="statement" domain-menu="salary-domain"><a>Statement</a></li>
 				</ul>
 			</li>
 			<li class="sub-menu">
@@ -112,12 +98,12 @@
 			</li>
 
 			<li>
-				<a id="maid-table"><i class="fa fa-credit-card"></i><span>การจองบริการ</span></a>
+				<a id="maid-table"><i class="fa fa-credit-card"></i><span>รายการจองแม่บ้าน</span></a>
 			</li>			
 
-			<li>
+<!-- 			<li>
 				<a id="money"><i class="fa fa-credit-card"></i><span>คำนวณเงินเดือน</span></a>
-			</li>
+			</li> -->
 
 			<li>
 				<a id="select"><i class="fa fa-credit-card"></i><span>ค้นหาบิลจากแม่บ้าน</span></a>
@@ -182,7 +168,7 @@
 <script src="../js/count.js"></script>
 <script src="../../js/sweetalert.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <!--this page plugins-->
 
 <script>
@@ -485,13 +471,13 @@
 			});
 		}		
 
-		$("#money").click(function(event) {
+		$("#calcurator").click(function(event) {
 			$("li .active").attr('class','');
 			get_page_saraly_calcurator();
 			$(this).attr('class','active');
-			// var domain = $(this).attr('domain-menu');
+			var domain = $(this).attr('domain-menu');
 			// alert(domain);
-			// $("#"+domain).addClass('dcjq-parent active');
+			$("#"+domain).addClass('dcjq-parent active');
 		});
 
 		function get_page_saraly_calcurator() {
@@ -501,7 +487,50 @@
 				$("#content").html(data);
 				// Switch()
 			});
+		}		
+
+		$("#statement").click(function(event) {
+			$("li .active").attr('class','');
+			get_page_statement();
+			$(this).attr('class','active');
+			var domain = $(this).attr('domain-menu');
+			// alert(domain);
+			$("#"+domain).addClass('dcjq-parent active');
+		});
+
+		function get_page_statement() {
+			$.get('get_page_statement.php', function() {
+				/*optional stuff to do after success */
+			}).done(function(data){
+				$("#content").html(data);
+				// Switch()
+			});
 		}
+
+
+//ice
+var myVar;
+		function alert_pay(){
+			
+			myVar=  setTimeout(function(){ 
+				try{
+
+					$.get('service_alert_paymeny.php', function() {
+						/*optional stuff to do after success */
+					}).done(function(data){
+						$("#alert_pay").html(data);
+						// console.log("processAlert_pay");
+						alert_pay();
+					});
+				}catch(e){
+					clearTimeout(myVar);
+					alert_pay();
+				}
+	
+			}, 5000);
+		}
+
+		alert_pay();
 	});
 
 </script>

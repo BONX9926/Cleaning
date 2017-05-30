@@ -6,7 +6,7 @@
 	<header class="panel-heading">รายชื่อแม่บ้าน</header>
 		<div class="panel-body">
 			<section id="unseen">
-				<table class="table table-bordered table-striped table-condensed">
+				<table class="table table-bordered table-striped table-condensed" id="listMaid">
 					<thead>
 						<tr>
 							<th>ลำดับ</th>
@@ -39,3 +39,10 @@
 		</div>
 	</section>
 </div>
+<script type="text/javascript">
+	$(document).ready(function() {
+	 	$('#listMaid').DataTable( {
+	        "pageLength": 10
+	    } );
+	});
+</script>

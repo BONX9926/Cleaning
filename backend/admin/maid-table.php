@@ -24,15 +24,26 @@
 	<header class="panel-heading">การจองบริการ</header>
 		<div class="panel-body">
 			<section id="unseen">
-			<!-- <pre> -->
-			<table class="table table-bordered">
-			<tr>
-				<td>เลขที่บิล</td>
-				<td>ผู้จ้าง</td>
-				<td>วันที่จ้าง</td>
-				<td>พนักงาน</td>
-				<td>ลบ</td>
-			</tr>
+			<table class="table table-bordered" id="myTable">
+	        <thead>
+		        <tr>
+		            <th>เลขที่บิล</th>
+		            <th>ผู้จ้าง</th>
+		            <th>วันที่จ้าง</th>
+		            <th>พนักงาน</th>
+		            <th>ลบ</th>
+		        </tr>
+		    </thead>
+		    <tfoot>
+		        <tr>
+		            <th>เลขที่บิล</th>
+		            <th>ผู้จ้าง</th>
+		            <th>วันที่จ้าง</th>
+		            <th>พนักงาน</th>
+		            <th>ลบ</th>
+		        </tr>
+		    </tfoot>
+        <tbody>
 			<?php
 				$sql ="SELECT * FROM `booking_table` INNER JOIN `user_detail` ON booking_table.ref_booking_uid = user_detail.uid ORDER BY booking_table.booking_id DESC";
 				if ($res = mysqli_query($conn,$sql)) {
@@ -51,8 +62,20 @@
 					}
 				}
 			?>
+			</tbody>
 			</table>
 			</section>
 		</div>
 	</section>
 </div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		 	$('#myTable').DataTable( {
+        // "scrollY":        "200px",
+        // "scrollCollapse": true,
+        // "searching": false,
+        // "paging":         false,
+        "pageLength": 10
+    } );
+	});
+</script>

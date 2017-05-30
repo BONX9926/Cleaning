@@ -12,7 +12,7 @@
 	<header class="panel-heading">แจ้งชำระเงิน</header>
 		<div class="panel-body">
 			<section id="unseen">
-				<table class="table table-bordered table-striped table-condensed">
+				<table class="table table-bordered table-striped table-condensed" id="pay">
 					<thead>
 						<tr>
 							<th>เลขที่บิล</th>
@@ -21,7 +21,7 @@
 							<th class="numeric">email</th>
 							<th class="numeric">จำนวนเงินที่แจ้ง</th>
 							<th class="numeric">วันที่แจ้งชำระ</th>
-							<th class="numeric">หลักฐานการโอนเงิน</th>
+							<th class="numeric">หลักฐาน</th>
 							<th class="numeric">สถานะ</th>
 						</tr>
 					</thead>
@@ -136,6 +136,9 @@
 				$("#myModal").modal("toggle");
 			})
 		});
+	 	$('#pay').DataTable( {
+	        "pageLength": 10
+	    } );
 
 	});
 </script>

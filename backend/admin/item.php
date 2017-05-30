@@ -6,7 +6,7 @@
 	<header class="panel-heading">รายชื่อแม่บ้าน</header>
 		<div class="panel-body">
 			<section id="unseen">
-				<table class="table table-bordered table-striped table-condensed">
+				<table class="table table-bordered table-striped table-condensed" id="it">
 					<thead>
 						<tr>
 							<th>รหัสสินค้า</th>
@@ -90,3 +90,10 @@
 </div>
 </div>
 </div>
+<script type="text/javascript">
+	$(document).ready(function() {
+	 	$('#it').DataTable( {
+	        "pageLength": 10
+	    } );
+	});
+</script>
