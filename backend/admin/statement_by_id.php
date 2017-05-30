@@ -13,16 +13,18 @@
 			if ($res =mysqli_query($conn,$sql_salary)) {
 				if ($res->num_rows > 0) {
 					?>
-					<form class="form-inline" id="BeTweenStatement" action="statement_all_PDF.php?maid_id=<?=$_POST['maid_id']?>&startDate={{sDate}}&endDate={{eDate}}" method="post" target="_blank">
+					<!-- <form class="form-inline" id="BeTweenStatement" action="statement_all_PDF.php?maid_id=<?=$_POST['maid_id']?>&startDate={{sDate}}&endDate={{eDate}}" method="post" target="_blank"> -->
+					<form class="form-inline" id="BeTweenStatement" action="statement_all_PDF.php" method="post" target="_blank">
 					<div class="form-group">
 					<label>ตั้งแต่วันที่ : </label>
 					<input type="date" class="form-control" name="startDate" id="startDate">
 					</div>
 					<div class="form-group">
 					<label>ถึงวันที่ : </label>
-					<input type="date" class="form-control" name="endDate" id="endDate" >
+					<input type="date" class="form-control" name="endDate" id="endDate">
+					<input type="hidden" class="form-control" name="maid_id" value="<?=$_POST['maid_id']?>">
 					</div>
-					<button type="submit"><i class="fa fa-print"> พิมพ์</i></button>
+					<button type="submit" class="btn btn-info"><i class="fa fa-print"> พิมพ์</i></button>
 					</form>
 					<table class="table table-bordered table-striped table-condensed" id="state">
 						<thead>
@@ -61,33 +63,6 @@
 					$(function(){
 						$("#startDate , #endDate").attr('required','');
 					});
-					function toTimestamp(strDate){
-					   	var datum = Date.parse(strDate);
-					   	return datum/1000;
-					}
-					$("#startDate").change(function(event) {
-						var startDate = $(this).val();
-						var btn_send = $("#BeTweenStatement");
-						var href = btn_send.attr('action');
-						var sD = toTimestamp(startDate);
-						var new_href = href.replace('{{sDate}}', sD);
-						btn_send.attr('action',new_href );
-						
-					});					
-					$("#endDate").change(function(event) {
-						var startDate = $(this).val();
-						var btn_send = $("#BeTweenStatement");
-						var href = btn_send.attr('action');
-						var sD = toTimestamp(startDate);
-						var new_href = href.replace('{{eDate}}', sD);
-						btn_send.attr('action',new_href );
-						
-					});
-						//BeTween Statement PDF
-						// $("#submit").click(function(event) {
-						// 	var data = $("#BeTweenStatement").serializeArray();
-						// 	// alert(data);
-						// });
 					</script>
 						<?php
 					}

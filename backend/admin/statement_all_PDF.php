@@ -5,7 +5,8 @@ require_once("../../mpdf/mpdf.php");
   $stylesheet = ".txtCenter{ text-align:center; } img {width: 177px;height: 80px;}";
 ?>
 Statement ALLL
-<?php var_dump($_POST) ?>
+<?php var_dump($data); ?>
+<?php echo $sql; ?>
 <?php
   $html = ob_get_contents();
   ob_end_clean();
