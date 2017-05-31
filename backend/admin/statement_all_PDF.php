@@ -1,12 +1,41 @@
 <?php
 include_once 'sql_statement_all_PDF.php';
+include_once '../../lib/php/public_function.php';
 require_once("../../mpdf/mpdf.php");
   ob_start();
-  $stylesheet = ".txtCenter{ text-align:center; } img {width: 177px;height: 80px;}";
+  $stylesheet = "table{font-size: 16pt;} .txtC{text-align: center;} div.edge{width: 275px;}div.test{font-size:16pt;padding-left: 20px;padding-right: 20px;border-style: solid;border-width: 2px;}";
 ?>
-Statement ALLL
-<?php var_dump($data); ?>
-<?php echo $sql; ?>
+<h1 align="center">Statement</h1>
+<div class="edge">
+	<div class="test">
+	<?php foreach ($data2 as $key => $v) {
+	?>
+		<label>ชื่อ-นามสกุล : <?=$v['fname'] ?> <?=$v['lname'] ?></label><br/>
+		<label>ที่อยู่ : <?=$v['address'] ?></label><br/>
+		<label>เบอร์โทรศัพท์ : <?=$v['phone'] ?></label><br/>
+	<?php
+	} ?>
+
+	</div>
+</div><br>
+<table border="1" cellpadding="5" cellspacing="0" width="100%">
+	<tr>
+		<th>ประจำเดือน</th>
+		<th>เงินเดือน</th>
+		<th>หักภาษี 7%</th>
+		<th>รวมสุทธิ</th>
+	</tr>
+	<?php foreach ($data1 as $key => $v) {
+	?>
+	<tr>
+		<td class="txtC"><?=date_thai(revert_date($v['created_at']))?></td>
+		<td class="txtC"><?=number_format($v['salary'])?></td>
+		<td class="txtC"><?=number_format($v['vat'])?></td>
+		<td class="txtC"><?=number_format($v['salary']+$v['vat'])?></td>
+	</tr>
+	<?php
+	} ?>
+</table>
 <?php
   $html = ob_get_contents();
   ob_end_clean();

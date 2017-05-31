@@ -53,7 +53,8 @@
 								<td class="numeric"><?=date_thai($row['startMonth'])?></td>
 								<td class="numeric"><?=date_thai($row['endMonth'])?></td>
 								<td class="numeric"><?=date_thai(revert_date($row['created_at']))?></td>
-								<td class="numeric"><a href="statement_by_id_PDF.php?maid_id=<?=$_POST['maid_id']?>&salary_id=<?=$row['salary_id']?>" target="_blank" class="btn btn-danger btn-xs"><i class="fa fa-print"></i></a></td>
+								<!-- <td class="numeric"><a href="statement_by_id_PDF.php?maid_id=<?=$_POST['maid_id']?>&salary_id=<?=$row['salary_id']?>" target="_blank" class="btn btn-danger btn-xs"><i class="fa fa-print"></i></a></td> -->
+								<td class="numeric"><form action="statement_by_id_PDF.php" method="post" target="_blank"><input type="hidden" name="maid_id" value="<?=$_POST['maid_id']?>"><input type="hidden" name="salary_id" value="<?=$row['salary_id']?>"><button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-print"></i></button></form></td>
 							</tr>
 							<?php } ?>
 						</tbody>

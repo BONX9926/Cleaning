@@ -42,7 +42,8 @@
 					// console.log(val.maidname);
 						contentTable+= "<td><img src='../img/avatar_profile/"+val.avatar+"' width='50' height='50'/></td>";
 						contentTable+="<td>"+val.maidname+"</td>";
-						contentTable+= "<td><a class='btn btn-info' href='calcurator_salary.php?maid_id="+val.maid_id+"&startDate="+json_res.startDate+"&endDate="+json_res.endDate+"' target='_blank'>Click</a></td>";
+						// contentTable+= "<td><a class='btn btn-info' href='calcurator_salary.php?maid_id="+val.maid_id+"&startDate="+json_res.startDate+"&endDate="+json_res.endDate+"' target='_blank'>Click</a></td>";
+						contentTable+= "<td><form action='calcurator_salary.php' method='post' tatget='_blank'><input type='hidden' name='maid_id' value='"+val.maid_id+"' /><input type='hidden' name='startDate' value='"+json_res.startDate+"' /><input type='hidden' name='endDate' value='"+json_res.endDate+"' /><button type='submit' class='btn btn-info' >Click</button></form></td>";
 
 					contentTable+="</tr>";
 					

@@ -1,29 +1,49 @@
 <?php
 include_once 'sql_statement_by_id_PDF.php';
+include_once '../../lib/php/public_function.php';
 require_once("../../mpdf/mpdf.php");
   ob_start();
-  $stylesheet = ".txtCenter{ text-align:center; } img {width: 177px;height: 80px;}";
+  $stylesheet = "table{font-size: 16pt;} .txtC{text-align: center;}div.edge{width: 275px;}div.test{font-size: 16pt;padding-left: 20px;padding-right: 20px;border-style: solid;border-width: 2px;}";
 ?>
-Statement BY ID
-<?php var_dump($data); ?>
-<table>
+<h1 align="center">PAY SLIP / เงินเดือน</h1>
+<div class="edge">
+	<div class="test">
+	<?php foreach ($data2 as $key => $v) {
+	?>
+		<label>ชื่อ-นามสกุล : <?=$v['fname'] ?> <?=$v['lname'] ?></label><br/>
+		<label>ที่อยู่ : <?=$v['address'] ?></label><br/>
+		<label>เบอร์โทรศัพท์ : <?=$v['phone'] ?></label><br/>
+		<label>ประจำเดือน : <?=date_thai(revert_date($data1[0]['created_at']))?></label>
+	<?php
+	} ?>
+	</div>
+</div><br>
+<table border="1" cellpadding="5" cellspacing="0" width="100%">
 	<thead>
 		<tr>
-			<th></th>
-			<th></th>
-			<th></th>
-			<th></th>
+			<th colspan="4">รายการ</th>
+		</tr>
+		<tr>
+			<th colspan="2">รายได้</th>
+			<th colspan="2">รายจ่าย</th>
 		</tr>
 	</thead>
 	<tbody>
+	<?php foreach ($data1 as $key => $v) {?>
 		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
+			<td class="txtC">เงินเดือน</td>
+			<td class="txtC"><?=number_format($v['salary']);?> บาท</td>
+			<td class="txtC">หักภาษี 7%</td>
+			<td class="txtC"><?=number_format($v['vat']);?> บาท</td>
 		</tr>
+		<tr>
+			<td class="txtC" colspan="3"><b>รวมสุทธิ</b></td>
+			<td class="txtC"><?=number_format($total = $v['salary']+$v['vat']);?></td>
+		</tr>
+		<?php } ?>
 	</tbody>
 </table>
+
 <?php
   $html = ob_get_contents();
   ob_end_clean();

@@ -9,13 +9,13 @@
 <div class="container">
 <h1>คำนวณเงินเดือน ประจำวันที่ :<?php date_default_timezone_set('Asia/Bangkok');
 echo $today = date('d-m-Y');?></h1>
-<h3>รหัสพนักงาน : <?php echo $_GET['maid_id']; ?></h3>
+<h3>รหัสพนักงาน : <?php echo $_POST['maid_id']; ?></h3>
 <?php
-	if($_GET['maid_id']) {
+	if($_POST['maid_id']) {
 		include_once '../../connect.php';
 		include_once '../../lib/php/public_function.php';
-		$sql = "SELECT booking_table.price_area,booking_table.booking_id,booking_table.ref_booking_uid,booking_table.start_work,booking_table.end_work,user_detail.fname,user_detail.lname,user_detail.lat,user_detail.lng,user_detail.phone FROM `booking_detail` INNER JOIN booking_table on (booking_detail.booking_id=booking_table.booking_id) INNER JOIN user_detail on (booking_table.ref_booking_uid = user_detail.uid) WHERE `ref_maid` = '{$_GET['maid_id']}' AND `booking_table`.`status_id` ='true' AND `end_work` >='{$_GET['startDate']}' AND `end_work` <= '{$_GET['endDate']}' ORDER BY booking_table.start_work ASC";
-		$sql_2 = "SELECT SUM(`booking_table`.`price_area`) as price_area FROM `booking_detail` INNER JOIN booking_table on (booking_detail.booking_id=booking_table.booking_id) INNER JOIN user_detail on (booking_table.ref_booking_uid = user_detail.uid) WHERE `ref_maid` = '{$_GET['maid_id']}' AND `booking_table`.`status_id` ='true' AND `end_work` >='{$_GET['startDate']}' AND `end_work` <= '{$_GET['endDate']}'";
+		$sql = "SELECT booking_table.price_area,booking_table.booking_id,booking_table.ref_booking_uid,booking_table.start_work,booking_table.end_work,user_detail.fname,user_detail.lname,user_detail.lat,user_detail.lng,user_detail.phone FROM `booking_detail` INNER JOIN booking_table on (booking_detail.booking_id=booking_table.booking_id) INNER JOIN user_detail on (booking_table.ref_booking_uid = user_detail.uid) WHERE `ref_maid` = '{$_POST['maid_id']}' AND `booking_table`.`status_id` ='true' AND `end_work` >='{$_POST['startDate']}' AND `end_work` <= '{$_POST['endDate']}' ORDER BY booking_table.start_work ASC";
+		$sql_2 = "SELECT SUM(`booking_table`.`price_area`) as price_area FROM `booking_detail` INNER JOIN booking_table on (booking_detail.booking_id=booking_table.booking_id) INNER JOIN user_detail on (booking_table.ref_booking_uid = user_detail.uid) WHERE `ref_maid` = '{$_POST['maid_id']}' AND `booking_table`.`status_id` ='true' AND `end_work` >='{$_POST['startDate']}' AND `end_work` <= '{$_POST['endDate']}'";
 		
 		// echo $sql_2;
 		if ($res = mysqli_query($conn,$sql)) {
@@ -67,11 +67,11 @@ echo $today = date('d-m-Y');?></h1>
 	<h4 align="left">เงินรับสุทธิ : <?php $total = $money - $vat_real;echo number_format($total); ?> บาท</h4>
 
 <form action="salary_save.php" method="post">
-<input type="hidden" class="form-control" name="id" value="<?=$_GET['maid_id']?>">
+<input type="hidden" class="form-control" name="id" value="<?=$_POST['maid_id']?>">
 <input type="hidden" class="form-control myNum" name="salary" value="<?=$money?>">
 <input type="hidden" class="form-control myNum" name="vat" value="<?=$vat_real?>">
-<input type="hidden" class="form-control myNum" name="startMonth" value="<?=$_GET['startDate']?>">
-<input type="hidden" class="form-control myNum" name="endMonth" value="<?=$_GET['endDate']?>">
+<input type="hidden" class="form-control myNum" name="startMonth" value="<?=$_POST['startDate']?>">
+<input type="hidden" class="form-control myNum" name="endMonth" value="<?=$_POST['endDate']?>">
 <button type="submit" class="btn btn-danger" style="float: right;">บันทึก</button>
 </form>
 <br><br><br><br>
