@@ -45,7 +45,7 @@
 					}
 				?>
 			</td>
-			<td><a href="rating.php?bin=<?=$row['booking_id']?>">click</a></td>
+			<td><a href="rating.php?bin=<?=$row['booking_id']?>" <?php if($row['work_status'] == "false") { echo "hidden" ;} ?>>click</a></td>
 		</tr>
 	<?php 
 				}

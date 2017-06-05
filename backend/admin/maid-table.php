@@ -31,6 +31,7 @@
 		            <th>ผู้จ้าง</th>
 		            <th>วันที่จ้าง</th>
 		            <th>พนักงาน</th>
+		            <th>สถานะบิล</th>
 		            <th>ลบ</th>
 		        </tr>
 		    </thead>
@@ -40,6 +41,7 @@
 		            <th>ผู้จ้าง</th>
 		            <th>วันที่จ้าง</th>
 		            <th>พนักงาน</th>
+		            <th>สถานะบิล</th>
 		            <th>ลบ</th>
 		        </tr>
 		    </tfoot>
@@ -55,6 +57,7 @@
 					<td><?=$row['fname']?> <?=$row['lname']?></td>
 					<td><?=date_thai($row['start_work'])?></td>
 					<td><?php name_maid($row['booking_id'],$conn) ?></td>
+					<td><?=$row['status_id'] ?></td>
 					<td><button class="btn btn-danger del-bin" bin-id="<?=$row['booking_id']?>">ลบ</button></td>
 
 				</tr>
@@ -70,12 +73,47 @@
 </div>
 <script type="text/javascript">
 	$(document).ready(function() {
-		 	$('#myTable').DataTable( {
+		$(".del-bin").click(function(event) {
+			var bin_id = $(this).attr('bin-id');
+				swal({
+				title: "คุณแน่ใจใช่ไหม?",
+				text: "จะลบรายการบิลที่ "+bin_id,
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonClass: "btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plx!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+				},
+				function(isConfirm) {
+				if (isConfirm) {
+				$.post('del_bin.php', {num_bin: bin_id}, function(data, textStatus, xhr) {
+					/*optional stuff to do after success */
+				}).done(function(data){
+					// swal(data);
+					var json_res = jQuery.parseJSON(data);
+					if(json_res.status == true) {
+						swal("Deleted!", json_res.message, "success");
+						maid_table();
+					} else {
+						swal("Deleted!", json_res.message, "error");
+					}
+				});
+				} else {
+				swal("Cancelled", "ยกเลิกการทำรายการ", "error");
+				}
+				});
+
+			// alert(bin_id);
+			// alert(5555);
+		});
+		$('#myTable').DataTable( {
         // "scrollY":        "200px",
         // "scrollCollapse": true,
         // "searching": false,
         // "paging":         false,
-        "pageLength": 10
-    } );
+        // "pageLength": 10
+    	} )
 	});
 </script>

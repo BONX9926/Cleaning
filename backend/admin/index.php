@@ -18,8 +18,9 @@
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
 	<link href="../css/bootstrap-reset.css" rel="stylesheet">
 	<!--external css-->
+
 	<link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-	<link href="../assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+	<!-- <link href="../assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/> -->
 	<link rel="stylesheet" href="../css/owl.carousel.css" type="text/css">
 	<link rel="stylesheet" type="text/css" href="../../css/sweetalert.css">
 <!-- 	<link rel="stylesheet" href="../css/simply-toast.min.css" type="text/css"> -->
@@ -73,7 +74,7 @@
 				</a>
 				<ul class="sub">
 					<li id="borrow" domain-menu="borrow-return"><a>แจ้งขอยืม-คืน</a></li>
-					<li id="list_borrow" domain-menu="borrow-return"><a>รายการยืม-คืนอุปกรณ์</a></li>
+					<!-- <li id="list_borrow" domain-menu="borrow-return"><a>รายการยืม-คืนอุปกรณ์</a></li> -->
 				</ul>
 			</li>
 			<li class="sub-menu">
@@ -105,9 +106,9 @@
 				<a id="money"><i class="fa fa-credit-card"></i><span>คำนวณเงินเดือน</span></a>
 			</li> -->
 
-			<li>
+<!-- 			<li>
 				<a id="select"><i class="fa fa-credit-card"></i><span>ค้นหาบิลจากแม่บ้าน</span></a>
-			</li>
+			</li> -->
 			<li class="sub-menu">
 				<a href="javascript:;" id="maid-domain">
 					<i class="fa fa-group"></i>
@@ -147,7 +148,7 @@
 <script src="../js/jquery.scrollTo.min.js"></script>
 <script src="../js/jquery.nicescroll.js" type="text/javascript"></script>
 <script src="../js/jquery.sparkline.js" type="text/javascript"></script>
-<script src="../assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+<!-- <script src="../assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script> -->
 <script src="../js/owl.carousel.js" ></script>
 <script src="../js/jquery.customSelect.min.js" ></script>
 <script src="../js/respond.min.js" ></script>
@@ -163,20 +164,95 @@
 <!-- <script src="../js/simply-toast.min.js"></script> -->
 
 <!--script for this page-->
-<script src="../js/sparkline-chart.js"></script>
-<script src="../js/easy-pie-chart.js"></script>
+<!-- <script src="../js/sparkline-chart.js"></script> -->
+<!-- <script src="../js/easy-pie-chart.js"></script> -->
 <script src="../js/count.js"></script>
 <script src="../../js/sweetalert.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <!--this page plugins-->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+
 
 <script>
+
 	$(document).ready(function() {
 		//set cussor
 		$("a").css('cursor', 'pointer');
 		//set cussor
 
+		// render chart function start
+		function chart_income_jay(target,data,title_name,unit,title_y) {
+
+			Highcharts.chart(target, {
+			    chart: {
+			        type: 'column'
+			    },
+			    title: {
+			        text: title_name
+			    },
+			    subtitle: {
+			        text: ''
+			    },
+			    xAxis: {
+			        categories: [
+			            'Jan',
+			            'Feb',
+			            'Mar',
+			            'Apr',
+			            'May',
+			            'Jun',
+			            'Jul',
+			            'Aug',
+			            'Sep',
+			            'Oct',
+			            'Nov',
+			            'Dec'
+			        ],
+			        crosshair: true
+			    },
+			    yAxis: {
+			        min: 0,
+			        title: {
+			            text: title_y+' ('+unit+')'
+			        }
+			    },
+			    tooltip: {
+			        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+			        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+			            '<td style="padding:0"><b>{point.y:.1f} '+unit+'</b></td></tr>',
+			        footerFormat: '</table>',
+			        shared: true,
+			        useHTML: true
+			    },
+			    plotOptions: {
+			        column: {
+			            pointPadding: 0.2,
+			            borderWidth: 0
+			        }
+			    },
+			    series: data
+			});
+		}
+		// render chart function stop
+
+
+		function show_index(){
+			$.get('show_index.php', function() {
+				/*optional stuff to do after success */
+			}).done(function(data){
+				$("#content").html(data);
+				$.get('service_chart/chart_income_jay.php', function(data) {
+				/*optional stuff to do after success */
+				}).done(function(data){
+					var json_res = jQuery.parseJSON(data);
+					//alert();
+					chart_income_jay('unseen',json_res,"รายรับรายจ่าย",'บาท','จำนวนเงิน');
+				});
+
+				
+			});
+		}
+		show_index();
 
 		$("#borrow").click(function(event) {
 			$("li .active").attr('class','');
@@ -410,46 +486,6 @@
 			}).done(function(data){
 				$("#content").html(data);
 				// Switch()
-			}, function() {
-				$(".btn-danger").click(function(event) {
-					var bin_id = $(this).attr('bin-id');
-						swal({
-						title: "คุณแน่ใจใช่ไหม?",
-						text: "จะลบรายการบิลที่ "+bin_id,
-						type: "warning",
-						showCancelButton: true,
-						confirmButtonClass: "btn-danger",
-						confirmButtonText: "Yes, delete it!",
-						cancelButtonText: "No, cancel plx!",
-						closeOnConfirm: false,
-						closeOnCancel: false
-						},
-						function(isConfirm) {
-						if (isConfirm) {
-						$.post('del_bin.php', {num_bin: bin_id}, function(data, textStatus, xhr) {
-							/*optional stuff to do after success */
-						}).done(function(data){
-							// swal(data);
-							var json_res = jQuery.parseJSON(data);
-							if(json_res.status == true) {
-								swal("Deleted!", json_res.message, "success");
-								maid_table();
-							} else {
-								swal("Deleted!", json_res.message, "error");
-							}
-						});
-						} else {
-						swal("Cancelled", "ยกเลิกการทำรายการ", "error");
-						}
-						});
-
-					// alert(bin_id);
-					// alert(5555);
-				});
-				$('')
-				// $(".del-bin").click(function(event) {
-				// 	alert(bin-id);
-				// });
 			});
 		}
 
