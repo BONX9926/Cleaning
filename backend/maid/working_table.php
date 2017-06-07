@@ -53,6 +53,7 @@
 					<td>วันที่ทำงาน</td>
 					<td>ชื่อผู้จ้างงาน</td>
 					<td>รายละเอียด</td>
+					<td>เบอร์ติดต่อ</td>
 					<td>สิ่งที่ต้องเตรียมไปด้วย</td>
 					<td>สถานะการทำงาน</td>
 					<td>Location</td>
@@ -66,6 +67,7 @@
 					<td><?=$lists['start_date_full'] ?></td>
 					<td><?=$lists['fname'] ?> <?=$lists['lname'] ?></td>
 					<td><?=room_name($lists['booking_id'],$conn) ?></td>
+					<td><?=$lists['phone'] ?></td>
 					<td><?=$lists['items'] ?></td>
 					<td>
 					<?php 
@@ -97,7 +99,14 @@
 					?>
 					</td>
 					<!-- <td><?=$lists['work_status'] ?></td> -->
-					<td><a  class="map" target="_blank" href="map.php?lat=<?=$lists['lat'] ?>&lng=<?=$lists['lng'] ?>" >Click</a></td>
+					<td>
+						<form action="map.php" method="post" target="_blank">
+							<input type="hidden" name="lat" value="<?=$lists['lat'] ?>">
+							<input type="hidden" name="lng" value="<?=$lists['lng'] ?>">
+							<button type="submit" class="btn btn-xs btn-danger">Click</button>
+						</form>
+					</td>
+					<!-- <td><a  class="map" target="_blank" href="map.php?lat=<?=$lists['lat'] ?>&lng=<?=$lists['lng'] ?>" >Click</a></td> -->
 					<td><a class="view-spc" href="#"  book-id="<?=$lists['booking_id'] ?>" >view</a></td>
 				</tr>
 				<?php 

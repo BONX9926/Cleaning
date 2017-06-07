@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="./css/bootstrap.min.css">
 <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <script src="./js/jquery-3.2.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 </head>
 <body>
@@ -100,16 +99,6 @@
 	</div>
 	</div>	
 
-	<div class="form-group">
-	<label class="col-md-4 control-label">จำนวนเงินที่ชำระ</label>  
-	<div class="col-md-4 inputGroupContainer">
-	<div class="input-group">
-	<span class="input-group-addon"><i class="fa fa-btc"></i></span>
-	<input name="money" class="form-control" type="text" placeholder="กรอกจำนวนเงิน" id="money" required>
-	</div>
-	</div>
-	</div>
-
 	<!-- Button -->
 	<div class="form-group">
 	<label class="col-md-4 control-label"></label>
@@ -122,10 +111,5 @@
 	</form>
 	</div><!-- /.container -->
 </div>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#money").mask('0,000,000');
-	});
-</script>
 </body>
 </html>

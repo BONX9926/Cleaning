@@ -180,6 +180,48 @@
 		$("a").css('cursor', 'pointer');
 		//set cussor
 
+		function chart_user(target,title_name,title_sub){
+			Highcharts.chart(target, {
+			    chart: {
+			        type: 'pie',
+			        options3d: {
+			            enabled: true,
+			            alpha: 45,
+			        },
+
+			    },
+			    title: {
+			        text: title_name
+			    },
+			    subtitle: {
+			        text: title_sub
+			    },
+			    plotOptions: {
+			        pie: {
+			            innerSize: 150,
+			            depth: 45
+			        },
+			    },
+			    series: [{
+			        name: 'Delivered amount',
+			        data: [
+			            ['Bananas', 8],
+			            ['Kiwi', 3]
+
+			        ],
+			        colors:['#FF6E40','#00E676'],
+			        point:{
+			        	events:{
+			        		click: function(){
+			        			alert(this.y);
+			        			// console.log(this.y);
+			        		}
+			        	}
+			        }
+			    }]
+			});
+		}
+
 		// render chart function start
 		function chart_income_jay(target,data,title_name,unit,title_y) {
 
@@ -195,18 +237,18 @@
 			    },
 			    xAxis: {
 			        categories: [
-			            'Jan',
-			            'Feb',
-			            'Mar',
-			            'Apr',
-			            'May',
-			            'Jun',
-			            'Jul',
-			            'Aug',
-			            'Sep',
-			            'Oct',
-			            'Nov',
-			            'Dec'
+			            'ม.ค.',
+			            'ก.พ.',
+			            'มี.ค.',
+			            'เม.ย.',
+			            'พ.ค.',
+			            'มิ.ย.',
+			            'ก.ค.',
+			            'ส.ค.',
+			            'ก.ย.',
+			            'ต.ค.',
+			            'พ.ย.',
+			            'ธ.ค.'
 			        ],
 			        crosshair: true
 			    },
@@ -228,9 +270,21 @@
 			        column: {
 			            pointPadding: 0.2,
 			            borderWidth: 0
+			        },
+			        series: {
+				        point:{
+				        	events:{
+				        		click: function(){
+				        			alert(this.y);
+				        			// console.log(this.y);
+				        		}
+				        	}
+				        }
 			        }
 			    },
-			    series: data
+			    series: data,
+			    colors:['#00E676','#FF6E40'],
+
 			});
 		}
 		// render chart function stop
@@ -247,6 +301,7 @@
 					var json_res = jQuery.parseJSON(data);
 					//alert();
 					chart_income_jay('unseen',json_res,"รายรับรายจ่าย",'บาท','จำนวนเงิน');
+					chart_user('user','เข้าใช้งานผ่าน','');
 				});
 
 				

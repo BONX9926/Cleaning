@@ -46,6 +46,9 @@
 	<div id="sidebar"  class="nav-collapse ">
 		<!-- sidebar menu start-->
 		<ul class="sidebar-menu" id="nav-accordion">
+			<li>
+				<a id="dashboard"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
+			</li>
 			<li class="sub-menu" id="sbmu_pro">
 				<a href="javascript:;" id="profile-domain">
 					<i class="fa fa-user"></i>
@@ -147,7 +150,26 @@
 		//set cussor
 		$("a").css('cursor', 'pointer');
 		//set cussor
-	//event menu profile
+		function show_index(){
+			$.get('show_index.php', function(data) {
+				/*optional stuff to do after success */
+			}).done(function(data){
+				$("#content").html(data);
+			});
+		}
+		show_index();
+
+		$("#dashboard").click(function(event) {
+			$("li .active").attr('class','');
+			show_index();
+			$(this).attr('class','active');
+			// var domain = $(this).attr('domain-menu');
+			// $("#"+domain).addClass('dcjq-parent active');
+			// alert(domain);
+			// $("#sbmu_pro").attr('class','active');
+			//alert("555");
+		});
+		//event menu profile
 		// event but maid click
 		$("#profile").click(function(event) {
 			$("li .active").attr('class','');
@@ -234,7 +256,7 @@
 		$("#items").click(function(event) {
 			$("li .active").attr('class','');
 			get_page_items();
-			// $(this).attr('class','active');
+			$(this).attr('class','active');
 			// var domain = $(this).attr('domain-menu');
 			// $("#"+domain).addClass('dcjq-parent active');
 			//alert("555");
@@ -252,7 +274,7 @@
 		$("#br-items").click(function(event) {
 			$("li .active").attr('class','');
 			get_page_br_items();
-			// $(this).attr('class','active');
+			$(this).attr('class','active');
 			// var domain = $(this).attr('domain-menu');
 			// $("#"+domain).addClass('dcjq-parent active');
 			//alert("555");

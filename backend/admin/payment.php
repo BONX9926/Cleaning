@@ -19,7 +19,6 @@
 							<th>ชื่อ-นามสกุล</th>
 							<th class="numeric">เบอร์โทรศัพท์</th>
 							<th class="numeric">email</th>
-							<th class="numeric">จำนวนเงินที่แจ้ง</th>
 							<th class="numeric">วันที่แจ้งชำระ</th>
 							<th class="numeric">หลักฐาน</th>
 							<th class="numeric">สถานะ</th>
@@ -36,7 +35,6 @@
 							<td><?=$show['name']?></td>
 							<td class="numeric"><?=$show['phone']?></td>
 							<td class="numeric"><?=$show['email']?></td>
-							<td class="numeric"><?=$show['money']?></td>
 							<td class="numeric"><?=$show['created_at']?></td>
 							<td class="numeric"><a style="cursor: pointer;" class="img-credit" img-cr="<?=$show['num_bin']?>">Click</a></td>
 							<td class="numeric">

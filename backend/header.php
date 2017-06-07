@@ -1,9 +1,9 @@
-<header class="header white-bg">
+<header class="header white-bg" style="background-color: #2a3542">
 	<div class="sidebar-toggle-box">
 		<div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
 	</div>
 	<!--logo start-->
-	<a href="index.html" class="logo">ระบบบริหารจัดการร้านรับ<span>ทำความสะอาด</span></a>
+	<a class="logo" style="color:#ffffff">ระบบบริหารจัดการร้านรับ<span>ทำความสะอาด</span></a>
 	<!--logo end-->
 	<div class="top-nav ">
 		<!--search & user info start-->
@@ -12,7 +12,7 @@
 			<li class="dropdown">
 				<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 					<img alt="" style="width: 28.99px;height: 28.99px;" src="../img/avatar_profile/<?=$_SESSION['avatar']?>">
-					<span class="username"><?=$_SESSION['fname']." ".$_SESSION['lname']?></span>
+					<span class="username" style="color: #FF6C60;"><?=$_SESSION['fname']." ".$_SESSION['lname']?></span>
 					<b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu extended logout">

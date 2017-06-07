@@ -14,7 +14,7 @@
 <div id="map"></div>
 <script>
       function initMap() {
-        var uluru = {lat: <?=$_GET['lat']?>, lng: <?=$_GET['lng']?>};
+        var uluru = {lat: <?=$_POST['lat']?>, lng: <?=$_POST['lng']?>};
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 16,
           center: uluru

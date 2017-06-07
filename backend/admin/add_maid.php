@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/bootstrap-datetimepicker/css/datetimepicker.css" />
     <link rel="stylesheet" type="text/css" href="../assets/jquery-multi-select/css/multi-select.css" />
 	<link rel="stylesheet" href="../css/simply-toast.min.css" type="text/css">
-
+	<div class="col-lg-12">
 	<section class="panel">
 	<header class="panel-heading">
 	เพิ่มแม่บ้าน
@@ -87,6 +87,7 @@
 			</div>
 	</div>
 	</section>
+	</div>
 </div>
 <!-- js placed at the end of the document so the pages load faster -->
 <!-- <script src="../js/jquery.js"></script> -->
