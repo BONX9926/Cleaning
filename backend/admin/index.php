@@ -64,16 +64,17 @@
 			</li>
 			<li class="sub-menu">
 				<a href="javascript:;" id="borrow-return">
-					<i class="fa fa-gavel"></i>
+					<i class="fa fa-building-o"></i>
 					<span>ยืม-คืน อุปกรณ์ </span>
 				</a>
 				<ul class="sub">
 					<li id="borrow" domain-menu="borrow-return"><a>แจ้งขอยืม-คืน</a></li>
+					<li id="list-return" domain-menu="borrow-return"><a>รายการยืม-คืน</a></li>
 				</ul>
 			</li>
 			<li class="sub-menu">
 				<a href="javascript:;" id="salary-domain">
-					<i class="fa fa-gavel"></i>
+					<i class="fa fa-money"></i>
 					<span>ระบบเงินเดือน</span>
 				</a>
 				<ul class="sub">
@@ -175,8 +176,6 @@
 		//set cussor
 		$("a").css('cursor', 'pointer');
 		//set cussor
-
-
 
 		function chart_items(target,title,data){
 			Highcharts.chart(target, {
@@ -289,11 +288,6 @@
 			});
 		}
 		show_index();
-
-		  $("#bin").click(function(event) {
-		    alert(555);
-		  });
-
 		$("#dashboard").click(function(event) {
 			$("li .active").attr('class','');
 			show_index();
@@ -303,6 +297,26 @@
 			// $("#"+domain).addClass('dcjq-parent active');
 			//alert("555");
 		});
+
+		$("#list-return").click(function(event) {
+			$("li .active").attr('class','');
+			get_page_borrow_return();
+			$(this).attr('class','active');
+			var domain = $(this).attr('domain-menu');
+			// alert(domain);
+			$("#"+domain).addClass('dcjq-parent active');
+			//alert("555");
+		});
+
+		function get_page_borrow_return(){
+			$.get('get_page_borrow_return.php', function() {
+				// optional stuff to do after success 
+			}).done(function(data){
+				$("#content").html(data);
+			});
+		}
+
+
 		$("#borrow").click(function(event) {
 			$("li .active").attr('class','');
 			get_page_borrow();

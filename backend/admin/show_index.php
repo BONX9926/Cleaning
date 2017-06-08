@@ -25,7 +25,7 @@
 		<section>
 			<div class="row state-overview">
                   <div class="col-lg-3 col-sm-6">
-                      <section class="panel">
+                      <section class="panel pointer" id="users">
                           <div class="symbol terques">
                               <i class="fa fa-user"></i>
                           </div>
@@ -36,7 +36,7 @@
                       </section>
                   </div>
                   <div class="col-lg-3 col-sm-6">
-                      <section class="panel">
+                      <section class="panel pointer" id="maids">
                           <div class="symbol red">
                               <i class="fa fa-users"></i>
                           </div>
@@ -47,7 +47,7 @@
                       </section>
                   </div>
                   <div class="col-lg-3 col-sm-6">
-                      <section class="panel" id="bin">
+                      <section class="panel pointer" id="bins">
                           <div class="symbol yellow">
                               <i class="fa fa-file-text-o"></i>
                           </div>
@@ -58,7 +58,7 @@
                       </section>
                   </div>
                   <div class="col-lg-3 col-sm-6">
-                      <section class="panel">
+                      <section class="panel pointer" id="comments">
                           <div class="symbol blue">
                               <i class="fa fa-comment-o"></i>
                           </div>
@@ -117,7 +117,19 @@
 	</section>
 </div>
 <script type="text/javascript">
-
+    $(".pointer").css('cursor', 'pointer');
+    $("#users").click(function(event) {
+      alert($(this).attr('id'));
+    });
+    $("#maids").click(function(event) {
+      alert($(this).attr('id'));
+    });    
+    $("#bins").click(function(event) {
+      alert($(this).attr('id'));
+    });    
+    $("#comments").click(function(event) {
+      alert($(this).attr('id'));
+    });
   $("#count_user").html(<?php  echo $count_user['num_user'];  ?>);
   $("#count_maid").html(<?php  echo $count_maid['num_miad'];  ?>);
   $("#count_bin").html(<?php echo $count_bin['num_bin']; ?>);
