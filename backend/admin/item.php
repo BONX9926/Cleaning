@@ -69,9 +69,9 @@
 </div>
 </div>
 <div class="form-group">
-<label class="col-lg-3 col-sm-3 control-label">จำนวนทั้งหมด / ชิ้น</label>
+<label class="col-lg-3 col-sm-3 control-label">จำนวนที่เพิ่ม / ชิ้น</label>
 <div class="col-lg-9">
-<input type="number" class="form-control" name="quantity_all" id="quantity_all">
+<input type="number" class="form-control" name="quantity_new" id="quantity_new">
 </div>
 </div>
 <div class="form-group">

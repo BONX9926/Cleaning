@@ -2,6 +2,8 @@
 	include_once '../../../connect.php';
 	$config = parse_ini_file("../../config/config.ini");
 
+	$year = (isset($_POST['year'])) ? $_POST['year']  :  date("Y");
+
 	$array_m = array(
 		'01',
 		'02',
@@ -25,9 +27,9 @@ $array_income['name'] = "รายรับ";
 $array_jay['name'] = "รายจ่าย";
 	$price_maid = $config['price_maid'];
 foreach ($array_m as $key => $m) {
-	$start = strtotime("01-{$m}-2017");
+	$start = strtotime("01-{$m}-{$year}");
 
-	$end = strtotime("last day of this month",strtotime("01-{$m}-2017"));
+	$end = strtotime("last day of this month",strtotime("01-{$m}-{$year}"));
 	
 	// echo ($key+1)." ".$start." ".$end."<br>";
 
@@ -55,12 +57,38 @@ foreach ($array_m as $key => $m) {
 			$array_jay['data'][] = ($row['jay']!== null) ? $row['jay']*1 : 0;
 		}
 }
+$res = null;
+$row = null;
+$user_arr = array();
+
+$sql_user = "SELECT concat(`social_provider`,' ',COUNT(*), ' คน' ) AS name ,COUNT(*) as num FROM `user` GROUP BY`social_provider`";
+if ($res = mysqli_query($conn,$sql_user)) {
+	while ($row = mysqli_fetch_assoc($res)) {
+		$user_arr[] = array($row['name'],$row['num']*1);
+	}
+
+}
+$res = null;
+$row = null;
+$items_arr =array();
+$sql_items = "SELECT concat(`item_name`,' ',`quantity_all`,'  ชิ้น') as name_item,`quantity_all` FROM `items`";
+if ($res = mysqli_query($conn,$sql_items)) {
+	while ($row = mysqli_fetch_assoc($res)) {
+		$items_arr[] = array($row['name_item'],$row['quantity_all']*1);
+		// var_dump($row);
+	}
+}
 
 $json_box[]= $array_income;
 $json_box[]= $array_jay;
 
+$array_json['income'] = $json_box;
+$array_json['user'] = $user_arr;
+$array_json['item'] = $items_arr;
+$array_json['year'] = $year;
 
-echo json_encode($json_box);
+
+echo json_encode($array_json);
 
 
 ?>

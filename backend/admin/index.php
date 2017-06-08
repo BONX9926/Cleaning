@@ -36,13 +36,6 @@
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" type="text/css">
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	
-
-
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
-<!--[if lt IE 9]>
-<script src="js/html5shiv.js"></script>
-<script src="js/respond.min.js"></script>
-<![endif]-->
 <style type="text/css">
 	.btn-xs {
 		color: white;
@@ -55,8 +48,7 @@
 <section id="container">
 <!--header start-->
 <?php 
-	include_once '../header.php'; 
-	// include_once '../../connect.php';
+	include_once '../header.php';
 ?>
 <!--header end-->
 <!--sidebar start-->
@@ -64,6 +56,9 @@
 	<div id="sidebar"  class="nav-collapse ">
 		<!-- sidebar menu start-->
 		<ul class="sidebar-menu" id="nav-accordion">
+			<li>
+				<a id="dashboard"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
+			</li>
 			<li>
 				<a id="payment"><i class="fa fa-credit-card"></i><span>แจ้งชำระเงิน</span> <b id="alert_pay"></b></a>
 			</li>
@@ -74,7 +69,6 @@
 				</a>
 				<ul class="sub">
 					<li id="borrow" domain-menu="borrow-return"><a>แจ้งขอยืม-คืน</a></li>
-					<!-- <li id="list_borrow" domain-menu="borrow-return"><a>รายการยืม-คืนอุปกรณ์</a></li> -->
 				</ul>
 			</li>
 			<li class="sub-menu">
@@ -134,6 +128,7 @@
 				
 			</div>
 			<!-- page end-->
+			
 		</section>
 	</section>
 <!--main content end-->
@@ -171,6 +166,7 @@
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
+<!-- <script src="https://code.highcharts.com/highcharts-3d.js"></script> -->
 
 
 <script>
@@ -180,7 +176,59 @@
 		$("a").css('cursor', 'pointer');
 		//set cussor
 
-		function chart_user(target,title_name,title_sub){
+
+
+		function chart_items(target,title,data){
+			Highcharts.chart(target, {
+			    chart: {
+			        type: 'pie',
+			        options3d: {
+			            enabled: true,
+			            alpha: 45,
+			            beta: 0
+			        }
+			    },
+			    title: {
+			        text: title
+			    },
+			    tooltip: {
+			        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+			    },
+			    plotOptions: {
+			        pie: {
+			            allowPointSelect: true,
+			            cursor: 'pointer',
+			            depth: 35,
+			            dataLabels: {
+			                enabled: true,
+			                format: '{point.name}'
+			            }
+			        }
+			    },
+			    series: [{
+			        type: 'pie',
+			        name: 'Browser share',
+			        data: data,
+			        point:{
+			        	events:{
+			        		click: function(){
+			        			// alert(this.y);
+			        			$('#titlemodal').html(title);
+
+			        			$.post('render_table_to_show_index.php', {word: this.name ,type: 'item'}, function(data, textStatus, xhr) {
+			        				/*optional stuff to do after success */
+			        			}).done(function(data){
+				        			$('#modal-content').html(data);
+			        			});
+			        			$('#myModal').modal('toggle');
+			        		}
+			        	}
+			        }
+			    }]
+			});
+		}
+
+		function chart_social(target,title_name,title_sub,data){
 			Highcharts.chart(target, {
 			    chart: {
 			        type: 'pie',
@@ -198,96 +246,29 @@
 			    },
 			    plotOptions: {
 			        pie: {
-			            innerSize: 150,
+			            innerSize: 100,
 			            depth: 45
 			        },
 			    },
 			    series: [{
 			        name: 'Delivered amount',
-			        data: [
-			            ['Bananas', 8],
-			            ['Kiwi', 3]
+			        data: data,
+			        colors:['#4267b2','#ff471a'],
+			        // point:{
+			        // 	events:{
+			        // 		click: function(){
+			        // 			$('#titlemodal').html(title_name);
+			        // 			$('#myModal').modal('toggle');
 
-			        ],
-			        colors:['#FF6E40','#00E676'],
-			        point:{
-			        	events:{
-			        		click: function(){
-			        			alert(this.y);
-			        			// console.log(this.y);
-			        		}
-			        	}
-			        }
+			        // 			// console.log(this.y);
+			        // 		}
+			        // 	}
+			        // }
 			    }]
 			});
 		}
 
-		// render chart function start
-		function chart_income_jay(target,data,title_name,unit,title_y) {
-
-			Highcharts.chart(target, {
-			    chart: {
-			        type: 'column'
-			    },
-			    title: {
-			        text: title_name
-			    },
-			    subtitle: {
-			        text: ''
-			    },
-			    xAxis: {
-			        categories: [
-			            'ม.ค.',
-			            'ก.พ.',
-			            'มี.ค.',
-			            'เม.ย.',
-			            'พ.ค.',
-			            'มิ.ย.',
-			            'ก.ค.',
-			            'ส.ค.',
-			            'ก.ย.',
-			            'ต.ค.',
-			            'พ.ย.',
-			            'ธ.ค.'
-			        ],
-			        crosshair: true
-			    },
-			    yAxis: {
-			        min: 0,
-			        title: {
-			            text: title_y+' ('+unit+')'
-			        }
-			    },
-			    tooltip: {
-			        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-			        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-			            '<td style="padding:0"><b>{point.y:.1f} '+unit+'</b></td></tr>',
-			        footerFormat: '</table>',
-			        shared: true,
-			        useHTML: true
-			    },
-			    plotOptions: {
-			        column: {
-			            pointPadding: 0.2,
-			            borderWidth: 0
-			        },
-			        series: {
-				        point:{
-				        	events:{
-				        		click: function(){
-				        			alert(this.y);
-				        			// console.log(this.y);
-				        		}
-				        	}
-				        }
-			        }
-			    },
-			    series: data,
-			    colors:['#00E676','#FF6E40'],
-
-			});
-		}
-		// render chart function stop
+		
 
 
 		function show_index(){
@@ -300,15 +281,28 @@
 				}).done(function(data){
 					var json_res = jQuery.parseJSON(data);
 					//alert();
-					chart_income_jay('unseen',json_res,"รายรับรายจ่าย",'บาท','จำนวนเงิน');
-					chart_user('user','เข้าใช้งานผ่าน','');
+					chart_income_jay('unseen',json_res.income,"รายรับรายจ่าย",'บาท','จำนวนเงิน');
+					chart_social('user','เข้าใช้ผ่าน','',json_res.user);
+					chart_items('items','อุปกรณ์ทำความสะอาด',json_res.item);
 				});
 
-				
 			});
 		}
 		show_index();
 
+		  $("#bin").click(function(event) {
+		    alert(555);
+		  });
+
+		$("#dashboard").click(function(event) {
+			$("li .active").attr('class','');
+			show_index();
+			$(this).attr('class','active');
+			// var domain = $(this).attr('domain-menu');
+			// alert(domain);
+			// $("#"+domain).addClass('dcjq-parent active');
+			//alert("555");
+		});
 		$("#borrow").click(function(event) {
 			$("li .active").attr('class','');
 			get_page_borrow();
@@ -402,6 +396,7 @@
 				/*optional stuff to do after success */
 			}).done(function(data){
 				$("#content").html(data);
+				// console.log(data);
 			}, function() {
 				$('.edit-btn').click(function() {
 					let item_id = $(this).attr('item_id');
@@ -412,7 +407,7 @@
 						if (json_res.status == true) {
 							$('#item_id').val(json_res.data.item_id);
 							$('#item_name').val(json_res.data.item_name);
-							$('#quantity_all').val(json_res.data.quantity_all);
+							//$('#quantity_all').val(json_res.data.quantity_all);
 							$('#item_price').val(json_res.data.item_price);
 							$('#myModal').modal('toggle');
 						}
@@ -599,11 +594,12 @@
 		}
 
 
-//ice
-var myVar;
-		function alert_pay(){
+
+var notification_pay;
+var notification_bin;
+		function noti_pay(){
 			
-			myVar=  setTimeout(function(){ 
+			notification_pay =  setTimeout(function(){ 
 				try{
 
 					$.get('service_alert_paymeny.php', function() {
@@ -611,17 +607,20 @@ var myVar;
 					}).done(function(data){
 						$("#alert_pay").html(data);
 						// console.log("processAlert_pay");
-						alert_pay();
+						noti_pay();
 					});
 				}catch(e){
-					clearTimeout(myVar);
-					alert_pay();
+					clearTimeout(notification_pay);
+					noti_pay();
 				}
 	
 			}, 5000);
 		}
+		function noti_bin(){
+			
+		}
 
-		alert_pay();
+		noti_pay();
 	});
 
 </script>

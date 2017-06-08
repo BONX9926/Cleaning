@@ -90,7 +90,7 @@ $limit_item = true;
 	$sql_check_item = "SELECT * FROM `borrow_detail` WHERE `item_amount` != `item_return` and `ref_borrow_id` = '{$_POST['br_id']}'";
 	if($res = mysqli_query($conn, $sql_check_item)){
 		if(mysqli_num_rows($res) != 0){
-			$update_status_br = "UPDATE `borrow_table` SET `status`='5' WHERE `borrow_id` = '{$_POST['br_id']}'"; 
+			$update_status_br = "UPDATE `borrow_table` SET `return_date`= '{$date}',`status`='5' WHERE `borrow_id` = '{$_POST['br_id']}'"; 
 			mysqli_query($conn,$update_status_br);
 			$return['status'] = true;
 			$return['message'] = "เสร็จสิ้น";
