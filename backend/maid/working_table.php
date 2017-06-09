@@ -107,7 +107,7 @@
 						</form>
 					</td>
 					<!-- <td><a  class="map" target="_blank" href="map.php?lat=<?=$lists['lat'] ?>&lng=<?=$lists['lng'] ?>" >Click</a></td> -->
-					<td><a class="view-spc" href="#"  book-id="<?=$lists['booking_id'] ?>" >view</a></td>
+					<td><a class="view-spc btn btn-xs btn-info" href="#"  book-id="<?=$lists['booking_id'] ?>" >view</a></td>
 				</tr>
 				<?php 
 					}

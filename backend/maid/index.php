@@ -72,7 +72,7 @@
 			</li>
 
 			<li>
-				<a id="items"><i class="fa fa-calendar"></i><span>ยืมอุปกรณ์</span></a>
+				<a id="items"><i class="fa fa-gavel"></i><span>ยืมอุปกรณ์</span></a>
 			</li>
 
 			<li>
