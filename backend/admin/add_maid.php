@@ -121,7 +121,6 @@
   <!--this page  script only-->
 <script src="../js/advanced-form-components.js"></script>
 <script>
-	 // $("#phone").mask('000-000-0000');
 	$('#submit').click(function(event) {
 		var data = $('form').serializeArray();
 		// alert(data[0]['value']);

@@ -17,7 +17,7 @@
 		<div class="col-lg-4">
 			<div class="thumbnail">
 			<div class="caption">
-			<h3><img src="<?=$_SESSION['avatar']?>" style='border-radius: 5px;display: inline;width: 50px;height:50px;' > <?=$_SESSION['name']?></h3>
+			<h3><img src="<?=$_SESSION['avatar']?>" style='border-radius: 5px;display: inline;width: 50px;height:50px;' > <?=$_SESSION['fname']?> <?=$_SESSION['lname']?></h3>
 				<ul class="nav nav-pills nav-stacked">
 				<li id="profile"><a href="profile.php"> <i class="fa fa-user"></i> ข้อมูลส่วนตัว</a></li>
 				<li><a href="profile-edit.php"> <i class="fa fa-edit"></i> แก้ไขข้อมูลส่วนตัว</a></li>

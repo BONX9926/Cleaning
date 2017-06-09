@@ -52,12 +52,14 @@
 					<div class="form-group">
 					<label  class="col-lg-2 control-label">วันเกิด</label>
 					<div class="col-lg-6">
-						<div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="<?=$_SESSION['birthday']?>" class="input-append date dpYears">
+						<!-- <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="<?=$_SESSION['birthday']?>" class="input-append date dpYears">
 							<input type="text" readonly="" name="birthday" value="<?=$_SESSION['birthday']?>" size="16" class="form-control" >
 							<span class="input-group-btn add-on">
 								<button class="btn btn-danger" type="button"><i class="fa fa-calendar"></i></button>
 							</span>
-						</div>
+						</div> -->
+						<input type="date" name="birthday" value="<?=$_SESSION['birthday']?>" class="form-control">
+
 
 					</div>
 					</div>
@@ -70,7 +72,7 @@
 					<div class="form-group">
 					<label  class="col-lg-2 control-label">เบอร์โทรศัพท์</label>
 					<div class="col-lg-6">
-					<input type="text" name="phone" class="form-control" id="phone" data-mask="999-999-9999" value="<?=$_SESSION['phone']?>">
+					<input type="text" name="phone" class="form-control" id="phone" value="<?=$_SESSION['phone']?>">
 					</div>
 					</div>
 					<input type="hidden" name="id" id="id" value="<?=$_SESSION['id']?>">
@@ -97,12 +99,12 @@
   <script type="text/javascript" src="../assets/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
   <script type="text/javascript" src="../assets/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
   <script type="text/javascript" src="../assets/jquery-multi-select/js/jquery.multi-select.js"></script>
-  <script type="text/javascript" src="../assets/jquery-multi-select/js/jquery.quicksearch.js"></script>
-  <script src="../js/jquery.mask.min.js"></script> -->
+  <script type="text/javascript" src="../assets/jquery-multi-select/js/jquery.quicksearch.js"></script>-->
+  <script src="../js/jquery.mask.min.js"></script>
   <!--this page  script only-->
 <!-- <script src="../js/advanced-form-components.js"></script> -->
 <script>
-    // $("#phone").mask('000-000-0000');
+    $("#phone").mask('000-000-0000');
 	$('#submit').click(function(event) {
 		// alert('5555');
 		var data = $('form').serializeArray();

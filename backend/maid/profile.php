@@ -8,7 +8,6 @@ session_start();
 			<a href="#">
 				<img src="../img/avatar_profile/<?=$_SESSION['avatar']?>" alt="">
 			</a>
-			<!-- <h1><?=$_SESSION['fname']." ".$_SESSION['lname']?></h1> -->
 			<p><?=$_SESSION['email']?></p>
 		</div>
 		<!-- <ul class="nav nav-pills nav-stacked">
@@ -39,7 +38,7 @@ session_start();
 					<p><span>Email </span>: <?=$_SESSION['email']?></p>
 				</div>
 				<div class="bio-row">
-					<p><span>เบอร์โทรสัพท์ </span>: <?=$_SESSION['phone']?></p>
+					<p><span>เบอร์โทรศัพท์ </span>: <?=$_SESSION['phone']?></p>
 				</div>
 				<div class="bio-row">
 					<p><span>แนะนำตัว </span>: <?=$_SESSION['show_detail']?></p>

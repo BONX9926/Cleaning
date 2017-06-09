@@ -23,7 +23,7 @@
 	<!-- <h1 align="center">Profile</h1> -->
 			
 			<div class="caption">
-			<h3><img src="<?=$_SESSION['avatar']?>" style='border-radius: 5px;display: inline;width:50px;height: 50px;' > <?=$_SESSION['name']?></h3>
+			<h3><img src="<?=$_SESSION['avatar']?>" style='border-radius: 5px;display: inline;width:50px;height: 50px;' > <?=$_SESSION['fname']?> <?=$_SESSION['lname']?></h3>
 <!-- <div class="list-group">
 <a href="#" class="list-group-item active">
 Cras justo odio

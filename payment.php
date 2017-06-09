@@ -40,7 +40,7 @@
 	<fieldset>
 
 	<!-- Form Name -->
-	<legend><i class="fa fa-credit-card"></i> แจ้งชำระเงิน <small style="color:red">กรุณาตรวจสอบข้อมูลให้เรียบร้อยก่อนแจ้งชำระ</small></legend>
+	<legend><i class="fa fa-credit-card"></i> แจ้งชำระเงิน <small style="color:red" id="txtNoti1">กรุณาตรวจสอบข้อมูลให้เรียบร้อยก่อนแจ้งชำระ</small></legend>
 
 
 	<div class="form-group">
@@ -89,13 +89,13 @@
 	</div>
 
 	<div class="form-group">
-	<label class="col-md-4 control-label">หลักฐานการโอนเงิน <small style="color:red">(ต้องมี)</small></label>  
+	<label class="col-md-4 control-label">หลักฐานการโอนเงิน <small style="color:red" id="txtNoti2">(ต้องมี)</small></label>  
 	<div class="col-md-4 inputGroupContainer">
 	<div class="input-group">
 	<span class="input-group-addon"><i class="fa fa-file"></i></span>
 	<input name="file" class="form-control" type="file" accept="image/.png,.jpg">
 	</div>
-	<span style="color:red">**นามสกุลไฟล์ .jpg .png เท่านั้น</span>
+	<span style="color:red" id="txtNoti3">**นามสกุลไฟล์ .jpg .png เท่านั้น</span>
 	</div>
 	</div>	
 
@@ -111,5 +111,26 @@
 	</form>
 	</div><!-- /.container -->
 </div>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		// alert(window.location);
+		 var url = window.location+" ";
+		//var url = "http://localhost/project/payment.php?succ=1&numbin=000035";
+
+		try{
+			var word = url.match(/succ=1/gm);
+			// alert(word);
+			if (word != null) {
+				$("#txtNoti1 , #txtNoti2 , #txtNoti3").hide();
+				
+			}
+		}catch(e){
+			alert(e);	
+		}
+
+		// if () {}
+		// http://localhost/project/payment.php?succ=1&numbin=000035
+	});
+</script>
 </body>
 </html>
