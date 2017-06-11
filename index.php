@@ -49,7 +49,7 @@
     <div class="container" id="padding">
 
         <div class="row" id="bg">
-            <div  class="col-lg-12 text-center">
+            <div  class="col-md-12 text-center">
                 <hr>
                 <h2 class="tagline">ร้านรับบริการทำความสะอาด</h2>
                 <hr>
@@ -57,7 +57,7 @@
                 <p><h4>ให้ที่พักของคุณสะอาดน่าอยู่ในเวลาที่ต้องการ ด้วยแม่บ้านที่คุณวางใจ</h4></p>
                 <p><h4>เรื่องความสะอาดไว้ใจเรา เลือกใช้บริการกับเรา ด้วยคุณภาพแล้วมาตราฐาน และพนักงานงานมืออาชีพ</h4></p>
                 <p><h4>บริการทุกระดับประทับใจ</h4></p>
-                <!-- <p style="padding-top: 20px;padding-bottom: 20px;"><a class="btn btn-success btn-lg" href="jong.php">จองบริการ »</a></p> -->
+
                 <br><br><br><br>
             </div>
         </div>

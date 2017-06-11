@@ -48,7 +48,7 @@
 	<div class="col-md-4 inputGroupContainer">
 	<div class="input-group">
 	<span class="input-group-addon"><i class="fa fa-file-o"></i></span>
-	<input name="num_bin" class="form-control" type="text" value="<?=$_GET['numbin']?>" required>
+	<input name="num_bin" class="form-control" type="text" value="<?php if($_POST){ echo $_POST['numbin'];}else if($_GET) { echo $_GET['numbin'];}?>" required>
 	</div>
 	</div>
 	</div>

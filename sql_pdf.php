@@ -2,11 +2,11 @@
 session_start();
 	include_once 'connect.php';
 	include_once 'lib/php/public_function.php';
-	// var_dump($_GET);
+	// var_dump($_POST);
 	// var_dump($_SESSION);
-	// print $_GET['num'];
+	// print $_POST['num'];
 	// print $_SESSION['uid'];
-	$sql = "SELECT * FROM `booking_table` WHERE `booking_id`='{$_GET['num']}' AND `ref_booking_uid`='{$_SESSION['uid']}' limit 1";
+	$sql = "SELECT * FROM `booking_table` WHERE `booking_id`='{$_POST['num']}' AND `ref_booking_uid`='{$_SESSION['uid']}' limit 1";
 	if($res = mysqli_query($conn,$sql)) {
 		if($res->num_rows > 0) {
 			$data = mysqli_fetch_assoc($res);

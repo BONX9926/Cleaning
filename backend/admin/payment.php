@@ -130,7 +130,7 @@
 				/*optional stuff to do after success */
 			}).done(function(data){
 				// alert(data);
-				$("#md-body").html("<img src='../../image/payment/"+data+"' style='width:500px;height: 500px;'>");
+				$("#md-body").html("<img src='../../image/payment/"+data+"' style='width:340px;height: 500px;'>");
 				$("#myModal").modal("toggle");
 			})
 		});

@@ -11,7 +11,7 @@
 <script src="./js/jquery-3.2.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
-<body>
+<body style="background-color: #E0E0E0">
 <?php include_once 'navbar.php'; ?>
 <div class="container" style="padding-top: 60px;">
 <!-- 	<pre>

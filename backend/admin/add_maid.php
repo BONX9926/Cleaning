@@ -61,13 +61,14 @@
 			</div>
 			<div class="form-group">
 				<label class="col-lg-2 col-sm-2 control-label">วันเกิด</label>
-				<div class="col-lg-7">
-					<div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="22-06-1994" class="input-append date dpYears">
+				<div class="col-lg-10">
+					<!-- <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="22-06-1994" class="input-append date dpYears">
 						<input type="text" readonly="" name="birthday" size="16" class="form-control" >
 						<span class="input-group-btn add-on">
 							<button class="btn btn-danger" type="button"><i class="fa fa-calendar"></i></button>
 						</span>
-					</div>
+					</div> -->
+					<input type="date" name="birthday" class="form-control">
 				</div>
 			</div>
 			

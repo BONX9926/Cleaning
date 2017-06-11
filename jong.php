@@ -187,7 +187,7 @@
 
 		$('#submit').click(function(event) {
 			if ($('#date').val() =="") {
-				alert("กรุณาเลือกวันที่");
+				swal("กรุณาเลือกวันที่");
 				$('#load_page').hide();
 			} else {
 			$('#load_page').show();
@@ -321,7 +321,9 @@
 			            // alert(data);
 			            let json_res = jQuery.parseJSON(data);
 			            if(json_res.status == true) {
-			            alert("กรุณาชำระเงิน ภายในวันเวลาที่บิลระบุ");
+			            // alert("กรุณาชำระเงิน ภายในวันเวลาที่บิลระบุ");
+			            swal("กรุณาชำระเงิน ภายในวันเวลาที่บิลระบุ");
+			            if (true) {}
 			            	window.location.href = "jong_detail.php";
 				           //  $.simplyToast(json_res.message, 'success');
 				           //  $('input').val("");
@@ -340,7 +342,8 @@
 			    return false;
 
 				} else {
-					alert('ไม่มีแม่บ้านที่คุณเลือก กรุณาเลือกแม่บ้าน');
+					// alert('ไม่มีแม่บ้านที่คุณเลือก กรุณาเลือกแม่บ้าน');
+					swal('ไม่มีแม่บ้านที่คุณเลือก กรุณาเลือกแม่บ้าน');
 					return false;
 				}
 			});//end $('#confirm').click(function(event) 

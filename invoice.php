@@ -11,7 +11,7 @@ include_once 'sql_pdf.php';
 	<tr>
 		<td>ที่อยู่เจ้าของบ้าน</td>
 		<td width="30%"></td>
-		<td>เลขที่บิล : <strong><?=$_GET['num']?></strong></td>
+		<td>เลขที่บิล : <strong><?=$_POST['num']?></strong></td>
 	</tr>
 	<tr>
 		<td>ชื่อ : <?=$_SESSION['fname']." ".$_SESSION['lname']?></td>

@@ -124,7 +124,7 @@
 			type: 'input',
 			inputType: "password",
 			showCancelButton: true,
-			cancelButtonClass: 'btn btn-info canC',
+			cancelButtonClass: 'btn btn-default canC',
 			closeOnConfirm: false,
 		}, function (inputValue) {
 			if (inputValue === false) return false;

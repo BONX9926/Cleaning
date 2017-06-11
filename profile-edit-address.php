@@ -17,7 +17,7 @@
     height: 400px;
   }
 </style>
-<body>
+<body style="background-color: #E0E0E0">
 <?php include_once 'navbar.php'; ?>
 <div class="container" style="padding-top: 60px;">
 <!-- 	<pre>

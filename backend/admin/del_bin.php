@@ -18,8 +18,14 @@
 						//ลบเน้นจุดที่ทำความสะอาด
 						$sql4="DELETE FROM `booking_comment` WHERE `booking_id`='{$_POST['num_bin']}'";
 						if (mysqli_query($conn,$sql4)) {
-							$return['status'] = true;
-							$return['message'] = "ลบบิลเรียบร้อยแล้ว";
+							$sql5 = "DELETE FROM `payment` WHERE `num_bin`='{$_POST['num_bin']}'";
+							if (mysqli_query($conn,$sql5)) {
+								$return['status'] = true;
+								$return['message'] = "ลบบิลเรียบร้อยแล้ว";
+							} else {
+								$return['status'] = false;
+								$return['message'] = "ลบบิลการแจ้งชำระไม่ได้";	
+							}
 						} else {
 							$return['status'] = false;
 							$return['message'] = "ลบรายการเน้นจุดที่ทำความสะอาดไม่ได้";							

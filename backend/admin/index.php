@@ -68,7 +68,7 @@
 					<span>ยืม-คืน อุปกรณ์ </span>
 				</a>
 				<ul class="sub">
-					<li id="borrow" domain-menu="borrow-return"><a>แจ้งขอยืม-คืน</a></li>
+					<li id="borrow" domain-menu="borrow-return"><a>แจ้งขอยืมอุปกรณ์</a></li>
 					<li id="list-return" domain-menu="borrow-return"><a>รายการยืม-คืน</a></li>
 				</ul>
 			</li>

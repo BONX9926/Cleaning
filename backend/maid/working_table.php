@@ -169,7 +169,7 @@
 					var _img = json_res.data.img_file_cm;
 					var _detail = json_res.data.comment;
 					console.log(json_res.data.img_file_cm);
-					$("#md-body").html("<table class='table-bordered'><tr><td><img src='../../image/img_comment/"+_img+"'></td></tr><tr><td><h3>รายละเอียด :</h3><span>"+_detail+"</span></td></tr>");
+					$("#md-body").html("<table class='table-bordered'><tr><td><img src='../../image/img_comment/"+_img+"' style='width:360px;height:500px;'></td></tr><tr><td><h3>รายละเอียด :</h3><span>"+_detail+"</span></td></tr>");
 					$("#modal").modal("toggle");
 				} else {
 					// console.log("data null");
