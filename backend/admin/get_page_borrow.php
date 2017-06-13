@@ -17,7 +17,7 @@
 	<header class="panel-heading">แจ้งยืมอุปกรณ์</header>
 		<div class="panel-body">
 			<section id="unseen">
-				<table class="table">
+				<table class="table"  id="item_re">
 					<thead>
 						<tr>
 							<th>เลขที่บิล</th>
@@ -154,5 +154,9 @@
 			$("#return-modal-list").modal('show');
 		});
 	});
+		$('#item_re').DataTable( {
+	        "pageLength": 10,
+	        "order":[[0,"desc"]]
+	    } );
 	
 </script>

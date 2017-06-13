@@ -67,6 +67,7 @@
 					<span>ตารางงาน</span>
 				</a>
 				<ul class="sub">
+					<li id="working-wait" domain-menu="working-domain"><a>ตารางงานที่ยังไม่เสร็จ</a></li>
 					<li id="working-table" domain-menu="working-domain"><a>ตารางงานทั้งหมด</a></li>
 				</ul>
 			</li>
@@ -142,6 +143,7 @@
 
 <script src="../js/simply-toast.min.js"></script>
 <script src="../../js/sweetalert.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiN2gSbA1GuW8BeHF4CMVucHzGvl0_drs">
 </script>
@@ -233,6 +235,24 @@
 	//event menu profile
 
 	//event menu working_tabel
+
+		$("#working-wait").click(function(event) {
+			$("li .active").attr('class','');
+			get_page_working_wait();
+			$(this).attr('class','active');
+			var domain = $(this).attr('domain-menu');
+			$("#"+domain).addClass('dcjq-parent active');
+			//alert("555");
+		});
+
+		function get_page_working_wait(){
+			$.get('working_wait.php', function() {
+				/*optional stuff to do after success */
+			}).done(function(data){
+				$("#content").html(data);
+				//alert(data);
+			});
+		}		
 
 		$("#working-table").click(function(event) {
 			$("li .active").attr('class','');

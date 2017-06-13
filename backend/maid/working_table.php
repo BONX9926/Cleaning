@@ -8,8 +8,11 @@
 ?>
 <aside class="profile-info col-lg-12">
 	<section class="panel">
-		<div class="panel-body bio-graph-info">
-			<h1>ตารางงานทั้งหมด</h1>
+		<header class="panel-heading">ตารางงานที่ยังไม่เสร็จ</header>
+			<div class="panel-body">
+				<section id="unseen">
+		<!-- <div class="panel-body bio-graph-info"> -->
+			<!-- <h1>ตารางงานทั้งหมด</h1> -->
 			<?php 
 				$list_info_maid = array();
 				include_once '../../connect.php';
@@ -50,14 +53,12 @@
 			?>
 			<table class="table">
 				<tr>
-					<td>วันที่ทำงาน</td>
-					<td>ชื่อผู้จ้างงาน</td>
-					<td>รายละเอียด</td>
-					<td>เบอร์ติดต่อ</td>
-					<td>สิ่งที่ต้องเตรียมไปด้วย</td>
-					<td>สถานะการทำงาน</td>
-					<td>Location</td>
-					<td>Focus Area</td>
+					<th>วันที่ทำงาน</th>
+					<th>ชื่อผู้จ้างงาน</th>
+					<th>รายละเอียด</th>
+					<th>เบอร์ติดต่อ</th>
+					<th>สิ่งที่ต้องเตรียมไปด้วย</th>
+					<th>สถานะการทำงาน</th>
 				</tr>
 				<?php
 					foreach ($list_info_maid as $index => $lists) {
@@ -69,54 +70,15 @@
 					<td><?=room_name($lists['booking_id'],$conn) ?></td>
 					<td><?=$lists['phone'] ?></td>
 					<td><?=$lists['items'] ?></td>
-					<td>
-					<?php 
-						$sql1 = "SELECT `work_status` FROM `booking_table` WHERE `booking_id`='{$lists['booking_id']}' ";
-						// echo $sql1; 
-						$data1 = mysqli_query($conn,$sql1);
-						while($show1 = mysqli_fetch_assoc($data1)){
-							// var_dump($show1["status_id"]);
-							?>
-						<select class="form-control m-bot15 myStatus" >
-							<?php 
-								foreach ($status_id as $status => $value) {
-									# code...
-									if($status == $show1["work_status"]){
-										$selected = "selected";
-									}else{
-										$selected = "";
-									}
-								
-							?>
-							<option value="status_id:<?=$status ?>,borrow_id:<?=$lists['booking_id']?>" <?=$selected ?>  > <?=$value?></option>
-
-							<?php 
-								}
-							 ?>
-                        </select>
-					<?php
-						}
-					?>
-					</td>
-					<!-- <td><?=$lists['work_status'] ?></td> -->
-					<td>
-						<form action="map.php" method="post" target="_blank">
-							<input type="hidden" name="lat" value="<?=$lists['lat'] ?>">
-							<input type="hidden" name="lng" value="<?=$lists['lng'] ?>">
-							<button type="submit" class="btn btn-xs btn-danger">Click</button>
-						</form>
-					</td>
-					<!-- <td><a  class="map" target="_blank" href="map.php?lat=<?=$lists['lat'] ?>&lng=<?=$lists['lng'] ?>" >Click</a></td> -->
-					<td><a class="view-spc btn btn-xs btn-info" href="#"  book-id="<?=$lists['booking_id'] ?>" >view</a></td>
+					<td <?php echo $color = ($lists['work_status'] =="true") ? "style='color:green;font-weight:bold'": "style='color:red;font-weight:bold'"; ?>><?php echo $work_status = ($lists['work_status'] =="true") ? "เสร็จเรียบร้อย": "อยู่ระหว่างดำเนินการ"; ?></td>
 				</tr>
 				<?php 
 					}
 				
 				?>
 			</table>
+			</section>
 		</div>
-		
-		</table>
 	</section>
 </aside>
 
@@ -154,67 +116,5 @@
 
 
 ?>
-<script type="text/javascript">
-	jQuery(document).ready(function($) {
-		$(".view-spc").click(function(event) {
-			var book_id = $(this).attr('book-id');
-			// alert(book_id);
-			$.post('focus_area.php', {book_id: book_id}, function() {
-				/*optional stuff to do after success */
-			}).done(function(data){
 
-				if (data != "null") {
-					// console.log("data");
-					var json_res = jQuery.parseJSON(data);
-					var _img = json_res.data.img_file_cm;
-					var _detail = json_res.data.comment;
-					console.log(json_res.data.img_file_cm);
-					$("#md-body").html("<table class='table-bordered'><tr><td><img src='../../image/img_comment/"+_img+"' style='width:360px;height:500px;'></td></tr><tr><td><h3>รายละเอียด :</h3><span>"+_detail+"</span></td></tr>");
-					$("#modal").modal("toggle");
-				} else {
-					// console.log("data null");
-					$("#md-body").html("<h1>ไม่มีรายการ</h1>");
-					$("#modal").modal("toggle");
-				}
-
-			});
-		});
-
-		$(".myStatus").change(function(event) {
-			var info = $(this).val();
-			// swal(info);
-			// alert(info);
-			var status = info.substring(10, 11);
-			if (status == "t") {
-				var status_up ="เสร็จเรียบร้อย";
-			}else if(status == "f") {
-				var status_up ="อยู่ระหว่างดำเนินการ";
-			} else {
-				var status_up ="error";
-			}
-			swal({
-				title: "คุณต้องการเปลี่ยนแปลงสถานะเป็น\n"+status_up,
-				text: "กรุณากรอก password เพื่อทำการยืนยัน",
-				type: "input",
-				inputType: "password",
-				showCancelButton: true,
-				closeOnConfirm: false,
-			}, function (inputValue) {
-				if (inputValue === false) return false;
-				if (inputValue === "") {
-					swal.showInputError("กรุณากรอก password ");
-					return false
-				}
-				$.post('service_update_status_work.php', {password:inputValue, info:info , event:"update_status_work", }, function() {
-					/*optional stuff to do after success */
-				}).done(function(data){
-					swal(data);
-					// if (data == "true") {}
-				});
-			});
-		});
-
-	});
-
-</script>
    
