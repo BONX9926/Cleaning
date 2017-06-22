@@ -17,6 +17,7 @@
 				<div class="col-lg-8">
 					<div class="col-lg-12"><h4>ทั้งหมด :<?=$row['quantity_all']?> ชิ้น</h4></div>
 					<div class="col-lg-12"><h4>คงเหลือ :<?=$row['quantity_remain']?> ชิ้น</h4></div>
+					<div class="col-lg-12"><h4>ถูกยืม :<?=$row['quantity_all']-$row['quantity_remain']?> ชิ้น</h4></div>
 					<div class="col-lg-12"><h4>ชำรุด :<?=$row['item_wongout']?> ชิ้น</h4></div>
 				</div>
 			</div>

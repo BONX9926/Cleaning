@@ -116,25 +116,66 @@
 		</div>
 	</section>
 </div>
+
+<!-- Modal -->
+<div id="showhead" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body" id="contents_show">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 <script type="text/javascript">
     $(".pointer").css('cursor', 'pointer');
-    $("#users").click(function(event) {
-      alert($(this).attr('id'));
-    });
-    $("#maids").click(function(event) {
-      alert($(this).attr('id'));
-    });    
-    $("#bins").click(function(event) {
-      alert($(this).attr('id'));
-    });    
-    $("#comments").click(function(event) {
-      alert($(this).attr('id'));
-    });
+    
   $("#count_user").html(<?php  echo $count_user['num_user'];  ?>);
   $("#count_maid").html(<?php  echo $count_maid['num_miad'];  ?>);
   $("#count_bin").html(<?php echo $count_bin['num_bin']; ?>);
   $("#count_comment").html(<?php echo $count_comment['num_comment']; ?>);
   $("#dashboard").attr('class', 'active');
+  $("#users").click(function(event) {
+      // alert($(this).attr('id'));
+      $.post('modal_page_indexShow.php', {event: 'users'}, function(data, textStatus, xhr) {
+      //   /*optional stuff to do after success */
+      }).done(function(data){
+        $("#contents_show").html(data);
+        $('#showhead').modal('toggle');
+      });
+    });
+    $("#maids").click(function(event) {
+      $.post('modal_page_indexShow.php', {event: 'maids'}, function(data, textStatus, xhr) {
+      //   /*optional stuff to do after success */
+      }).done(function(data){
+        $("#contents_show").html(data);
+        $('#showhead').modal('toggle');
+      });
+    });    
+    $("#bins").click(function(event) {
+      $.post('modal_page_indexShow.php', {event: 'bins'}, function(data, textStatus, xhr) {
+        /*optional stuff to do after success */
+      }).done(function(data){
+        console.log(data);
+        $("#contents_show").html(data);
+        $('#showhead').modal('toggle');
+      });
+    });    
+    $("#comments").click(function(event) {
+      $.post('modal_page_indexShow.php', {event: 'comments'}, function(data, textStatus, xhr) {
+        /*optional stuff to do after success */
+      }).done(function(data){
+        console.log(data);
+        $("#contents_show").html(data);
+        $('#showhead').modal('toggle');
+      });
+    });
   $("#sel").change(function(event) {
       
       var year = $(this).val();

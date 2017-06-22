@@ -109,11 +109,8 @@
 			// alert(5555);
 		});
 		$('#myTable').DataTable( {
-        // "scrollY":        "200px",
-        // "scrollCollapse": true,
-        // "searching": false,
-        // "paging":         false,
-        // "pageLength": 10
-    	} )
+	        "pageLength": 10,
+	        "order":[[0,"desc"]]
+    	} );
 	});
 </script>

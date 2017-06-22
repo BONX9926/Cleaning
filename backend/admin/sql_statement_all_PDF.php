@@ -20,12 +20,13 @@
 						}
 					}else {
 						echo "ไม่พบข้อมูล";
+						// header("Location:error.php");
 					}
 				} else {
 					echo "sql_detailMaid error";
 				}
 			} else {
-				echo "string";
+				header("Location:error.php");
 			}
 		} else {
 			echo "SQL ERROR";

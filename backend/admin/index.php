@@ -65,10 +65,10 @@
 			<li class="sub-menu">
 				<a href="javascript:;" id="borrow-return">
 					<i class="fa fa-building-o"></i>
-					<span>ยืม-คืน อุปกรณ์ </span>
+					<span>ยืม-คืน อุปกรณ์ <b id="alert_new_br"></b></span>
 				</a>
 				<ul class="sub">
-					<li id="borrow" domain-menu="borrow-return"><a>แจ้งขอยืมอุปกรณ์</a></li>
+					<li id="borrow" domain-menu="borrow-return"><a>แจ้งขอยืมอุปกรณ์ <b id="alert_borrow"></b></a></li>
 					<li id="list-return" domain-menu="borrow-return"><a>รายการยืม-คืน</a></li>
 				</ul>
 			</li>
@@ -97,13 +97,6 @@
 				<a id="maid-table"><i class="fa fa-credit-card"></i><span>รายการจองแม่บ้าน</span></a>
 			</li>			
 
-<!-- 			<li>
-				<a id="money"><i class="fa fa-credit-card"></i><span>คำนวณเงินเดือน</span></a>
-			</li> -->
-
-<!-- 			<li>
-				<a id="select"><i class="fa fa-credit-card"></i><span>ค้นหาบิลจากแม่บ้าน</span></a>
-			</li> -->
 			<li class="sub-menu">
 				<a href="javascript:;" id="maid-domain">
 					<i class="fa fa-group"></i>
@@ -292,10 +285,6 @@
 			$("li .active").attr('class','');
 			show_index();
 			$(this).attr('class','active');
-			// var domain = $(this).attr('domain-menu');
-			// alert(domain);
-			// $("#"+domain).addClass('dcjq-parent active');
-			//alert("555");
 		});
 
 		$("#list-return").click(function(event) {
@@ -521,9 +510,6 @@
 			$("li .active").attr('class','');
 			payment();
 			$(this).attr('class','active');
-			// var domain = $(this).attr('domain-menu');
-			// alert(domain);
-			// $("#"+domain).addClass('dcjq-parent active');
 		});
 
 		function payment() {
@@ -539,9 +525,6 @@
 			$("li .active").attr('class','');
 			maid_table();
 			$(this).attr('class','active');
-			// var domain = $(this).attr('domain-menu');
-			// alert(domain);
-			// $("#"+domain).addClass('dcjq-parent active');
 		});
 
 		function maid_table() {
@@ -557,9 +540,6 @@
 			$("li .active").attr('class','');
 			select();
 			$(this).attr('class','active');
-			// var domain = $(this).attr('domain-menu');
-			// alert(domain);
-			// $("#"+domain).addClass('dcjq-parent active');
 		});
 
 		function select() {
@@ -628,12 +608,31 @@ var notification_bin;
 					noti_pay();
 				}
 	
-			}, 5000);
+			}, 1000);
 		}
+
 		function noti_bin(){
 			
 		}
 
+		function noti_borrow(){
+			notification_borrow = setTimeout(function(){
+				try{
+					$.get('service_alert_borrow.php', function(data) {
+						/*optional stuff to do after success */
+					}).done(function(data){
+						// $("#alert_borrow").html(data);
+						$("#alert_new_br").html(data);
+						// console.log("processAlert_borrow");
+						noti_borrow();						
+					});
+				}catch(e){
+					clearTimeout(notification_borrow);
+					noti_borrow()
+				}
+			}, 1000);
+		}
+		noti_borrow();
 		noti_pay();
 	});
 

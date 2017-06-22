@@ -154,8 +154,6 @@
 	jQuery(document).ready(function($) {
 		// var uid = "<?php echo $_SESSION['uid'] ?>";
 		var list_maid_id = [];
-		var vm_c = '';
-		var vm_i = '';
 		$('#load_page').hide();
 		function render(arr_maid) {
 			let patt = "<tr class='row-maid mid-{maid_id}'><td><img src='{img}' style='width: 30px; height: 30px;border-radius: 30px;'> {name} <input type='hidden' name='arr_maid[]' value='{maid_id_hidden}'><button class='btn btn-danger btn-xs rm-maid' mid={{maid_id}}>X ลบ</button></td></tr>";
@@ -331,7 +329,7 @@
 
 			            } else {
 			            	// $.simplyToast(json_res.message, 'danger');
-			            	alert(json_res.message);
+			            	swal("",json_res.message);
 			            }
 			        },
 			        cache: false,
@@ -343,7 +341,7 @@
 
 				} else {
 					// alert('ไม่มีแม่บ้านที่คุณเลือก กรุณาเลือกแม่บ้าน');
-					swal('ไม่มีแม่บ้านที่คุณเลือก กรุณาเลือกแม่บ้าน');
+					swal("","ไม่มีแม่บ้านที่คุณเลือก กรุณาเลือกแม่บ้าน");
 					return false;
 				}
 			});//end $('#confirm').click(function(event) 

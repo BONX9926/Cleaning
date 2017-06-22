@@ -57,7 +57,7 @@
 		    	},function() {
     			 	$('#state').DataTable( {
 				        "pageLength": 10
-				    } );
+				    });
 		    	});
 		    }
 		});

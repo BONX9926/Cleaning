@@ -50,7 +50,7 @@
 	$return = array();
 	// var_dump($_FILES);
 	// var_dump($_POST);
-	if (isset($_POST['arr_maid']) && isset($_POST['uid']) && isset($_POST['date_time'])) {
+	if (isset($_POST['arr_maid']) && isset($_POST['uid']) && isset($_POST['date_time']) && isset($_POST['rooms'])) {
 		include_once '../connect.php';
 		include_once '../lib/php/public_function.php';
 		$date = ($_POST['date_time'])*1;
@@ -202,7 +202,7 @@
 		}
 	} else {
 		$return['status'] = false;
-		$return['message'] = "data No";
+		$return['message'] = "กรุณาเลือกประเภทการทำความสะอาด";
 	}
 
 	echo json_encode($return);
