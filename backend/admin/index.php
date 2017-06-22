@@ -94,7 +94,7 @@
 			</li>
 
 			<li>
-				<a id="maid-table"><i class="fa fa-credit-card"></i><span>รายการจองแม่บ้าน</span></a>
+				<a id="maid-table"><i class="fa fa-credit-card"></i><span>รายการจองแม่บ้าน <b id="alert_bin"></b></span></a>
 			</li>			
 
 			<li class="sub-menu">
@@ -632,6 +632,25 @@ var notification_bin;
 				}
 			}, 1000);
 		}
+
+		function noti_bin(){
+			notification_borrow = setTimeout(function(){
+				try{
+					$.get('service_alert_bin.php', function(data) {
+						/*optional stuff to do after success */
+					}).done(function(data){
+						// $("#alert_borrow").html(data);
+						$("#alert_bin").html(data);
+						// console.log("processAlert_borrow");
+						noti_bin();						
+					});
+				}catch(e){
+					clearTimeout(notification_borrow);
+					noti_bin()
+				}
+			}, 1000);
+		}
+		noti_bin();
 		noti_borrow();
 		noti_pay();
 	});

@@ -1,5 +1,6 @@
 <?php
 	include_once '../../connect.php';
+	include '../../lib/php/public_function.php';
 	session_start();
 ?>
 <style type="text/css">
@@ -29,7 +30,7 @@
 				<div class="cmt-details">
 					<a href="#"><?=$row['name']?></a>
 					<span><?=$row['comment']?></span>
-					<p><?=$row['created_at']?> จากเลขที่บิล : <?=$row['bin']?></p>
+					<p><?=date_thai(revert_date($row['created_at']))?> จากเลขที่บิล : <?=$row['bin']?></p>
 				</div>
 			</li>
 						<?php
